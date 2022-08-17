@@ -1,0 +1,115 @@
+﻿@model IEnumerable<CityAccess.Service>
+
+@{
+    /**/
+
+    ViewBag.Title = "Details";
+}
+
+<div class="Header">
+    <div class="Section-Title col-md-3">
+        <h1>@ViewBag.operator1</h1>
+    </div>
+</div>
+
+
+<div style="padding: 0px 40px 60px 40px; font-size: 12px" class="Content">
+
+    <form asp-controller="Agreements" asp-action="Search" method="get" style="padding-left:0px;padding-bottom:10px;">
+        <div class="search-wrapper">
+            <div class="col-md-1" style="padding-bottom:9px;padding-top:8px;padding-right:3px;">
+                <strong>Cities:</strong>
+            </div>
+            <div>
+            @Html.DropDownList("city", new SelectList(ViewBag.cities, "name", "name"), "", htmlAttributes: new { @class = "no-padding form-horizontal col-md-1 col-sm-1", style = " width:120px; height: 30px;", onchange = "this.form.submit()" })
+            </div>
+            <div class="col-md-6 col-sm-offset-1">
+               <strong> *For additional details, please contact the operator. To book please contact operator and establish an agreement.</strong>
+            </div>
+        </div>
+    </form>
+
+
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            if ($(window).width() < 768) {
+                $("#MainTable").removeClass("table");
+                $("div").removeClass("table-wrapper");
+                $(".logo").css('height', '50px');
+            }
+        });
+    </script>
+
+    <div class="table-wrapper">
+        <table id="MainTable" class="table marketDet">
+            <thead class="marketDet" role="rowgroup">
+                <tr class="marketDet" role="row">
+                    <th role="columnheader" class="marketDet">
+                        Logo
+                    </th>
+                    <th role="columnheader" class="marketDet">
+                        Service Name
+                    </th>
+                    <th role="columnheader" class="marketDet">
+                        Price
+                    </th>
+                    <th role="columnheader" class="marketDet">
+                        City
+                    </th>
+                    <th role="columnheader" class="marketDet">
+                        Description
+                    </th>
+                </tr>
+            </thead>
+
+
+            @{
+                var base64 = string.Empty;
+                var imgSrc = string.Empty;
+            }
+
+            <tbody class="marketDet" role="rowgroup">
+                @foreach (var item in Model)
+                {
+                    <tr class="marketDet" role="row">
+                        <td role="gridcell" class="marketDet logo">
+
+                            @if (item.ServiceImages.Where(x => x.sequenceNR == 1).FirstOrDefault() != null)
+                            {
+                                base64 = Convert.ToBase64String(item.ServiceImages.Where(x => x.sequenceNR == 1).First().Image);
+                                imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                <img src="@imgSrc" alt="IMAGES" style=" height:40px; width:80px" align="left" />
+                            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                        </td>
+                        <td role="gridcell" class="marketDet">
+                             @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td role="gridcell" class="marketDet" >
+                        @if (item.price != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.price)
+                        }
+                        else
+                        {
+                            <span>-</span>
+                        }
+                        </td>
+                        <td role="gridcell" class="marketDet">
+                                @Html.DisplayFor(modelItem => item.City.name)
+                        </td>
+                        <td role="gridcell" class="marketDet">
+                                @Html.DisplayFor(modelItem => item.description)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

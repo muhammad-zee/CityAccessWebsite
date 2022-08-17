@@ -1,0 +1,388 @@
+﻿@model CityAccess.ReqLog
+@{
+    ViewBag.Title = "Details";
+}
+<div class="Header">
+    <div class="Section-Title col-md-3">
+        <h1>Details</h1>
+    </div>
+</div>
+
+
+<div class="Content">
+
+    <div>
+        <h4>Requested Service Details</h4>
+        <hr />
+        @*<table style="width: 100%">
+            <tr>
+                <td class="inline-grid" valign="top">*@
+        <div class="primaryDiv">
+            <div>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.contactName)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.contactName)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.contactEmail)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.contactEmail)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.contactPhone)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.contactPhone)
+                    </dd>
+                     @if (ViewBag.leg == 1 || ViewBag.leg == null)
+                     {
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.eventDate)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.eventDate)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.eventTime)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.eventTime)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.nrPersons)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.nrPersons)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.price)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.price)
+                        </dd>
+
+                        if (ViewBag.NotTransfer == null)
+                        {
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Request.pickupLocation)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Request.pickupLocation)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Request.dropoffLocation)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Request.dropoffLocation)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Request.flightNr)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Request.flightNr)
+                            </dd>
+                        }
+                     }
+                     @if (ViewBag.leg == 2)
+                     {
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.eventDate)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.returnDate)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.eventTime)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.returnTime)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.nrPersons)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.nrPersons)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.pickupLocation)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.returnPickup)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.dropoffLocation)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.returnDropoff)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.flightNr)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.returnFlight)
+                        </dd>
+
+                     }
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.reference)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.reference)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.notes)
+                        </dt>
+                        <dd>
+                            <span class="multi">  @Html.DisplayFor(model => model.Request.notes) </span>
+                        </dd>
+
+
+                    @if (Model.Agreement.Service.field1IsActive == true)
+                    {
+                        <dt>
+                            <label class="control-label">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName1)
+                            </label>
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.extraDate1)
+                        </dd>
+                    }
+                    @if (Model.Agreement.Service.field2IsActive == true)
+                    {
+                        <dt>
+                            <label class="control-label">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName2)
+                            </label>
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.extraDate2)
+                        </dd>
+                    }
+                    @if (Model.Agreement.Service.field3IsActive == true)
+                    {
+                        <dt>
+                            <label class="control-label">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName3)
+                            </label>
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.extraDate3)
+                        </dd>
+                    }
+                    @if (Model.Agreement.Service.field4IsActive == true)
+                    {
+                        <dt>
+                            <label class="control-label">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName4)
+                            </label>
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.extraTime1)
+                        </dd>
+                    }
+                    @if (Model.Agreement.Service.field5IsActive == true)
+                    {
+                        <dt>
+                            <label class="control-label">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName5)
+                            </label>
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.extraTime2)
+                        </dd>
+                    }
+                    @if (Model.Agreement.Service.field6IsActive == true)
+                    {
+                        <dt>
+                            <label class="control-label">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName6)
+                            </label>
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.extraTime3)
+                        </dd>
+                    }
+                    @if (Model.Agreement.Service.field7IsActive == true)
+                    {
+                        <dt>
+                            <label class="control-label">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName7)
+                            </label>
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.extraText1)
+                        </dd>
+                    }
+                    @if (Model.Agreement.Service.field8IsActive == true)
+                    {
+                        <dt>
+                            <label class="control-label">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName8)
+                            </label>
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.extraText2)
+                        </dd>
+                    }
+                    @if (Model.Agreement.Service.field9IsActive == true)
+                    {
+                        <dt>
+                            <label class="control-label">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName9)
+                            </label>
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.extraText3)
+                        </dd>
+                    }
+                    @if (Model.Agreement.Service.field10IsActive == true)
+                    {
+                        <dt>
+                            <label class="control-label">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName10)
+                            </label>
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.extraMultiText1)
+                        </dd>
+                    }
+                    @if (Model.Agreement.Service.field11IsActive == true)
+                    {
+                        <dt>
+                            <label class="control-label">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName11)
+                            </label>
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.extraMultiText2)
+                        </dd>
+                    }
+                    @if (Model.Agreement.Service.field12IsActive == true)
+                    {
+                        <dt>
+                            <label class="control-label">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName12)
+                            </label>
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.extraMultiText3)
+                        </dd>
+                    }
+
+
+                    @using (Html.BeginForm("Details", "ServicesRequested", FormMethod.Post, new { @style = "padding-left: 0px;" }))
+                    {
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Request.ID)
+                        @Html.AntiForgeryToken()
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.OperatorNotes)
+                        </dt>
+                        <dd>
+                            @Html.EditorFor(model => model.operatorNotes, Model.operatorNotes, new { htmlAttributes = new { style = "width: 220px; height:70px; font-size: 12px; line-height: 1;", maxlength = "1000" } })
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.stateID)
+                        </dt>
+                        <dd>
+                            @Html.DropDownListFor(a => a.stateID, new SelectList(ViewBag.stateID, "ID", "ID"), Model.Request.stateID, htmlAttributes: new { @class = "form-control", style = "width: 125px; height: 23px; font-size: 12px; color:#3a6d98; align:left;" })
+                            @Html.ValidationMessageFor(model => model.Request.stateID, "", new { @class = "text-danger" })
+                        </dd>
+                        <dt>
+                                @Html.DisplayName("Assigned to:")
+                        </dt>
+                        <dd>
+                            @if(Session["userAdmin"] != null)
+                            {
+                                if (Model.Request.User1 != null)
+                                {
+                                    @Html.DropDownListFor(a => a.ResponsibleID, ViewBag.Users as IEnumerable<SelectListItem>, Model.Request.User1.fullName, htmlAttributes: new { @class = "form-control", style = "width: 125px; height: 23px; font-size: 12px; color:#3a6d98; align:left;" })
+                                }
+                                else
+                                {
+                                    @Html.DropDownListFor(a => a.ResponsibleID, ViewBag.Users as IEnumerable<SelectListItem>, string.Empty, htmlAttributes: new { @class = "form-control", style = "width: 125px; height: 23px; font-size: 12px; color:#3a6d98; align:left;" })
+                                }
+                            }
+                            else {
+                                @Html.DisplayFor(model => model.Request.User1.fullName);
+                            }
+                        </dd>
+
+                        <dt></dt>
+                        <dd>
+                            <input type="submit" value="Change" class="btn btn-default" align="left" />
+                        </dd>
+                    }
+                </dl>
+            </div>
+
+            <p>
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+        <div class="secondaryDiv">
+            @*</td>
+                <td valign="top">*@
+            <dl>
+                <hr class="hr-style" />
+                @foreach (var item in Model.ReqLog_List)
+                {
+                    <dt>
+                        @Html.DisplayFor(model => item.User.username) at  @Html.DisplayFor(model => item.Date) at @Html.DisplayFor(model => item.Time):
+                    </dt>
+                    <dd>
+                        @*Html.DisplayFor(model => item.notes)*@
+                        @Html.Raw(Html.Encode(item.notes).Replace("\n", "<br />"))
+                    </dd>
+                }
+
+            </dl>
+        </div>
+        @*</td>
+                </tr>
+            </table>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.stateID, "State", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("stateID", null, htmlAttributes: new { @class = "form-control", style = "width = 150px;" })
+                    @Html.ValidationMessageFor(model => model.stateID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*@<div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Change" class="btn btn-default" />
+                </div>
+            </div> *@
+    </div>
+
+    <p></p>
+    <p></p>
+    @if (ViewBag.leg != null)
+    {
+        <p>
+            This request is related to this one:
+            @if (ViewBag.leg == 1)
+            {
+                @Html.ActionLink("Related Request", "Details", new { id = ViewBag.ID, leg = 2 })
+            }
+            else
+            {
+                @Html.ActionLink("Related Request", "Details", new { id = ViewBag.ID, leg = 1 })
+            }
+        </p>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    <div id="dialog"></div>
+</div>
+

@@ -1,0 +1,100 @@
+﻿@model  Link
+
+    @{ 
+        var arg1 = "Links_" + Model.Index;
+        var arg2 = "Links_" + Model.Index +"__posHorizontal";
+        var arg3 = "Links_" + Model.Index + "__posVertical";
+        var arg4 =  Model.Index;
+    }
+
+
+
+    @if (Model.posVertical != 0)
+    {
+        <div class='col-md-12 clearfix'  id=@arg1>
+
+            @Html.HiddenFor(model => model.posHorizontal)
+            @Html.HiddenFor(model => model.posVertical)
+            @Html.HiddenFor(model => model.partnerSiteID)
+            @Html.HiddenFor(model => model.ID)
+            @Html.HiddenFor(model => model.IsDropMaster)
+            <div class="col-md-offset-1 col-md-2">
+                @Html.Label("Button Url", htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-9" style="padding-bottom: 15px;">
+                @Html.EditorFor(model => model.value)
+                <span class="glyphicon glyphicon-remove" onclick="Remove(@arg1, @arg2, @arg3,@arg4)" data-html="true" style="padding-left: 4px; color:red;"></span>
+            </div>
+
+            <div class="col-md-offset-1 col-md-2">
+                @Html.Label("Button text", htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-9" style="padding-bottom: 35px;">
+                @Html.EditorFor(model => model.text)
+            </div>
+        </div>
+        <script>
+            $(@arg1).appendTo("#" + @Model.posHorizontal);
+        </script>
+    }
+    else
+    {
+        if (Model.IsDropMaster != null && Model.IsDropMaster == true)
+        {
+            <div class='col-md-12 clearfix'  id=@arg1>
+                <div id="@Model.posHorizontal">
+                    @Html.HiddenFor(model => model.posHorizontal)
+                    @Html.HiddenFor(model => model.posVertical)
+                    @Html.HiddenFor(model => model.partnerSiteID)
+                    @Html.HiddenFor(model => model.ID)
+                    @Html.HiddenFor(model => model.IsDropMaster)
+
+                    <div class="col-md-2">
+                        @Html.Label("Button Url", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-10" style="padding-bottom: 15px;">
+                        @Html.EditorFor(model => model.value)
+                        <span class="glyphicon glyphicon-remove"  onclick="Remove(@arg1, @arg2, @arg3,@arg4)" data-html="true" style="padding-left: 4px; color:red;"></span>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.Label("Button text", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-10" style="padding-bottom: 35px;">
+                        @Html.EditorFor(model => model.text)
+                    </div>
+                </div>
+                <div class='col-md-9 col-md-offset-3 dropdown' style='margin-bottom: 5%;'>
+                     <button type='button' class='btn btn-default btn-sm'>
+                        <span class='glyphicon glyphicon-plus-sign' onclick='DropdownChild(@Model.posHorizontal)'>Sub Field</span>
+                     </button>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class='col-md-12 clearfix' id=@arg1>
+
+                @Html.HiddenFor(model => model.posHorizontal)
+                @Html.HiddenFor(model => model.posVertical)
+                @Html.HiddenFor(model => model.partnerSiteID)
+                @Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.IsDropMaster)
+                <div class="col-md-2">
+                    @Html.Label("Button Url", htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-10" style="padding-bottom: 15px;">
+                    @Html.EditorFor(model => model.value)
+                    <span class="glyphicon glyphicon-remove" onclick="Remove(@arg1, @arg2, @arg3,@arg4)"  data-html="true" style="padding-left: 4px; color:red;"></span>
+                </div>
+                <div class="col-md-2">
+                    @Html.Label("Button text", htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-10" style="padding-bottom: 35px;">
+                    @Html.EditorFor(model => model.text)
+                </div>
+            </div>
+        }
+    }
+
+
+

@@ -1,0 +1,28 @@
+﻿@model CityAccess.AgreementLog
+@{
+    ViewBag.Title = "Details";
+}
+<div class="Header">
+    <div class="Section-Title">
+        <h1>Details</h1>
+    </div>
+</div>
+
+<div class="Content">
+    <div>
+        <h4>Agreement Log Details</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.notes)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.notes)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
+

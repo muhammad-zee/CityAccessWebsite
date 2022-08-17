@@ -1,0 +1,286 @@
+﻿@model IEnumerable<CityAccess.Agr_Partn_Comm>
+
+@{
+    Layout = null;
+}
+
+<div class="Content">
+    @{
+        int i = 0;
+        string substring = string.Empty;
+        string substring2 = string.Empty;
+        string substringAux = string.Empty;
+        string substring3 = string.Empty;
+        string substring4 = string.Empty;
+        string substring5 = string.Empty;
+        var base64 = string.Empty;
+        var imgSrc = string.Empty;
+        var base64_2 = string.Empty;
+        var imgSrc_2 = string.Empty;
+        var base64_3 = string.Empty;
+        var imgSrc_3 = string.Empty;
+        var numChar = 17;
+    }
+    @foreach (var item in Model)
+    {
+        i = 0;
+        if (item.serviceImage != null)
+        {
+            base64 = Convert.ToBase64String(item.serviceImage.Image);
+            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+        }
+
+        if (item.Partner.PartnerLogoes.First().Image.Length > 0)
+        {
+            base64_2 = Convert.ToBase64String(item.Partner.PartnerLogoes.First().Image);
+            imgSrc_2 = String.Format("data:image/gif;base64,{0}", base64_2);
+        }
+        <div class="Card" style="margin-left:20px">
+            <div class="Card-Image">
+                @if (item.serviceImage != null)
+                {
+                    <img src="@imgSrc" alt="IMAGES" style="height:105px;width:210px;" />
+                }
+                else
+                {
+                    <div style="height:105px;width:210px;color: dimgrey;"></div>
+                }
+                <div class="Card-price" style="height:30px;width:58px;padding-top:0;font-size:11px;">
+                    @if (item.Agreement.price != null)
+                    {
+                        <p style="padding-left:13px;margin:0;font-size: 9px;">from</p>
+                        <span style="padding-left:8px;">@Html.DisplayFor(modelItem => item.Agreement.price)</span><span>€</span>
+                    }
+                    else
+                    {
+                        <p style="padding-left:13px;margin:0;font-size: 10px;">from</p>
+                        <span style="padding-left:8px;">@Html.DisplayFor(modelItem => item.Agreement.Service.price)</span><span>€</span>
+                    }
+                </div>
+            </div>
+
+            @if (item.Agreement.partnerID != null)
+            {
+
+                <div id=@item.Agreement.ID class="Card-TradeName">
+                    <table style="margin-top: 0px; width: 100%;">
+                        <tr>
+                            <td>
+                                @if (item.Partner.PartnerLogoes != null)
+                                {
+                                    <img src="@imgSrc_2" alt="IMAGES" style=" height:40px; width:28px" align="left" />
+                                }
+                            </td>
+                            <td>
+                                @if (item.Label.Length <= numChar)
+                                {
+                                    <p class=" col-md-offset-1" style="font-size:12px"> @Html.DisplayFor(modelItem => item.Label)</p>
+                                    <span class=" col-md-offset-1" style="font-size:11px"><strong> @Html.DisplayFor(modelItem => item.Partner.tradeName)</strong></span>
+                                }
+                                else
+                                {
+                                    int pos = 0;
+                                    int k = 0;
+                                    for (int j = 0; j < numChar + 1; j++)
+                                    {
+                                        if (item.Label[j] == ' ')
+                                        {
+                                            pos = j;
+                                        }
+
+                                        if (j == numChar)
+                                        {
+                                            if (pos == 0)
+                                            {
+                                                pos = (k + 1) * numChar;
+                                            }
+
+
+                                            if (k == 0)
+                                            {
+                                                substring = item.Label.Substring(0, pos);
+                                                substring2 = item.Label.Substring(pos, (item.Label.Length - pos));
+                                                item.Label = substring2;
+                                                substringAux = substring2;
+
+                                            }
+                                            if (k == 1)
+                                            {
+                                                substring3 = substring2.Substring(pos, (substring2.Length - pos));
+                                                substring2 = substring2.Substring(0, pos);
+                                                item.Label = substring3;
+                                                substringAux = substring3;
+                                            }
+                                            if (k == 2)
+                                            {
+                                                substring4 = substring3.Substring(pos, (substring3.Length - pos));
+                                                substring3 = substring3.Substring(0, pos);
+                                                item.Label = substring4;
+                                                substringAux = substring4;
+                                            }
+                                            if (k == 3)
+                                            {
+                                                substring5 = substring4.Substring(pos, (substring4.Length - pos));
+                                                substring4 = substring4.Substring(0, pos);
+                                                item.Label = substring5;
+                                                substringAux = substring4;
+                                            }
+                                            if (substringAux.Length > numChar && k != 3)
+                                            {
+                                                j = 0;
+                                                k++;
+                                            }
+                                        }
+                                    }
+                                    <span class=" col-md-offset-1 no-padding" style="font-size:12px"> @Html.Raw(substring)</span>
+                                    <p class=" col-md-offset-1 no-padding" style="font-size:12px"> @Html.Raw(substring2)</p>
+                                    if (k == 1)
+                                    {
+                                        <p class=" col-md-offset-1 no-padding" style="font-size:12px"> @Html.Raw(substring3)</p>
+                                    }
+                                    if (k == 2)
+                                    {
+                                        <p class=" col-md-offset-1 no-padding" style="font-size:12px"> @Html.Raw(substring4)</p>
+                                    }
+                                    if (k == 3)
+                                    {
+                                        <p class=" col-md-offset-1 no-padding" style="font-size:12px"> @Html.Raw(substring5)</p>
+                                    }
+                                    <span class=" col-md-offset-1" style="font-size:11px"> <strong>@Html.DisplayFor(modelItem => item.Partner.tradeName)</strong></span>
+                                }
+
+                            </td>
+                            @if (item.PartnerLogo != null)
+                            {
+                                base64_3 = Convert.ToBase64String(item.PartnerLogo.Image);
+                                imgSrc_3 = String.Format("data:image/gif;base64,{0}", base64_3);
+                                <td>
+                                    <img src="@imgSrc_3" alt="IMAGES" style=" height:40px; width:28px" align="right" />
+                                </td>
+                            }
+                        </tr>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div id=@item.Agreement.ID class="Card-TradeName">
+                    <table style="margin-top: 0px; width: 100%;">
+                        <tr>
+                            <td>
+                                @if (item.Partner.PartnerLogoes != null)
+                                {
+                                    <img src="@imgSrc_2" alt="IMAGES" style=" height:40px; width:28px" align="left" />
+                                }
+                            </td>
+                            <td>
+                                @if (item.Label.Length <= numChar)
+                                {
+                                    <p class=" col-md-offset-1" style="font-size:12px"> @Html.DisplayFor(modelItem => item.Label)</p>
+                                    <span class=" col-md-offset-1" style="font-size:11px"> <strong>@Html.DisplayFor(modelItem => item.BaseService)</strong></span>
+                                }
+                                else
+                                {
+                                    int pos = 0;
+                                    int k = 0;
+                                    for (int j = 0; j < numChar + 1; j++)
+                                    {
+                                        if (item.Label[j] == ' ')
+                                        {
+                                            pos = j;
+                                        }
+
+                                        if (j == numChar)
+                                        {
+                                            if (k == 0)
+                                            {
+                                                substring = item.Label.Substring(0, pos);
+                                                substring2 = item.Label.Substring(pos, (item.Label.Length - pos));
+                                                item.Label = substring2;
+                                                substringAux = substring2;
+
+                                            }
+                                            if (k == 1)
+                                            {
+                                                substring3 = substring2.Substring(pos, (substring2.Length - pos));
+                                                substring2 = substring2.Substring(0, pos);
+                                                item.Label = substring3;
+                                                substringAux = substring3;
+                                            }
+                                            if (k == 2)
+                                            {
+                                                substring4 = substring3.Substring(pos, (substring3.Length - pos));
+                                                substring3 = substring3.Substring(0, pos);
+                                                item.Label = substring4;
+                                                substringAux = substring4;
+                                            }
+                                            if (k == 3)
+                                            {
+                                                substring5 = substring4.Substring(pos, (substring4.Length - pos));
+                                                substring4 = substring4.Substring(0, pos);
+                                                item.Label = substring5;
+                                                substringAux = substring4;
+                                            }
+                                            if (substringAux.Length > numChar && k != 3)
+                                            {
+                                                j = 0;
+                                                k++;
+                                            }
+                                        }
+                                    }
+                                    <span class=" col-md-offset-1 no-padding" style="font-size:12px"> @Html.Raw(substring)</span>
+                                    <p class=" col-md-offset-1 no-padding" style="font-size:12px"> @Html.Raw(substring2)</p>
+                                    if (k == 1)
+                                    {
+                                        <p class=" col-md-offset-1 no-padding" style="font-size:12px"> @Html.Raw(substring3)</p>
+                                    }
+                                    if (k == 2)
+                                    {
+                                        <p class=" col-md-offset-1 no-padding" style="font-size:12px"> @Html.Raw(substring4)</p>
+                                    }
+                                    if (k == 3)
+                                    {
+                                        <p class=" col-md-offset-1 no-padding" style="font-size:12px"> @Html.Raw(substring5)</p>
+                                    }
+                                    <span class=" col-md-offset-1" style="font-size:11px"> <strong>@Html.DisplayFor(modelItem => item.BaseService)</strong></span>
+                                }
+                            </td>
+
+                        </tr>
+                    </table>
+
+                </div>
+            }
+                <div class="Card-Actions">
+                    @if (ViewBag.NonConfirmed != 1)
+                    {
+                    <div class="Card-Action">
+                        @*<button data-url='@Url.Action("Index","Booking", new { agID = item.Agreement.ID } )' onclick="ChangeExternalView('Button@(item.Agreement.ID)')" id="Button@(item.Agreement.ID)">Book</button>*@
+                        @Html.ActionLink("Book", "PartnerBookingPage", "PartnerSite", new { agID = item.Agreement.ID , partnerID = item.Agreement.partnerID}, htmlAttributes: new { style = "margin: 0px;" })
+                    </div>
+                    }
+                </div>
+        </div>
+    }
+
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        function card () {
+            var  Agreements =  @Html.Raw(Json.Encode(@ViewBag.AgIds));
+            for (var i = 0; Agreements[i] > 0; i++) {
+                $("#" + Agreements[i]).css("padding-top", "0px");
+                $("#" + Agreements[i]).css("height", "95px");
+                }
+        }
+
+        window.onload = function () {
+            card();
+        };
+    });
+</script>

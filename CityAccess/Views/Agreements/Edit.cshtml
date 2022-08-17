@@ -1,0 +1,175 @@
+﻿@model CityAccess.Agreement
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+<div class="Header">
+	<div class="Section-Title col-md-3">
+		<h1>Edit</h1>
+	</div>
+</div>
+
+
+<div class="Content">
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Agreement</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.partnerID, "Partner", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("partnerID", null, string.Empty, htmlAttributes: new { @class = "form-control", style = "width: 200px" })
+                @Html.ValidationMessageFor(model => model.partnerID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.serviceID, "Service", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("serviceID", null, string.Empty, htmlAttributes: new { @class = "form-control", style = "width: 200px" })
+                @Html.ValidationMessageFor(model => model.serviceID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.label, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.label, new { htmlAttributes = new { @class = "form-control", style = "width: 250px", maxlength = "50" } })
+                @Html.ValidationMessageFor(model => model.label, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isActive, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.isActive)
+                    @Html.ValidationMessageFor(model => model.isActive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.needsApproval, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.needsApproval)
+                    @Html.ValidationMessageFor(model => model.needsApproval, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control", maxlength = "500" } })
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.commissionValue, htmlAttributes: new { @class = "control-label col-md-2", style = "padding-top: 0px;" })
+            <div class="col-md-10">
+                @* Por dropdown com as opções da LOV *@
+                <div class="col-md-2" style="padding-left:0px; padding-bottom: 3px;">
+                    @Html.DropDownList("TypeCommission", new SelectList(ViewBag.commission, "ID", "label"), htmlAttributes: new { @class = "form-control", style = "width: 115px;  font-size: 12px; align:left;" })
+                </div>
+                <div class="col-md-5" style="padding-left:0px;">
+                    @Html.EditorFor(model => model.commissionValue, new { htmlAttributes = new { @class = "form-control", style = "width: 60px; " } })
+                </div>
+                @Html.ValidationMessageFor(model => model.commissionValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @* Dropdown pricetype *@
+                <div class="col-md-2" style="padding-left:0px; padding-bottom: 3px;">
+                    @Html.DropDownList("priceType", new SelectList(ViewBag.price, "ID", "label"), htmlAttributes: new { @class = "form-control", style = "width: 115px;  font-size: 12px; align:left;" })
+                </div>
+                <div class="col-md-5" style="padding-left:0px;">
+                    @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control", style = "width: 60px; " } })
+                </div>
+                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Override1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Override1, new { htmlAttributes = new { @class = "form-control", style = "width: 100px;  height: 25px;" } })
+                @Html.ValidationMessageFor(model => model.Override1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PaymentAgent, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @* Dropdown paymentagenttype *@
+                <div class="col-md-2" style="padding-left:0px; padding-bottom: 3px;">
+                    @Html.DropDownList("PaymentAgentType", new SelectList(ViewBag.paymentAgent, "ID", "label"), htmlAttributes: new { @class = "form-control", style = "width: 115px;  font-size: 12px; align:left;" })
+                </div>
+                <div class="col-md-5" style="padding-left:0px;">
+                    @Html.EditorFor(model => model.PaymentAgent, new { htmlAttributes = new { @class = "form-control", style = "width: 60px; " } })
+                </div>
+                @Html.ValidationMessageFor(model => model.PaymentAgent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.agentInstructions, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.agentInstructions, new { htmlAttributes = new { @class = "form-control", maxlength = "1500" } })
+                @Html.ValidationMessageFor(model => model.agentInstructions, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.messageTemplate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.messageTemplate, new { htmlAttributes = new { @class = "form-control", maxlength = "1500" } })
+                @Html.ValidationMessageFor(model => model.messageTemplate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cancellationPolicy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cancellationPolicy, new { htmlAttributes = new { @class = "form-control", maxlength = "1500" } })
+                @Html.ValidationMessageFor(model => model.cancellationPolicy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+	}
+
+	<div>
+		@Html.ActionLink("Back to List", "Index")
+	</div>
+
+	@section Scripts {
+		@Scripts.Render("~/bundles/jqueryval")
+	}
+	</div>

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<CityAccess.Agr_Serv_Partn_ServType>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="Header">
+    <div class="Section-Title col-md-3">
+        <h1>Agreements List</h1>
+
+    </div>
+    <div class="Button-Action create-butt">
+        @Html.ActionLink("Create New", "Create")
+    </div>
+</div>
+
+<div class="Content">
+    <table class="table">
+        <tr>
+            <th>
+                Operator
+            </th>
+            <th>
+                Partner
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Public
+            </th>
+            <th>
+                Commission
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Partner2.tradeName)
+                </td>
+                <td>@if (item.Agreement.partnerID != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Partner.tradeName)
+                    }else
+                    {
+                        
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceType.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Agreement.label)
+                </td>
+                <td>@if (item.Agreement.partnerID != null)
+                    {
+                        <p>No</p>
+                    }
+                    else
+                    {
+                        <p>Yes</p>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Agreement.commissionValue)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Agreement.ID })|
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Agreement.ID })|
+                    @Html.ActionLink("Details", "Details", new { id = item.Agreement.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+

@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135464203-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-135464203-1');
+    </script>
+
+    <link rel="icon" href="/favicon (1).ico">
+    <title>City Access</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Css/PartnerSite.css")
+    @*@Styles.Render("~/Content/bootstrap.css")*@
+    @Styles.Render("~/Content/bootstrap.min.css")
+
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+
+
+    <script src="~/Scripts/partnerSite.js"></script>
+
+    <link rel="stylesheet" href="@Url.Action("GetCss", "PartnerSite", new {partnerID=Model.PartnerID})" />
+
+</head>
+<body>
+    @{
+        var base64 = string.Empty;
+        var imgSrc = string.Empty;
+        var hasImage = false;
+
+        var base64Logo = string.Empty;
+        var imgSrcLogo = string.Empty;
+        var hasLogo = false;
+
+        if (Model.BackgroundImage != null)
+        {
+            base64 = Convert.ToBase64String(Model.BackgroundImage);
+            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+            hasImage = true;
+        }
+
+        if (Model.Logo != null)
+        {
+            base64Logo = Convert.ToBase64String(Model.Logo);
+            imgSrcLogo = String.Format("data:image/gif;base64,{0}", base64Logo);
+            hasLogo = true;
+        }
+    }
+
+
+
+
+
+<div class="PartnerSiteBackgroundColor">
+    <div class="PartnerSiteHeader clearfix">
+        <div class="PartnerSiteLogoPos">
+            <img src="@imgSrcLogo" alt="IMAGES"/>
+        </div>
+        <div class="PartnerSiteMenuPos PartnerSiteFont">
+            <div class="mobile-icon">
+                <span style="cursor:pointer;" onclick="openNav()">&#9776;</span>
+            </div>
+            <div class="Navbar">
+                <div id="menu">
+                    @foreach (var lk in Model.Links)
+                    {
+                        if (lk.IsDropMaster == null || lk.IsDropMaster == false)
+                        {
+                            if (lk.posVertical == 0)
+                            {
+
+                                    <div class="dropdown">
+                                        <button type="button" class="dropbtn">
+                                            <a href=@lk.value>@lk.text</a>
+                                        </button>
+                                    </div>
+
+                            }
+                            else
+                            {
+                                <script>
+                                    AppendToDrop('@lk.value', '@lk.text', '@lk.posHorizontal');
+                                </script>
+                            }
+
+                        }
+                        else
+                        {
+
+                                <div class="dropdown">
+                                    <button type="button" class="dropbtn">
+                                        <a href=@lk.value>@lk.text</a>
+                                        <i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <div class="dropdown-content" id=@lk.posHorizontal>
+                                    </div>
+                                </div>
+
+                        }
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="mobileMenu" id="mySideNav"></div>
+    <div class="PartnerSiteBody" id="body">
+        <img src="@imgSrc" alt="IMAGES" class="BackgroundImg" />
+        <div class="ExternalView" id="ExternalView">
+            @RenderBody()
+        </div>  
+    </div>
+
+
+        @*<div style="height:20vh;">
+        </div>*@
+</div>
+</body>
+</html>

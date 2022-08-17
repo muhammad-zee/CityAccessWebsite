@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CityAccess.AgreementLog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="Header">
+    <div class="Section-Title">
+        <h1>Agreement Log</h1>
+
+    </div>
+</div>
+
+<div class="Content">
+    <table class="table">
+        <tr>
+            <th>
+                User that changed
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Agreement
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.fullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.ActionLink("Click here", "Details", "Agreements", new { id = item.agreementID }, null)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+

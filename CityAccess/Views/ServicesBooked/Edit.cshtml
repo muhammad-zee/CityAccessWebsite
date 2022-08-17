@@ -1,0 +1,565 @@
+﻿@model CityAccess.ReqLog
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="Header">
+    <div class="Section-Title col-md-3">
+        <h1>Edit</h1>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var bootstrapButton = $.fn.button.noConflict() // return $.fn.button to previously assigned value
+        $.fn.bootstrapBtn = bootstrapButton            // give $().bootstrapBtn the Bootstrap functionality
+    });
+        //$.jQuery.noConflict();
+
+        (function ($) {
+
+            $.fn.multipleInput = function () {
+
+                return this.each(function () {
+
+                    // create html elements
+
+                    // list of email addresses as unordered list
+                    $list = $('<ul />');
+
+                    // input
+                    var $input = $('<input type="text" id="mltxt" />').keyup(function (event) {
+
+                        if (event.which == 32 || event.which == 188) {
+                            // key press is space or comma
+                            var val = $(this).val().slice(0, -1); // remove space/comma from value
+
+                            // append to list of emails with remove button
+                            $list.append($('<li class="multipleInput-email"><span> ' + val + '</span></li>')
+                                .append($('<a href="#" class="multipleInput-close" title="Remove" />')
+                                    .click(function (e) {
+                                        $(this).parent().remove();
+                                        e.preventDefault();
+                                    })
+                                )
+                            );
+                            $(this).attr('placeholder', '');
+                            // empty input
+                            $(this).val('');
+                        }
+
+                    });
+
+                    // container div
+                    var $container = $('<div class="multipleInput-container" />').click(function () {
+                        $input.focus();
+                    });
+
+                    // insert elements into DOM
+                    $container.append($list).append($input).insertAfter($(this));
+
+                    // add onsubmit handler to parent form to copy emails into original input as csv before submitting
+                    var $orig = $(this);
+                    $(this).closest('form').submit(function (e) {
+
+                        var emails = new Array();
+                        $('.multipleInput-email span').each(function () {
+                            emails.push($(this).html());
+                        });
+                        emails.push($input.val());
+
+                        $orig.val(emails.join());
+
+                    });
+
+                    return $(this).hide();
+
+                });
+
+            };
+        })(jQuery);
+</script>
+
+<script>
+    function popup()
+    {
+
+        var content = " <form id='myForm' method='Post'>" +
+            "<div id='header'><input data-val='true' data-val-number='The field ID must be a number.' data-val-required='The ID field is required.' id='Request_ID' name='Request.ID' type='hidden' value='@Model.Request.ID'>" +
+            "<div style='padding-bottom:7px;height:33%;'><div style='float:left;'>To: &nbsp;</div><input class='form-control text-box single-line' id='Request_contactEmail1'  name='Request.contactEmail' style='height: 25px; font-size:12px;' type='text' value='@Model.Request.contactEmail'/></div><div id='clear'></div>" +
+            //"<div style='padding-bottom:7px;height:33%;'><div style='float:left;'>Cc: &nbsp;</div><input class='form-control text-box single-line' id='Cc'  name='Cc' style='height: 25px; font-size:12px;' type='text'/></div><div id='clear'></div>" +
+            "<div style='padding-top:5px;padding-bottom:7px;height:33%;'><div style='float:left;'>Subject:&nbsp;</div><input class='form-control text-box single-line' id='Subject' maxlength='100' name='Subject' style='height: 25px; font-size:12px;' type='text' value='@Model.ClientMailSubject'/></div><div id='clear'></div></div>" +
+            @*"<textarea class='multi-line contactBox' cols='20' id='content1' name='content1' rows='2' style='overflow:auto;>"+ "@(new HtmlString(@Model.ClientMailContent))"  +"</textarea>"*@
+            "<div class='contactBox' contenteditable='true' id='content2' name='content2'>" + "@(new HtmlString(@Model.ClientMailContent))"  + "</div>"
+            +"<div style='padding-top: 7px;'><input type='button' onclick='submitF()' value = 'Send' class='btn btn-default' /></div>"+
+            "</form>";
+
+
+
+        var title = "Confirmation e-mail";
+
+        $("#dialog").empty();
+        $("#dialog").attr('title', title);
+
+        $("#dialog").dialog({
+            minHeight: 470
+        });
+
+        $("#dialog").dialog({
+            minWidth: 800
+        });
+
+
+        $("#dialog").append(content);
+
+        $("#dialog").dialog();
+
+
+        $(".ui-dialog-titlebar-close").empty();
+        $(".ui-dialog-titlebar-close").append("<span class='ui-button-icon-primary ui-icon ui-icon-close'></span>");
+    }
+
+    function submitF() {
+
+        var Mailcontent = $("#content2").html();
+
+        $("#myForm").append("<input data-val='true' id='content1' name='content1' type='hidden' value='"+ Mailcontent +"'>");
+
+        $("#myForm").submit();
+    }
+
+    function MultipleInput() {
+
+        $("#Request_contactEmail1").multipleInput();
+        $("#mltxt").val("@Model.Request.contactEmail");
+        //$("#Cc").multipleInput();
+    }
+</script>
+
+<div class="Content">
+
+
+    <div style="height:100%;">
+        <h4>Request</h4>
+        <hr />
+        @if (Model.Request.stateID == "Approved" || Model.Request.stateID == "Invoiced" || Model.Request.stateID == "Submitted")
+        {
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Request.ID)
+                {
+                    Model.Vouch = 1;
+                }
+                @Html.HiddenFor(model => model.Vouch)
+
+                <div class="col-md-2 secondary-btn">
+                    <input type="submit" formtarget="_blank" value="Voucher" class=" file-download btn btn-default" />
+                </div>
+            }
+            <input type="button" value="Confirmation e-mail" onclick="popup(); MultipleInput();" class=" secondary-btn btn btn-default" />
+        }
+        else
+        {
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Request.ID)
+                {
+                    Model.Vouch = 1;
+                }
+                @Html.HiddenFor(model => model.Vouch)
+                @Html.HiddenFor(model => model.Request.ID)
+
+                <div class="col-md-12 secondary-btn">
+                    <input type="submit" formtarget="_blank" value="Voucher" class=" file-download btn btn-default" />
+                </div>
+            }
+        }
+        @*<div style="padding-bottom: 10px;float:right" class="col-md-2">
+                <input type="button" value="Confirmation e-mail" onclick="popup(); MultipleInput();" class=" btn btn-default" />
+            </div>*@
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(model => model.Request.ID)
+            @Html.HiddenFor(model => model.Request.User)
+            @Html.HiddenFor(model => model.Request.State)
+            @Html.HiddenFor(model => model.Request.Agreement)
+            @Html.HiddenFor(model => model.Request.agreementID)
+            @Html.HiddenFor(model => model.Request.bookerId)
+            @*@Html.HiddenFor(model => model.Request.stateID)*@
+            @*<table style="width: 100%">
+                <tr>
+                    <td class="col-md-7 col-md-offset-1" valign="top">*@
+
+            <div class="primaryDiv ">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="no-padding form-group ">
+                        @Html.LabelFor(model => model.Request.contactName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Request.contactName, new { htmlAttributes = new { @class = "form-control", style = "height: 25px", maxlength = "50" } })
+                            @Html.ValidationMessageFor(model => model.Request.contactName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group no-padding ">
+                        @Html.LabelFor(model => model.Request.contactEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Request.contactEmail, new { htmlAttributes = new { @class = "form-control", style = "height: 25px", maxlength = "50" } })
+                            @Html.ValidationMessageFor(model => model.Request.contactEmail, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group no-padding">
+                        @Html.LabelFor(model => model.Request.contactPhone, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Request.contactPhone, new { htmlAttributes = new { @class = "form-control", style = "width: 200px; height: 25px", maxlength = "20" } })
+                            @Html.ValidationMessageFor(model => model.Request.contactPhone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group no-padding">
+                        @Html.LabelFor(model => model.Request.eventDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Request.eventDate, new { htmlAttributes = new { @class = "form-control", style = "width: 150px; height: 25px" } })
+                            @Html.ValidationMessageFor(model => model.Request.eventDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group no-padding">
+                        @Html.LabelFor(model => model.Request.eventTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Request.eventTime, new { htmlAttributes = new { @class = "form-control", style = "width: 115px; height: 25px" } })
+                            @Html.ValidationMessageFor(model => model.Request.eventTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group no-padding">
+                        @Html.LabelFor(model => model.Request.nrPersons, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Request.nrPersons, Enumerable.Range(1, 50).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+                            @Html.ValidationMessageFor(model => model.Request.nrPersons, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group no-padding">
+                        @Html.LabelFor(model => model.Request.price, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Request.price, new { htmlAttributes = new { @class = "form-control", style = "width:75px; height: 25px" } })
+                            @Html.ValidationMessageFor(model => model.Request.price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group no-padding">
+                        @Html.LabelFor(model => model.Request.reference, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Request.reference, new { htmlAttributes = new { @class = "form-control", style = "width:200px; height: 25px", maxlength = "50" } })
+                            @Html.ValidationMessageFor(model => model.Request.reference, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group no-padding">
+                        @Html.LabelFor(model => model.Request.notes, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Request.notes, new { htmlAttributes = new { @class = "form-control", maxlength = "1000" } })
+                            @Html.ValidationMessageFor(model => model.Request.notes, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @if (ViewBag.NotTransfer == null)
+                    {
+                        <div class="form-group no-padding">
+                            @Html.LabelFor(model => model.Request.pickupLocation, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Request.pickupLocation, new { htmlAttributes = new { @class = "form-control", style = "height: 25px", maxlength = "100" } })
+                                @Html.ValidationMessageFor(model => model.Request.pickupLocation, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group no-padding">
+                            @Html.LabelFor(model => model.Request.dropoffLocation, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Request.dropoffLocation, new { htmlAttributes = new { @class = "form-control", style = "height: 25px", maxlength = "100" } })
+                                @Html.ValidationMessageFor(model => model.Request.dropoffLocation, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group no-padding">
+                            @Html.LabelFor(model => model.Request.flightNr, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Request.flightNr, new { htmlAttributes = new { @class = "form-control", style = "width:75px; height: 25px", maxlength = "20" } })
+                                @Html.ValidationMessageFor(model => model.Request.flightNr, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+
+                    @if (ViewBag.Control != null)
+                    {
+                        <div class="form-group no-padding">
+                            @Html.LabelFor(model => model.Request.returnDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Request.returnDate, new { htmlAttributes = new { @class = "form-control", style = "width:150px; height: 25px" } })
+                                @Html.ValidationMessageFor(model => model.Request.returnDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group no-padding">
+                            @Html.LabelFor(model => model.Request.returnTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Request.returnTime, new { htmlAttributes = new { @class = "form-control", style = "width:115px; height: 25px" } })
+                                @Html.ValidationMessageFor(model => model.Request.returnTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group no-padding">
+                            @Html.LabelFor(model => model.Request.returnFlight, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Request.returnFlight, new { htmlAttributes = new { @class = "form-control", style = "width:75px; height: 25px", maxlength = "20" } })
+                                @Html.ValidationMessageFor(model => model.Request.returnFlight, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group no-padding">
+                            @Html.LabelFor(model => model.Request.returnPickup, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Request.returnPickup, new { htmlAttributes = new { @class = "form-control", style = "height: 25px", maxlength = "100" } })
+                                @Html.ValidationMessageFor(model => model.Request.returnPickup, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group no-padding">
+                            @Html.LabelFor(model => model.Request.returnDropoff, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Request.returnDropoff, new { htmlAttributes = new { @class = "form-control", style = "height: 25px", maxlength = "100" } })
+                                @Html.ValidationMessageFor(model => model.Request.returnDropoff, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+
+
+
+
+
+
+
+                    <div class="form-group no-padding">
+                        @Html.LabelFor(model => model.Request.stateID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.DropDownList("stateID", new SelectList(ViewBag.stateIDs,"Value","Text", Model.Request.stateID) , htmlAttributes: new { @class = "form-control", style = "width: 125px; height: 23px; font-size: 12px; align:left;" })
+                            @Html.ValidationMessageFor(model => model.Request.stateID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+
+                    @if (Model.Agreement.Service.field1IsActive == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-2" style="float:left; padding-top: 0px;">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName1)
+                                @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName1, "", new { @class = "text-danger" })
+                            </label>
+                            <div class="col-md-5" style="float:left;">
+                                @Html.EditorFor(model => model.Request.extraDate1)
+                                @Html.ValidationMessageFor(model => model.Request.extraDate1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Agreement.Service.field2IsActive == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-2" style="float:left;  padding-top: 0px;">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName2)
+                                @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName2, "", new { @class = "text-danger" })
+                            </label>
+                            <div class="col-md-5" style="float:left;">
+                                @Html.EditorFor(model => model.Request.extraDate2)
+                                @Html.ValidationMessageFor(model => model.Request.extraDate2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Agreement.Service.field3IsActive == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-2" style="float:left; padding-top: 0px;">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName3)
+                                @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName3, "", new { @class = "text-danger" })
+                            </label>
+                            <div class="col-md-5" style="float:left;">
+                                @Html.EditorFor(model => model.Request.extraDate3)
+                                @Html.ValidationMessageFor(model => model.Request.extraDate3, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Agreement.Service.field4IsActive == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-2" style="float:left; padding-top: 0px;">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName4)
+                                @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName4, "", new { @class = "text-danger" })
+                            </label>
+                            <div class="col-md-5" style="float:left;">
+                                @Html.EditorFor(model => model.Request.extraTime1)
+                                @Html.ValidationMessageFor(model => model.Request.extraTime1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Agreement.Service.field5IsActive == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-2" style="float:left; padding-top: 0px;">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName5)
+                                @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName5, "", new { @class = "text-danger" })
+                            </label>
+                            <div class="col-md-5" style="float:left;">
+                                @Html.EditorFor(model => model.Request.extraTime2)
+                                @Html.ValidationMessageFor(model => model.Request.extraTime2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Agreement.Service.field6IsActive == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-2" style="float:left; padding-top: 0px;">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName6)
+                                @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName6, "", new { @class = "text-danger" })
+                            </label>
+                            <div class="col-md-5" style="float:left;">
+                                @Html.EditorFor(model => model.Request.extraTime3)
+                                @Html.ValidationMessageFor(model => model.Request.extraTime3, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Agreement.Service.field7IsActive == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-2" style="float:left; padding-top: 0px;">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName7)
+                                @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName7, "", new { @class = "text-danger" })
+                            </label>
+                            <div class="col-md-5" style="float:left;">
+                                @Html.EditorFor(model => model.Request.extraText1, new { maxlength = "100" })
+                                @Html.ValidationMessageFor(model => model.Request.extraText1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Agreement.Service.field8IsActive == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-2" style="float:left; padding-top: 0px;">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName8)
+                                @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName8, "", new { @class = "text-danger" })
+                            </label>
+                            <div class="col-md-5" style="float:left;">
+                                @Html.EditorFor(model => model.Request.extraText2, new { maxlength = "100" })
+                                @Html.ValidationMessageFor(model => model.Request.extraText2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Agreement.Service.field9IsActive == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-2" style="float:left; padding-top: 0px;">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName9)
+                                @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName9, "", new { @class = "text-danger" })
+                            </label>
+                            <div class="col-md-5" style="float:left;">
+                                @Html.EditorFor(model => model.Request.extraText3, new { maxlength = "100" })
+                                @Html.ValidationMessageFor(model => model.Request.extraText3, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Agreement.Service.field10IsActive == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-2" style="float:left; padding-top: 0px;">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName10)
+                                @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName10, "", new { @class = "text-danger" })
+                            </label>
+                            <div class="col-md-5" style="float:left;">
+                                @Html.EditorFor(model => model.Request.extraMultiText1, new { maxlength = "1000" })
+                                @Html.ValidationMessageFor(model => model.Request.extraMultiText1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Agreement.Service.field11IsActive == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-2" style="float:left; padding-top: 0px;">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName11)
+                                @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName11, "", new { @class = "text-danger" })
+                            </label>
+                            <div class="col-md-5" style="float:left;">
+                                @Html.EditorFor(model => model.Request.extraMultiText2, new { maxlength = "1000" })
+                                @Html.ValidationMessageFor(model => model.Request.extraMultiText2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Agreement.Service.field12IsActive == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-2" style="float:left; padding-top: 0px;">
+                                @Html.DisplayFor(model => model.Agreement.Service.fieldName12)
+                                @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName12, "", new { @class = "text-danger" })
+                            </label>
+                            <div class="col-md-5" style="float:left;">
+                                @Html.EditorFor(model => model.Request.extraMultiText3, new { maxlength = "1000" })
+                                @Html.ValidationMessageFor(model => model.Request.extraMultiText3, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group no-padding">
+                        @Html.LabelFor(model => model.Request.OperatorNotes, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10 control-label">
+                            <span class="multi">  @Html.MultiBreakLine(model => model.Request.OperatorNotes) </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group no-padding">
+                        @Html.LabelFor(model => model.Request.ResponsibleId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10 control-label">
+                            @Html.DisplayFor(model => model.ResponsibleID) 
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group no-padding">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Update" class="btn btn-default" />
+                        </div>
+                    </div>
+
+                </div>
+                <div>
+                    @Html.ActionLink("Cancel", "Index")
+                </div>
+            </div>
+            <div class="secondaryDiv">
+                @*</td>
+                    <td @*class="col-md-offset-1" valign="top">*@
+                <hr class="hr-style" />
+                <dl>
+                    @foreach (var item in Model.ReqLog_List)
+                    {
+                        <dt>
+                            @Html.DisplayFor(model => item.User.username) at  @Html.DisplayFor(model => item.Date) at @Html.DisplayFor(model => item.Time) :
+                        </dt>
+                        <dd>
+                            @*Html.DisplayFor(model => item.notes)*@
+                            @Html.Raw(Html.Encode(item.notes).Replace("\n", "<br />"))
+                        </dd>
+                    }
+
+                </dl>
+                @*</td>
+                        </tr>
+                    </table>*@
+            </div>
+
+        }
+    </div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    <div id="dialog"></div>
+</div>
+

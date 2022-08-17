@@ -1,0 +1,24 @@
+﻿@{
+	ViewBag.Title = "Contact";
+}
+
+<div class="Header">
+	<div class="Section-Title col-md-3">
+		<h1>@ViewBag.Title</h1>
+	</div>
+</div>
+
+
+<div class="Content">
+    @using (Html.BeginForm())
+    {
+        <p>Your opinion matters to us. Send us your feedback/suggestions through the box below.</p>
+        @Html.TextArea("content", new { @class = "multi-line contactBox" })
+        <p></p>
+        <div class="form-group no-padding">
+            <div class="col-md-10">
+                <input type="submit" value="Send" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    </div>

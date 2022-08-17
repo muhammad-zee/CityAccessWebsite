@@ -1,0 +1,96 @@
+﻿@model IEnumerable<CityAccess.Service>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="Header">
+    <div class="Section-Title col-md-3">
+        <h1>Services</h1>
+
+
+    </div>
+    <div class="Button-Action create-butt ">
+        @Html.ActionLink("Create New", "Create")
+    </div>
+</div>
+
+<div class="Content">
+    @if (ViewBag.Ag != null)
+    {
+        <div><p style="color:red;">You cannot delete a service that has agreements associated!</p></div>
+    }
+
+
+
+    <div class="table-wrapper">
+        <table id="MainTable" class="table service">
+            <thead class="service" role="rowgroup">
+                <tr class="service" role="row">
+                    <th role="columnheader" class="service">
+                        Name
+                    </th>
+                    <th role="columnheader" class="service">
+                        Description
+                    </th>
+                    <th role="columnheader" class="service">
+                        Public
+                    </th>
+                    <th role="columnheader" class="service">
+                        City Name
+                    </th>
+                    <th role="columnheader" class="service">
+                        Trade Name
+                    </th>
+                    <th role="columnheader" class="service">
+                        Service Type
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="service" role="rowgroup">
+                @foreach (var item in Model)
+                {
+                    <tr class="service" role="row">
+                        <td role="gridcell" class="service">
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td role="gridcell" class="service">
+                            @Html.DisplayFor(modelItem => item.description)
+                        </td>
+                        <td role="gridcell" class="service">
+                            @Html.DisplayFor(modelItem => item.isPublic)
+                        </td>
+                        <td role="gridcell" class="service">
+                            @Html.DisplayFor(modelItem => item.City.name)
+                        </td>
+                        <td role="gridcell" class="service">
+                            @Html.DisplayFor(modelItem => item.Partner.tradeName)
+                        </td>
+                        <td role="gridcell" class="service">
+                            @Html.DisplayFor(modelItem => item.serviceType.name)
+                        </td>
+                        <td role="gridcell" class="service">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                            <span>|</span>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                            <span>|</span>
+                            @Html.ActionLink("Details", "Details", new { id = item.ID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+        $(document).ready(function () {
+            if ($(window).width() < 768) {
+                $("#MainTable").removeClass("table");
+                $("div").removeClass("table-wrapper");
+            }
+        });
+</script>

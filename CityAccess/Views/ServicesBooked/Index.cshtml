@@ -1,0 +1,705 @@
+﻿@model CityAccess.BookingFilters
+
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+}
+
+<div class="Header">
+    <div class="Section-Title col-md-3">
+        <h1>Our Bookings</h1>
+    </div>
+</div>
+
+<div style="padding: 0px 40px 60px 40px; font-size: 12px" class="Content">
+    @using (Html.BeginForm("Index", "ServicesBooked", FormMethod.Post, new { @class = "formInLists", style = "padding-left: 0px;" }))
+    {
+        <div class="search-wrapper">
+            <table id="filtersTable">
+                <tr>
+                    <td><strong>Status</strong></td>
+                    <td>
+                        @Html.DropDownListFor(a => a.Status, Model.StatusFilters, "Active", htmlAttributes: new { @class = "no-padding form-horizontal ", style = "width:100px; height: 30px;", @id = "statusDrop" })
+                    </td>
+                </tr>
+                @if (Session["admin"] != null)
+                {
+                    <tr>
+                        <td>Partner</td>
+                        <td>
+                            @Html.DropDownList("Partner", new SelectList(ViewBag.partners, "tradeName", "tradeName"), htmlAttributes: new { @class = "no-padding form-horizontal col-md-1 col-sm-1", style = " width:120px; height: 30px;", @id = "partnerDrop" })
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td><strong>Operator</strong></td>
+                    <td>
+                        @Html.DropDownListFor(a => a.Operator, new SelectList(ViewBag.operators, "tradeName", "tradeName"), " ", htmlAttributes: new { @class = "no-padding form-horizontal ", style = "width: 120px; height: 30px;", @id = "operatorDrop" })
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Service Name</strong></td>
+                    <td>
+                        @Html.DropDownListFor(a => a.ServTitle, new SelectList(ViewBag.Service, "name", "name"), " ", htmlAttributes: new { @class = "no-padding form-horizontal ", style = "width: 150px; height: 30px;", @id = "serviceDrop" })
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Service Date</strong></td>
+                    <td>
+                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "no-padding form-horizontal", style = "width:120px; height: 30px;", @id = "dateDrop" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.EditorFor(model => model.Date2, new { htmlAttributes = new { @class = "no-padding form-horizontal", style = "width:120px; height: 30px;", @id = "dateDrop2" } })
+                    </td>
+                <tr>
+                    <td><strong>Booking Date</strong></td>
+                    <td>
+                        @Html.EditorFor(model => model.BookingDate, new { htmlAttributes = new { @class = "no-padding form-horizontal", style = "width:120px; height: 30px;", @id = "bookdateDrop" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.EditorFor(model => model.BookingDate2, new { htmlAttributes = new { @class = "no-padding form-horizontal", style = "width:120px; height: 30px;", @id = "bookdateDrop2" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Filter" class=" btn btn-default" /></td>
+                    <td><input type='button' value='Clear' onClick='resetFilters()' class=' btn btn -default' /></td>
+                </tr>
+            </table>
+
+
+
+            <script src="~/Scripts/jquery-1.10.2.js"></script>
+            <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+            <script src="~/Scripts/SortTable.js"></script>
+
+            <script>
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip();
+                })
+            </script>
+
+            @if (Session["admin"] == null)
+            {
+                <script>
+                    $(document).ready(function () {
+                        if ($(window).width() >= 768) {
+
+                            var Status = $('#statusDrop').clone(true);
+                            var Operator = $("#operatorDrop").clone();
+                            var Service = $("#serviceDrop").clone();
+                            var Date = $("#dateDrop").clone();
+                            var BookDate = $("#bookdateDrop").clone();
+                            var Date2 = $("#dateDrop2").clone();
+                            var BookDate2 = $("#bookdateDrop2").clone();
+
+                            $("#filtersTable").empty();
+
+                            var filters = $("#filtersTable");
+                            var tr = $("<tr>");
+
+
+                            var button = $("<input type='submit' value='Filter' class='btn btn-default' />");
+
+                            var button2 = $("<input type='button' value='Clear' onClick='resetFilters()' class=' btn btn -default' />");
+
+                            tr = $("<tr><td><strong>Status</strong ></td><td><strong>Operator</strong></td><td><strong>Service Name</strong></td><td><strong>Service Date</strong></td><td></td><td><strong>Booking Date</strong></td><td></td><td></td><td></td></tr>");
+
+                            filters.append(tr);
+
+                            filters.append($("<tr id='trSecond'></tr>"));
+
+                            var content = $("<td id='first'></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#first").append(Status));
+
+                            content = $("<td id='second'></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#second").append(Operator));
+
+                            content = $("<td id='third'></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#third").append(Service));
+
+                            content = $("<td id='fourth'><span>From: </span></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#fourth").append(Date));
+
+                            content = $("<td id='eight'><span>To: </span></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#eight").append(Date2));
+
+                            content = $("<td id='fift'><span>From: </span></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#fift").append(BookDate));
+
+                            content = $("<td id='ninth'><span>To: </span></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#ninth").append(BookDate2));
+
+                            content = $("<td id='sixth'></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#sixth").append(button));
+
+                            content = $("<td id='seventh'></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#seventh").append(button2));
+                        } else {
+                            $("#MainTable").removeClass("table");
+                            $("div").removeClass("table-wrapper");
+                        }
+                    });
+                </script>
+            }
+            else
+            {
+                <script>
+                    $(document).ready(function () {
+                        if ($(window).width() >= 768) {
+
+                            var Status = $('#statusDrop').clone(true);
+                            var Operator = $("#operatorDrop").clone();
+                            var Service = $("#serviceDrop").clone();
+                            var Date = $("#dateDrop").clone();
+                            var BookDate = $("#bookdateDrop").clone();
+                            var Partner = $("#partnerDrop").clone();
+                            var Date2 = $("#dateDrop2").clone();
+                            var BookDate2 = $("#bookdateDrop2").clone();
+
+                            $("#filtersTable").empty();
+
+                            var filters = $("#filtersTable");
+                            var tr = $("<tr>");
+
+
+                            var button = $("<input type='submit' value='Filter' class='btn btn-default' />");
+
+                            var button2 = $("<input type='button' value='Clear' onClick='resetFilters()' class=' btn btn -default' />");
+
+                            tr = $("<tr><td><strong>Status</strong ><td><strong>Partner</strong ></td></td><td><strong>Operator</strong></td><td><strong>Service Name</strong></td><td><strong>Service Date</strong></td><td></td><td><strong>Booking Date</strong></td><td></td><td></td><td></td></tr>");
+
+                            filters.append(tr);
+
+                            filters.append($("<tr id='trSecond'></tr>"));
+
+                            var content = $("<td id='first'></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#first").append(Status));
+
+                            content = $("<td id='part'></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#part").append(Partner));
+
+                            content = $("<td id='second'></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#second").append(Operator));
+
+                            content = $("<td id='third'></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#third").append(Service));
+
+                            content = $("<td id='fourth'><span>From: </span></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#fourth").append(Date));
+
+                            content = $("<td id='eight'><span>To: </span></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#eight").append(Date2));
+
+                            content = $("<td id='fift'><span>From: </span></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#fift").append(BookDate));
+
+                            content = $("<td id='ninth'><span>To: </span></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#ninth").append(BookDate2));
+
+                            content = $("<td id='sixth'></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#sixth").append(button));
+
+                            content = $("<td id='seventh'></td>");
+                            filters.append(content);
+                            $("#trSecond").append($("#seventh").append(button2));
+                        } else {
+                            $("#MainTable").removeClass("table");
+                            $("div").removeClass("table-wrapper");
+                        }
+                    });
+                </script>
+
+            }
+            <script>
+                function expand(name) {
+                    var rows = document.getElementsByName(name);
+                    var i;
+
+                    for (i = 0; i < rows.length; i++) {
+
+                        if (rows[i].style.display === "table-row") {
+                            rows[i].style.display = "none";
+                        }
+                        else {
+                            rows[i].style.display = "table-row";
+                        }
+                    }
+
+                }
+
+                function popup() {
+                    window.open('/ServicesBooked?c=1', '_blank', 'left=100,top=100,width=1000,height=800,toolbar=1,resizable=0');
+                }
+
+                function resetFilters() {
+                    $("#statusDrop").val(null);
+                    $("#serviceDrop").val(null);
+                    $("#operatorDrop").val(null);
+                    $("#dateDrop").val(null);
+                    $("#bookdateDrop").val(null);
+                }
+            </script>
+
+        </div>
+        <div class="calendarBtn">
+            <input type="button" value="Calendar View" onclick="window.location.href='@Url.Action("Index", "ServicesBooked", new { c=1 })'" class=" btn btn-default" />
+        </div>
+    }
+
+    <div class="table-wrapper">
+        <table id="MainTable" class="table mobile">
+            <thead class="mobile" role="rowgroup">
+                <tr class="mobile" role="row">
+                    <th role="columnheader" class="mobile">
+                        Request
+                        <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTableID(0)"></a>
+                    </th>
+                    <th role="columnheader" class="mobile">
+                        Operator
+                        <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(1)"></a>
+                    </th>
+                    <th role="columnheader" class="mobile">
+                        Partner
+                        <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(2)"></a>
+                    </th>
+                    <th role="columnheader" class="mobile">
+                        Service Name
+                        <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(3)"></a>
+                    </th>
+
+                    <th role="columnheader" class="mobile">
+                        Customer
+                        <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(4)"></a>
+                    </th>
+                    <th role="columnheader" class="mobile">
+                        Date
+                        <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTableDate(5)"></a>
+                    </th>
+                    <th role="columnheader" class="mobile">
+                        Time
+                        <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(6)"></a>
+                    </th>
+                    <th role="columnheader" class="mobile">
+                        Pax
+                        <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTableN(7)"></a>
+                    </th>
+                    <th role="columnheader" class="mobile">
+                        Status
+                        <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(8)"></a>
+                    </th>
+                    <th role="columnheader" class="mobile">
+                        Pick up Location
+                        <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(9)"></a>
+                    </th>
+                    <th role="columnheader" class="mobile">
+                        Flight number
+                        <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(10)"></a>
+                    </th>
+                    <th role="columnheader" class="mobile">
+                        Drop off Location
+                        <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(11)"></a>
+                    </th>
+                    <th role="columnheader" class="mobile">
+                        Price
+                        <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTableN(12)"></a>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody class="mobile" role="rowgroup">
+                @{
+                    var ctrl = 0;
+                }
+
+                @foreach (var item in Model.Req_UserList)
+                {
+
+                    if (item.req_ForTransfer.eventID != null && ctrl == (int)item.req_ForTransfer.eventID)
+                    {
+
+                        <tr class="mobile" role="row" style="display: none;" name="@item.req_ForTransfer.eventID">
+                            <td role="gridcell" class="mobile" style="text-align: center;">
+                                <a href="@Url.Action("Edit/" + item.req_ForTransfer.ID, null, new { area = string.Empty, controller = "ServicesBooked" }, Request.Url.Scheme)"> @Html.DisplayFor(modelItem => item.req_ForTransfer.ID)</a>
+                                @if (item.req_ForTransfer.OperatorNotes != null || item.req_ForTransfer.Notes != null)
+                                {
+                                    string description = @item.req_ForTransfer.Notes + Environment.NewLine + @item.req_ForTransfer.OperatorNotes;
+                                    description = description.Replace("/n", Environment.NewLine);
+                                    <span class="glyphicon glyphicon-list-alt" data-toggle="tooltip" data-html="true" data-original-title='@description' data-placement="right" style="padding-left: 4px;"></span>
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.Partner.tradeName)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.Agreement.Partner.tradeName)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.Agreement.label != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.Agreement.label)
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Agreement.Service.name)
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.ContactName)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.EventDate)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.EventTime)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.NrPersons)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.req_ForTransfer.StateID == "Canceled")
+                                {
+                                    <span class="canceled"> @Html.DisplayFor(modelItem => item.req_ForTransfer.StateID, new { @class = "canceled" })</span>
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.req_ForTransfer.StateID)
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.req_ForTransfer.PickupLocation != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.req_ForTransfer.PickupLocation)
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.req_ForTransfer.FlightNr != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.req_ForTransfer.FlightNr)
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.req_ForTransfer.DropoffLocation != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.req_ForTransfer.DropoffLocation)
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.Price)
+                            </td>
+
+                            @*<td>
+                                    @Html.ActionLink("Details", "Details", new { id = item.Request.ID }) |  @Html.ActionLink("Edit", "Edit", new { id = item.Request.ID })
+                                </td>*@
+                        </tr>
+                    }
+
+
+
+
+
+                    if (item.req_ForTransfer.eventID != null && ctrl != (int)item.req_ForTransfer.eventID)
+                    {
+
+
+                        ctrl = (int)item.req_ForTransfer.eventID;
+
+                        <tr class="mobile" role="row" id="@item.req_ForTransfer.eventID">
+                            <td role="gridcell" class="mobile">
+
+                                <button type="button" class="btn-link" onclick="expand(@item.req_ForTransfer.eventID)">
+                                    <span class="glyphicon glyphicon-plus-sign"></span>
+                                </button>
+
+                                @if (item.req_ForTransfer.EventNotes != null)
+                                {
+                                    string description = @item.req_ForTransfer.EventNotes;
+                                    description = description.Replace("/n", Environment.NewLine);
+                                    <span class="glyphicon glyphicon-file" data-toggle="tooltip" data-html="true" data-original-title='@description' data-placement="right" style="padding-left: 4px;"></span>
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.Partner.tradeName)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.Agreement.Partner.tradeName)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.Agreement.label != null)
+                                {
+                                    <b>@Html.DisplayFor(modelItem => item.Agreement.label)</b>
+                                }
+                                else
+                                {
+                                    <b>@Html.DisplayFor(modelItem => item.Agreement.Service.name)</b>
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                <span>-</span>
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.EventDate)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.EventTime)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.TotalNrPersons)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                <span>-</span>
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                <span>-</span>
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                <span>-</span>
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                <span>-</span>
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.TotalPrice)
+                            </td>
+                        </tr>
+
+                        <tr class="mobile" role="row" style="display: none;" name="@item.req_ForTransfer.eventID">
+                            <td role="gridcell" class="mobile" style="text-align: center;">
+                                <a href="@Url.Action("Edit/" + item.req_ForTransfer.ID, null, new { area = string.Empty, controller = "ServicesBooked" }, Request.Url.Scheme)"> @Html.DisplayFor(modelItem => item.req_ForTransfer.ID)</a>
+                                @if (item.req_ForTransfer.OperatorNotes != null || item.req_ForTransfer.Notes != null)
+                                {
+                                    string description = @item.req_ForTransfer.Notes + Environment.NewLine + @item.req_ForTransfer.OperatorNotes;
+                                    description = description.Replace("/n", Environment.NewLine);
+                                    <span class="glyphicon glyphicon-list-alt" data-toggle="tooltip" data-html="true" data-original-title='@description' data-placement="right" style="padding-left: 4px;"></span>
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.Partner.tradeName)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.Agreement.Partner.tradeName)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.Agreement.label != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.Agreement.label)
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Agreement.Service.name)
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.ContactName)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.EventDate)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.EventTime)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.NrPersons)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.req_ForTransfer.StateID == "Canceled")
+                                {
+                                    <span class="canceled"> @Html.DisplayFor(modelItem => item.req_ForTransfer.StateID, new { @class = "canceled" })</span>
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.req_ForTransfer.StateID)
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.req_ForTransfer.PickupLocation != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.req_ForTransfer.PickupLocation)
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.req_ForTransfer.FlightNr != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.req_ForTransfer.FlightNr)
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.req_ForTransfer.DropoffLocation != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.req_ForTransfer.DropoffLocation)
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.Price)
+                            </td>
+                        </tr>
+                    }
+
+
+                    if (item.req_ForTransfer.eventID == null)
+                    {
+
+                        <tr class="mobile" role="row">
+                            <td role="gridcell" class="mobile">
+                                <a href="@Url.Action("Edit/" + item.req_ForTransfer.ID, null, new { area = string.Empty, controller = "ServicesBooked" }, Request.Url.Scheme)"> @Html.DisplayFor(modelItem => item.req_ForTransfer.ID)</a>
+                                @if (item.req_ForTransfer.OperatorNotes != null || item.req_ForTransfer.Notes != null)
+                                {
+                                    string description = @item.req_ForTransfer.Notes + Environment.NewLine + @item.req_ForTransfer.OperatorNotes;
+                                    description = description.Replace("/n", Environment.NewLine);
+                                    <span class="glyphicon glyphicon-list-alt" data-toggle="tooltip" data-html="true" data-original-title='@description' data-placement="right" style="padding-left: 4px;"></span>
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.Partner.tradeName)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.Agreement.Partner.tradeName)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.Agreement.label != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.Agreement.label)
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Agreement.Service.name)
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.ContactName)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.EventDate)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.EventTime)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.NrPersons)
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.req_ForTransfer.StateID == "Canceled")
+                                {
+                                    <span class="canceled"> @Html.DisplayFor(modelItem => item.req_ForTransfer.StateID, new { @class = "canceled" })</span>
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.req_ForTransfer.StateID)
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.req_ForTransfer.PickupLocation != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.req_ForTransfer.PickupLocation)
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.req_ForTransfer.FlightNr != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.req_ForTransfer.FlightNr)
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @if (item.req_ForTransfer.DropoffLocation != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.req_ForTransfer.DropoffLocation)
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </td>
+                            <td role="gridcell" class="mobile">
+                                @Html.DisplayFor(modelItem => item.req_ForTransfer.Price)
+                            </td>
+                        </tr>
+                    }
+
+
+
+                }
+            </tbody>
+        </table>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.Req_UserList)
+        {
+            Model.Dwn = 1;
+        }
+        @Html.HiddenFor(model => model.Dwn)
+        @Html.HiddenFor(model => model.Status)
+        @Html.HiddenFor(model => model.BookingDate)
+        @Html.HiddenFor(model => model.BookingDate2)
+        @Html.HiddenFor(model => model.Date)
+        @Html.HiddenFor(model => model.Date2)
+        @Html.HiddenFor(model => model.Agent)
+        @Html.HiddenFor(model => model.Operator)
+        <div class="form-group">
+            <div class="col-md-2">
+                <input type="submit" value="Export" onclick="new_window()" class=" file-download btn btn-default" />
+                @*@Html.ActionLink("Export", "Index", new { dwn = 1})*@
+            </div>
+        </div>
+    }
+</div>
+
+
+
+

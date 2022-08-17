@@ -1,0 +1,342 @@
+﻿@model CityAccess.Service
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+<div class="Header">
+	<div class="Section-Title col-md-3">
+		<h1>Edit</h1>
+	</div>
+</div>
+
+
+<div class="Content">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Service</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+
+            <table>
+                <tr>
+                    <td style="width: 60%;">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.typeID, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("typeID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.typeID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
+                                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control", maxlength = "500" } })
+                                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control", style = "width: 110px; " } })
+                                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.commissionValue, htmlAttributes: new { @class = "control-label col-md-2", style = "padding-top: 0px;" })
+                            <div class="col-md-10">
+                                @* Por dropdown com as opções da LOV *@
+                                <div class="col-md-2" style="padding-left:0px; padding-bottom: 3px;">
+                                    @Html.DropDownList("comissionType", new SelectList(ViewBag.commission, "ID", "label"), htmlAttributes: new { @class = "form-control", style = "width: 115px; height: 23px; font-size: 12px; align:left;" })
+                                </div>
+                                <div class="col-md-5" style="padding-left:50px;">
+                                    @Html.EditorFor(model => model.commissionValue, new { htmlAttributes = new { @class = "form-control", style = "width: 60px; height: 23px;" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.commissionValue, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MaxPersonNum, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.MaxPersonNum, new { htmlAttributes = new { @class = "form-control", style = "width: 60px;" } })
+                                @Html.ValidationMessageFor(model => model.MaxPersonNum, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MinPersonNum, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.MinPersonNum, new { htmlAttributes = new { @class = "form-control", style = "width: 60px;" } })
+                                @Html.ValidationMessageFor(model => model.MinPersonNum, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Availability1, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @* Dropdown com availability *@
+                                <div class="col-md-2" style="padding-left:0px; padding-bottom: 3px;">
+                                    @Html.DropDownList("Availability1", new SelectList(ViewBag.availability, "ID", "label"), htmlAttributes: new { @class = "form-control", onchange = "showBtn()", style = "width: 115px; height: 23px; font-size: 12px; align:left;" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Availability1, "", new { @class = "text-danger" })
+                                <div class="col-md-5" style="padding-left:15px;">
+                                    <input id="eventBtn" type="button" onclick="window.open('@Url.Action("Event", "Services", new {servID = Model.ID})', '_blank', 'left=100,top=100,width=1300,height=800,toolbar=1,resizable=0')" value="Edit Events" style="display:none;width:120px;height:28px;font-size:12px;" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @* Dropdown pricetype *@
+                                <div class="col-md-2" style="padding-left:0px; padding-bottom: 3px;">
+                                    @Html.DropDownList("priceType", new SelectList(ViewBag.price, "ID", "label"), htmlAttributes: new { @class = "form-control", style = "width: 115px; height: 23px; font-size: 12px; align:left;" })
+                                </div>
+                                <div class="col-md-5" style="padding-left:50px;">
+                                    @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control", style = "width: 60px;  height: 23px;" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Override1, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Override1, new { htmlAttributes = new { @class = "form-control", style = "width: 75px; font-size: 12px;" } })
+                                @Html.ValidationMessageFor(model => model.Override1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PaymentAgent, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @* Dropdown paymentagenttype *@
+                                <div class="col-md-2" style="padding-left:0px; padding-bottom: 3px;">
+                                    @Html.DropDownList("PaymentAgentType", new SelectList(ViewBag.paymentAgent, "ID", "label"), htmlAttributes: new { @class = "form-control", style = "width: 115px; height: 23px; font-size: 12px; align:left;" })
+                                </div>
+                                <div class="col-md-5" style="padding-left:50px;">
+                                    @Html.EditorFor(model => model.PaymentAgent, new { htmlAttributes = new { @class = "form-control", style = "width: 60px;  height: 23px;" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.PaymentAgent, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.agentInstructions, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.agentInstructions, new { htmlAttributes = new { @class = "form-control", maxlength = "1500" } })
+                                @Html.ValidationMessageFor(model => model.agentInstructions, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ConfirmationText, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ConfirmationText, new { htmlAttributes = new { @class = "form-control", maxlength = "1500" } })
+                                @Html.ValidationMessageFor(model => model.ConfirmationText, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.cancellationPolicy, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.cancellationPolicy, new { htmlAttributes = new { @class = "form-control", maxlength = "1500" } })
+                                @Html.ValidationMessageFor(model => model.cancellationPolicy, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.cityID, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("cityID", null, htmlAttributes: new { @class = "form-control", style = "width: 115px;" })
+                                @Html.ValidationMessageFor(model => model.cityID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.isPublic, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.isPublic)
+                                    @Html.ValidationMessageFor(model => model.isPublic, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.isActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.isActive)
+                                    @Html.ValidationMessageFor(model => model.isActive, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        @if (Session["admin"] != null)
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.operatorID, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("operatorID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.operatorID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        }
+
+                    @*@Html.HiddenFor(model => model.file)*@
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ServiceImages.First().Image, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.file, new { type = "file" })
+                            </div>
+                        </div>
+
+                        <hr />
+                        <p></p>
+                        <p>Additional Fields</p>
+
+                        @for (int i = 1; i <= 12; i++)
+                        {
+                            if ("Model.fieldName" + i != null)
+                            {
+                                        <div class="form-group">
+                                            <label class="control-label" style="float:left; padding-top: 0px;">
+                                                Label:
+                                                @Html.Editor("fieldName" + i, new { htmlAttributes = new { maxlength = "50" } })
+                                                @Html.ValidationMessage("fieldName" + i, "", new { @class = "text-danger" })
+                                            </label>
+                                            <div style="float:left; margin-left: 2%">
+                                                Is active:
+                                                @Html.Editor("field" + i + "IsActive")
+                                                @Html.ValidationMessage("field" + i + "IsActive", "", new { @class = "text-danger" })
+                                            </div>
+                                            <div style="float:left; margin-left: 2%">
+                                                Is mandatory:
+                                                @Html.Editor("field" + i + "IsMandatory")
+                                                @Html.ValidationMessage("field" + i + "IsMandatory", "", new { @class = "text-danger" })
+                                            </div>
+                                            <div style="float:left; margin-left: 2%">
+                                                @if (i < 4)
+                                                {
+                                                    <span>Type: Date</span>
+                                                }
+                                                else
+                                                {
+                                                    if (i < 7)
+                                                    {
+                                                         <span>Type: Time</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        if (i < 10)
+                                                        {
+                                                            <span>Type: Text</span>
+                                                        }
+                                                         else
+                                                        {
+                                                        <span>Type: MultiLineText</span>
+                                                        }
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                            }
+                        }
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 ">
+                                <input type="submit" value="Save" class="btn btn-default" name="action:save" formenctype="multipart/form-data" />
+                            </div>
+                        </div>
+
+                        @*
+        <div class="form-group">
+            @Html.Label("Add image", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.file, new { type = "file" })
+
+            </div>
+        </div>*@
+                    </td>
+                        <td class="col-md-4 col-md-offset-4">
+                            <p> Choose your service image</p>
+
+                            @{
+                                var base64 = string.Empty;
+                                var imgSrc = string.Empty;
+                            }
+                            @foreach (var item in ViewBag.Imgs)
+                            {
+                                base64 = Convert.ToBase64String(item.Image);
+                                imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+
+
+                                <div class=" Card-Image">
+                                    <img src="@imgSrc" />
+                                </div>
+                                <div class="col-md-2">
+                                    @* @Html.RadioButtonFor( model => model.selectedID , new { id = item.ID })*@
+                                    @Html.RadioButton("selectedID", new { id = "/" + item.ID + "/" })
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            <div class="col-md-offset-2 ">
+                                <input type="submit" value="Remove Image" class="btn btn-default" name="action:RemoveImg" />
+                            </div>
+                        </td>
+
+
+
+                        </tr>
+                        </table>
+                    </div>
+
+     }
+    <script>
+
+
+        $(document).ready(function () {
+            if ($('#Availability1 option:selected').text() == "Event") {
+                $('#eventBtn').css("display", "block");
+            }
+        });
+
+        function showBtn() {
+            if ($('#Availability1 option:selected').text() == "Event") {
+                $('#eventBtn').css("display", "block");
+            }
+            else {
+                $('#eventBtn').css("display", "none");
+            }
+        }
+
+    </script>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

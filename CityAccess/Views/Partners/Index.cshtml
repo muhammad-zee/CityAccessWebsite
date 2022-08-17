@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CityAccess.Partner>
+
+@{
+	ViewBag.Title = "Partner";
+}
+
+<div class="Header">
+	<div class="Section-Title col-md-3">
+		<h1>Partner</h1>
+	</div>
+    <div class="Button-Action create-butt">
+        @Html.ActionLink("Create New", "Create")
+    </div>
+</div>
+
+<div class="Content">
+	<table class="table">
+		<tr>
+			<th>
+				Trade Name
+			</th>
+			<th>
+				Email
+			</th>
+			<th>
+				Description
+			</th>
+			<th>
+				Invoice Name
+			</th>
+			<th>
+				Invoice Address
+			</th>
+			<th></th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.tradeName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.email)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.description)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.invoiceName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.invoiceAddress)
+				</td>
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+					@Html.ActionLink("Details", "Details", new { id = item.ID }) |
+					@Html.ActionLink("Delete", "Delete", new { id = item.ID })
+				</td>
+			</tr>
+		}
+
+	</table>
+	</div>

@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135464203-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-135464203-1');
+    </script>
+
+    <link rel="icon" href="/favicon (1).ico">
+    <title>City Access</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body>
+    <div class="MainHeader">
+        <span style="cursor:pointer;" onclick="openNav()" class="mobile-icon">&#9776;</span>
+        <img src="~/Content/Logo.png" />
+        @Html.ActionLink("CITYACCESS", "Index", "Home")
+        @if (Session["userID"] != null)
+        {
+            @*<div class="Invite-Button">
+                    @Html.ActionLink("Invite partner", "Invite", "Partners")
+                </div>*@
+            <div class="login-wrapper">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                        <div class="user-info">
+                            @if (Session["admin"] == null)
+                            {
+                                <div class="username">@Session["username"]</div>
+                                if (Request.Browser.ScreenPixelsWidth > 200)
+                                {
+                                    <div class="partner">@Session["partner"]</div>
+                                }
+                                else
+                                {
+                                    int i = 0;
+                                    String substring = string.Empty;
+                                    String substring2 = string.Empty;
+                                    String partner = Session["partner"] as string;
+                                    for (int Char = 0; i < 2; Char++)
+                                    {
+                                        if (partner[Char] == ' ')
+                                        {
+                                            i++;
+                                        }
+                                        if (i == 2)
+                                        {
+                                            substring = partner.Substring(0, Char);
+                                            substring2 = partner.Substring(Char, (partner.Length - Char));
+                                        }
+                                    }
+                                    <span class=" partner"> @Html.Raw(substring)</span>
+                                    <p class=" partner"> @Html.Raw(substring2)</p>
+                                }
+                            }
+                            else
+                            {
+                                <div class="username">@Session["admin"]</div>
+                            }
+                        </div>
+                        <img src="~/Content/person-icon.png" />
+                    </button>
+                    <ul class="dropdown-menu">
+                        @if (Session["userAdmin"] != null)
+                        {
+                            <li><a href="/Partners/Edit?id=@Session["partnerID"]&origin=1">Account details</a></li>
+                            <li><a href="/Users">Manage Users</a></li>
+                            <li><a href="/PartnerSite">Site Layout </a></li>
+                        }
+                        <li><a href="/Users/Details/@Session["userID"]">User details</a></li>
+                        <li>@Html.ActionLink("Invite partner", "Invite", "Partners")</li>
+                        <li><a href="/Login/Logout/@Session["userID"]">Log out</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" id="mySidenav">
+
+        <ul class="nav navbar-nav" style="overflow:auto">
+            <li>
+                <a href="@Url.Action("Index", "Home")">
+                    <span class="glyphicon glyphicon-home"></span>
+                    Home
+                </a>
+
+            </li>
+            @if (Session["userID"] == null)
+            {
+                <li>
+                    <a href="/Login">
+                        <span class="glyphicon glyphicon-user"></span>
+                        Login/Register
+                    </a>
+                </li>
+            }
+            @if (Session["userID"] != null)
+            {
+                <li>
+                    <a href="/Agreements">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        Book!
+                    </a>
+                </li>
+                if (Session["agent"] != null || Session["admin"] != null)
+                {
+                    <li>
+                        <a href="/ServicesBooked">
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                            Our Bookings
+                        </a>
+                    </li>
+                }
+                if (Session["operator"] != null || Session["admin"] != null)
+                {
+                    <li>
+                        <a href="/ServicesRequested" class="menu-group">
+                            <span class="glyphicon glyphicon-phone"></span>
+                            Requests to us
+                        </a>
+                    </li>
+                }
+                if (Session["operator"] != null || Session["admin"] != null)
+                {
+                    <li>
+                        <a href="/Services" class="menu-group">
+                            <span class="glyphicon glyphicon-wrench"></span>
+                            Our Services
+                        </a>
+                    </li>
+                }
+                if (Session["agent"] != null || Session["admin"] != null)
+                {
+                    <li>
+                        <a href="/Market">
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                            Market
+                        </a>
+                    </li>
+                }
+
+                if (Session["admin"] != null)
+                {
+                    <li>
+                        <a href="/AgreementLog" style="font-size: 14px;">
+                            <span class="glyphicon glyphicon-home"></span>
+                            Agreements Log
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/RequestLog">
+                            <span class="glyphicon glyphicon-home"></span>
+                            Request Log
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Agreements/List">
+                            <span class="glyphicon glyphicon-home"></span>
+                            Agreements List
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Partners">
+                            <span class="glyphicon glyphicon-user"></span>
+                            Partners
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Users">
+                            <span class="glyphicon glyphicon-home"></span>
+                            Users
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/ServiceTypes">
+                            <span class="glyphicon glyphicon-cog"></span>
+                            ServiceTypes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/commissionTypes" style="font-size: 14px;">
+                            <span class="glyphicon glyphicon-home"></span>
+                            CommissionTypes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Cities">
+                            <span class="glyphicon glyphicon-home"></span>Cities
+                        </a>
+                    </li>
+                }
+
+                <li>
+                    <a href="@Url.Action("Contact", "Home")">
+                        <span class="glyphicon glyphicon-earphone"></span>
+                        Contact
+                    </a>
+                </li>
+            }
+            @*<li>
+
+                    <a href="@Url.Action( "About", "Home")">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        About
+                    </a>
+                </li>*@
+
+        </ul>
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/OnReady")
+        @RenderSection("scripts", required: false)*@
+    <div class="container body-content" id="main">
+        @RenderBody()
+        <footer style="width:100%">
+            <p>&copy; @DateTime.Now.Year - City Access</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        function openNav() {
+            if (document.getElementById("mySidenav").style.width === "0px") {
+                document.getElementById("mySidenav").style.width = "200px";
+                document.getElementById("main").style.marginLeft = "200px";
+            } else {
+                if (document.getElementById("mySidenav").style.width === "200px") {
+                    document.getElementById("mySidenav").style.width = "0";
+                    document.getElementById("main").style.marginLeft = "0";
+                } else {
+                    document.getElementById("mySidenav").style.width = "200px";
+                    document.getElementById("main").style.marginLeft = "200px";
+                }
+            }
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+﻿@model CityAccess.ReqLog
+@{
+    ViewBag.Title = "Details";
+}
+<div class="Header">
+    <div class="Section-Title col-md-3">
+        <h1>Details</h1>
+    </div>
+</div>
+
+<div class="Content">
+    <div>
+        <h4>Booked Service Details</h4>
+        <hr />
+        <table><tr>
+            <td>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.contactName)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.contactName)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.contactPhone)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.contactPhone)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.eventDate)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.eventDate)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.eventTime)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.eventTime)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.nrPersons)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.nrPersons)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.price)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.price)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.reference)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.reference)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.notes)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.notes)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.pickupLocation)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.pickupLocation)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.dropoffLocation)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.dropoffLocation)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.flightNr)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.flightNr)
+                    </dd>
+
+                    @if (ViewBag.hasreturn != null)
+                     {
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.returnDate)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.returnDate)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.returnTime)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.returnTime)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.returnFlight)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.returnFlight)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.returnPickup)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.returnPickup)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Request.returnDropoff)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Request.returnDropoff)
+                        </dd>
+                    }
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Request.stateID)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Request.stateID)
+                    </dd>
+
+
+                </dl>
+            </td>
+            <td>
+                <dl class="dl-horizontal">
+                    @foreach (var item in Model.ReqLog_List)
+                    {
+                    <dt>
+                        @Html.DisplayFor(model => item.User.username) at  @Html.DisplayFor(model => item.Date) :
+                    </dt>
+                    <dd>
+                        @*Html.DisplayFor(model => item.notes)*@
+                        @Html.Raw(Html.Encode(item.notes).Replace("\n", "<br />"))
+                    </dd>
+                    }
+
+                </dl>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Edit", "Edit", new { id = ViewBag.ID })
+    </p>
+</div>
+
+

@@ -1,0 +1,52 @@
+﻿@model CityAccess.BinaryPlus
+@{
+    Layout = null;
+}
+@using (Html.BeginForm("BackgroundImg", "PartnerSite", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class=" primaryDiv">
+
+        @{
+            var base64 = string.Empty;
+            var imgSrc = string.Empty;
+            var hasImage = false;
+            if (Model.Binary1 != null)
+            {
+                base64 = Convert.ToBase64String(Model.Binary1);
+                imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                hasImage = true;
+            }
+        }
+        <div class="form-group">
+            @Html.HiddenFor(model => model.ID)
+            @Html.HiddenFor(model => model.partnerSite_ID)
+            <div class=" col-md-8 col-md-offset-2">
+                @Html.Label("Current homepage image")
+            </div>
+            <div class=" col-md-8 col-md-offset-2" style="padding-bottom:10px;">
+                @if (hasImage)
+                {
+                    <img src="@imgSrc" alt="IMAGES" style=" height:200px; width:400px" />
+                }
+                else
+                {
+                    <img src="~/Content/NoImage.png" style="height:160px;width:300px" />
+                    <p>It appears you have not yet loaded your homepage image</p>
+                }
+            </div>
+            <div class=" col-md-8 col-md-offset-2" style="padding-bottom:60px;">
+                <label class=" btn btn-default btn-file">
+                    Choose image
+                    @Html.TextBoxFor(model => model.file, new { type = "file" })
+                </label>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+                <input type="submit" value="Save" class="btn btn-default" align="left" formenctype="multipart/form-data"/>
+            </div>
+        </div>
+    </div>
+    <div class="secondaryDiv">
+        <p style="padding-top:30vh;">The maximum homepage image size is 2048 kb</p>
+    </div>
+}

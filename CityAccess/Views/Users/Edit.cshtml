@@ -1,0 +1,144 @@
+﻿@model CityAccess.UsLog
+
+@{
+	ViewBag.Title = "Edit";
+}
+<div class="Header">
+	<div class="Section-Title col-md-3">
+		<h1>Edit</h1>
+	</div>
+</div>
+
+
+
+<div class="Content">
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+    <div class="primaryDiv">
+        <div class="form-horizontal">
+            <h4>User</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.user.ID)
+            @Html.HiddenFor(model => model.user.partnerId)
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.user.username, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.user.username, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
+                    @Html.ValidationMessageFor(model => model.user.username, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.user.fullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.user.fullName, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
+                    @Html.ValidationMessageFor(model => model.user.fullName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.user.password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.user.password, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
+                    @Html.ValidationMessageFor(model => model.user.password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.user.passwordConfirm, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.user.passwordConfirm, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
+                    @Html.ValidationMessageFor(model => model.user.passwordConfirm, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.user.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.user.email, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
+                    @Html.ValidationMessageFor(model => model.user.email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.user.phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.user.phone, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
+                    @Html.ValidationMessageFor(model => model.user.phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.user.lastLoginDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.user.lastLoginDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.user.lastLoginDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            @if (Session["admin"] != null)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.user.partnerId, "partnerId", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("partnerId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.user.partnerId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+            <div class="form-group">
+                @Html.LabelFor(model => model.user.isActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.user.isActive)
+                        @Html.ValidationMessageFor(model => model.user.isActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.user.isAdmin, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.user.isAdmin)
+                        @Html.ValidationMessageFor(model => model.user.isAdmin, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+	}
+    <div class="secondaryDiv">
+        <hr class="hr-style" />
+        <dl>
+            @foreach (var item in Model.UserLog_List)
+            {
+                <dt>
+                    @Html.DisplayFor(model => item.User.username) at  @Html.DisplayFor(model => item.Date) at @Html.DisplayFor(model => item.Time) :
+                </dt>
+                <dd>
+                    @*Html.DisplayFor(model => item.notes)*@
+                    @Html.Raw(Html.Encode(item.notes).Replace("\n", "<br />"))
+                </dd>
+            }
+
+        </dl>
+    </div>
+
+	<div>
+		@Html.ActionLink("Back to List", "Index")
+	</div>
+
+	@section Scripts {
+		@Scripts.Render("~/bundles/jqueryval")
+	}
+	</div">

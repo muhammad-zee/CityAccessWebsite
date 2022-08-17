@@ -1,0 +1,87 @@
+﻿@model Style
+
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("StylePost", "PartnerSite", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class=" primaryDiv">
+        <div class="form-group">
+
+            <div class=" col-md-8 col-md-offset-2" style="padding-bottom:10px;">
+                @Html.Label("Menu Position")
+            </div>
+            <div class=" col-md-8 col-md-offset-2" style="padding-bottom:10px;">
+                <div class="col-md-2">
+                    Left
+                </div>
+                <div class=" col-md-10">
+                    @Html.RadioButtonFor(model => model.MenuPosition, false)
+                </div>
+            </div>
+            <div class=" col-md-8 col-md-offset-2" style="padding-bottom:60px;">
+                <div class="col-md-2">
+                    Right
+                </div>
+                <div class=" col-md-10">
+                    @Html.RadioButtonFor(model => model.MenuPosition, true)
+                </div>
+            </div>
+
+            <div class=" col-md-8 col-md-offset-2" style="padding-bottom:10px;">
+                @Html.Label("Logo Position")
+            </div>
+            <div class=" col-md-8 col-md-offset-2" style="padding-bottom:10px;">
+                <div class="col-md-2">
+                    Left
+                </div>
+                <div class=" col-md-10">
+                    @Html.RadioButtonFor(model => model.LogoPosition, false)
+                </div>
+            </div>
+            <div class=" col-md-8 col-md-offset-2" style="padding-bottom:60px;">
+                <div class="col-md-2">
+                    Right
+                </div>
+                <div class=" col-md-10">
+                    @Html.RadioButtonFor(model => model.LogoPosition, true)
+                </div>
+            </div>
+
+
+            <div class=" col-md-8 col-md-offset-2" style="padding-bottom:10px;">
+                <div class="col-md-2">
+                    @Html.Label("Background Color")
+                </div>
+                <div class=" col-md-10">
+                    @Html.EditorFor(model => model.BackgroundColor, new { htmlAttributes = new { @class = "form-control ", maxlength = "50" } })
+                </div>
+            </div>
+
+            <div class=" col-md-8 col-md-offset-2" style="padding-bottom:10px;">
+                <div class="col-md-2">
+                    @Html.Label("Font")
+                </div>
+                <div class=" col-md-10">
+                    @Html.DropDownListFor(model => model.Font, new SelectList(ViewBag.Fonts, "ID", "ID"), htmlAttributes: new { @class = "form-control", style = "width: 125px; height: 23px; font-size: 12px; align:left;" })
+                    @Html.ValidationMessageFor(model => model.Font, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class=" col-md-8 col-md-offset-2" style="padding-bottom:10px;">
+                <div class="col-md-2">
+                    @Html.Label("Font Color")
+                </div>
+                <div class=" col-md-10">
+                    @Html.EditorFor(model => model.FontColor, new { htmlAttributes = new { @class = "form-control ", maxlength = "50" } })
+                </div>
+            </div>
+
+            <div class="col-md-8 col-md-offset-2">
+                <input type="submit" value="Save" class="btn btn-default" align="left" />
+            </div>
+        </div>
+    </div>
+}

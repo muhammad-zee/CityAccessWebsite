@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CityAccess.City>
+
+@{
+	ViewBag.Title = "Cities";
+}
+
+<div class="Header">
+	<div class="Section-Title col-md-3">
+		<h1>Cities</h1>
+	</div>
+    <div class="Button-Action create-butt">
+        @Html.ActionLink("Create New", "Create")
+    </div>
+</div>
+
+<div class="Content">
+	<table class="table">
+		<tr>
+			<th>
+				Name
+			</th>
+			<th></th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.name)
+				</td>
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+					@Html.ActionLink("Details", "Details", new { id = item.ID }) |
+					@Html.ActionLink("Services", "Services", new { id = item.ID })  | |
+					@Html.ActionLink("Agreements", "Agreements", new { id = item.ID })
+					@Html.ActionLink("Users", "Users", new { id = item.ID }) |
+					@Html.ActionLink("Cities", "Cities", new { id = item.ID }) |
+					@Html.ActionLink("ServiceTypes", "ServiceTypes", new { id = item.ID })
+				</td>
+			</tr>
+		}
+
+	</table>
+</div>

@@ -1,0 +1,398 @@
+﻿
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.ExternalView {
+    padding-left: 15vw;
+    padding-right: 15vw;
+    padding-top:3vh;
+   position:absolute;
+    z-index:10;
+    width:100vw;
+    padding-bottom:20vh;
+}
+
+.Content {
+    /*background-color: #e6e6e6;*/
+    /*background-color: #dfeced;*/
+    background-color:rgba(223,236,237,0.9);
+    width: 100%;
+    border-radius: 7px;
+}
+
+
+.Card {
+    border-radius: 4px;
+    box-shadow: #111 0 1px 20px;
+    display: inline-block;
+    margin: 20px;
+    position: relative;
+    white-space: nowrap;
+    width: 210px;
+    height: 185px;
+}
+
+    .Card:first-child {
+        margin-left: 0;
+    }
+
+    .Card:last-child {
+        margin-right: 0;
+    }
+
+.Card-Image img {
+    width: 210px;
+}
+
+.Card-Image {
+    background-color: #eee;
+    position: relative;
+    width: 210px;
+}
+
+.Card-Title {
+    bottom: 10px;
+    color: #fff;
+    font-weight: bold;
+    left: 0;
+    padding: 20px;
+    position: absolute;
+}
+
+.Card-price {
+    background: linear-gradient(45deg, #1de099, #1dc8cd);
+    border-radius: 0 0 0 10px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.Card-TradeName {
+    background-color: #eff5f5;
+    color: #111;
+    padding: 10px 10px 10px; /*Estava: 10px 20px 26px*/
+    height: 80px;
+}
+
+.Card-Actions {
+    bottom: +18px; /*Estava -22*/
+    display: inline-block;
+    position: relative; /*Estava absolute*/
+    text-align: center;
+    width: 100%;
+}
+
+.Card-Action {
+    display: inline-block;
+}
+
+    .Card-Action a, .Card-Action button {
+        background: #fff;
+        border: 2px solid #9fdcc6;
+        border-radius: 25px;
+        color: #9fdcc6;
+        color: #9fdcc6;
+        display: inline-block;
+        font-family: "Montserrat", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        margin: 0px;
+        padding: 4px 14px;
+        text-decoration: none;
+        transition: background .5s;
+    }
+
+        .Card-Action a:hover, .Card-Action button:hover {
+            background: #1dc8cd;
+            border: 2px solid #1dc8cd;
+            color: #fff;
+            text-decoration: none;
+        }
+
+.primaryDiv {
+    float: left;
+    width: 86%;
+    margin-bottom: 5%;
+    position: relative;
+    margin-left:7%;
+    margin-right:7%;
+}
+
+.secondaryDiv {
+    float: left;
+    width: 35%;
+    margin-left: 4%;
+    margin-bottom: 5%;
+    position: relative;
+    margin-right: 7%;
+}
+
+.form-horizontal .control-label {
+    color: #1e2324c9;
+    font-size: 13px;
+    font-weight: 550;
+    text-align: center;
+    /*float: left;*/
+}
+
+.form-horizontal {
+    /*background: #e6e6e6;*/
+    background-color: rgba(223,236,237,0.1);
+    padding: 3%;
+    border-radius: 10px;
+}
+
+.no-padding {
+    padding: 1px 1px 1px 1px;
+    margin-bottom: 6px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.multi {
+    width: 220px;
+    font-size: 13px;
+    line-height: 1;
+    display: block;
+}
+
+dl.dl-horizontal {
+    background: #e6e6e6;
+    border-radius: 10px;
+    color: #777;
+    padding: 40px 20px;
+    margin-top: 0;
+}
+
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+
+.btn {
+    background: #fff;
+    border: 2px solid #9fdcc6;
+    border-radius: 25px;
+    color: #9fdcc6;
+    color: #9fdcc6;
+    display: inline-block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 10px;
+    padding: 6px 16px;
+    text-decoration: none;
+    transition: background .5s;
+}
+
+    .btn:hover {
+        background: #1dc8cd;
+        border-color: #1dc8cd;
+        color: #fff;
+        text-decoration: none;
+    }
+
+.btn-default {
+    background: linear-gradient(45deg, #1de099, #1dc8cd);
+    border: 0;
+    border-radius: 20px;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+    padding: 8px 16px;
+}
+
+    .btn-default:hover,
+    .btn-default:active,
+    .btn-default:focus {
+        background: linear-gradient(45deg, #1de099, #1dc8cd);
+        color: #fff;
+        outline: none;
+    }
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+html[xmlns] .clearfix {
+    display: block;
+}
+
+* html .clearfix {
+    height: 1%;
+}
+
+
+@media (max-width: 768px) {
+
+    .primaryDiv, .secondaryDiv, .event-left-container, .event-right-container {
+        width: 90%;
+        float: none;
+        margin-left: 4%;
+        margin-bottom: 3%;
+    }
+}
+
+
+@media (min-width: 1074px){
+    .form-horizontal .form-group {
+        margin-right: calc( (100% - 600px)/2 )  !important;
+        margin-left: calc( (100% - 600px)/2 ) !important;
+    }
+}
+
+
+@media (min-width: 1440px) {
+    .ExternalView {
+        padding-left: 25vw;
+        padding-right: 25vw;
+    }
+
+}
+
+    .btn-default:hover,
+    .btn-default:active,
+    .btn-default:focus {
+        background: linear-gradient(45deg, #1de099, #1dc8cd);
+        color: #fff;
+        outline: none;
+    }
+
+
+    .btn:hover {
+        background: #1dc8cd;
+        border-color: #1dc8cd;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    select.form-control,
+    .text-box {
+        border: 0;
+        border: 1px solid #ced4da;
+        border-radius: 0;
+        box-shadow: none;
+        color: #111;
+        line-height: 30px;
+        padding: 0 10px;
+    }
+
+        .text-box.multi-line {
+            width: 220px;
+            height: 70px;
+            font-size: 12px;
+            line-height: 1;
+        }
+
+
+    .multi-line {
+        white-space: pre-wrap;
+    }
+
+    .form-horizontal .form-group {
+        max-width: 600px;
+    }
+
+    hr {
+        border: 1px solid !important;
+        border-color: #5984a24d !important;
+    }
+
+    .mobileMenu{
+        width: 0px;
+    }
+
+.mobile-icon {
+    z-index: -1;
+    visibility: hidden;
+}
+
+
+
+@media (max-width: 768px) {
+
+
+    .dropdown-content{
+        width:40vw;
+    }
+
+
+    .mobileCross{
+        margin-top: 10%;
+        margin-left: 15%;
+    }
+
+
+    .mobileMenu .dropdown {
+        width: 40vw !important;
+        top: 8vh !important;
+        text-align: center;
+    }
+
+    .mobileMenu{
+        margin: 0 !important;
+        border: 0 !important;
+        padding: 0 !important;
+
+        position: fixed;
+        height:100vh;
+        z-index:20;
+        background-color:#bbcad0;
+    }
+
+    .mobile-icon {
+        z-index: 21;
+        visibility: visible;
+    }
+
+    .Navbar {
+        visibility:hidden;
+        width:0;
+    }
+
+    .PartnerSiteHeader{
+        height:15vh !important;
+        z-index:15;
+    }
+
+   .PartnerSiteMenuPos{
+       height: 18px;
+       margin-right:10vw;
+       margin-top:5vw;
+   }
+
+   .PartnerSiteBody .BackgroundImg {
+       margin-top:22vh !important;
+       position:fixed !important;
+   }
+
+   .ExternalView{
+       padding-top:15vh !important;
+   }
+
+   .PartnerSiteHeader{
+       position:fixed !important;
+   }
+
+}
+

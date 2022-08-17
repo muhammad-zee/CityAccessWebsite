@@ -1,0 +1,166 @@
+﻿@model CityAccess.Req_User
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<div class="Header">
+	<div class="Section-Title col-md-3">
+		<h1>Agreement details</h1>
+	</div>
+</div>
+
+
+<div class="Content">
+	<div>
+		<hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Agreement.Service.name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Agreement.Service.name)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Agent")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Agreement.Partner.tradeName)
+            </dd>
+            <dt>
+                @Html.DisplayName("Operator")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Agreement.Service.Partner.tradeName)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Agreement Name")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Agreement.label)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Agreement.messageTemplate)
+            </dt>
+
+            <dd>
+               <span class="multi"> @Html.MultiBreakLine(model => model.ConfirmationText)</span>
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Agreement.agentInstructions)
+            </dt>
+
+            <dd>
+               <span class="multi"> @Html.MultiBreakLine(model => model.AgentInstructions) </span>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Agreement.cancellationPolicy)
+            </dt>
+
+            <dd>
+                <span class="multi"> @Html.MultiBreakLine(model => model.CancellationPolicy) </span>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Agreement.needsApproval)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Agreement.needsApproval)
+            </dd>
+            <dt>
+                 @Html.DisplayNameFor(model => model.Agreement.description) 
+            </dt>
+
+            <dd>
+                <span class="multi"> @Html.MultiBreakLine(model => model.Description) </span>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Agreement.isActive)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Agreement.isActive)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Agreement.price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PriceValue)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Agreement.priceType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PriceType)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Agreement.PaymentAgent)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AgentPaymentValue)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Agreement.PaymentAgentType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AgentPaymentType)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Agreement.commissionValue)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CommissionValue)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Agreement.TypeCommission)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CommissionType)
+            </dd>
+
+            @if (ViewBag.Agent == true)
+             {
+                using (Html.BeginForm("Details", "Agreements", FormMethod.Post, new { @style = "padding-left: 0px;" }))
+                {
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Agreement.ID)
+                    @Html.AntiForgeryToken()
+                 <dt>
+                    @Html.DisplayNameFor(model => model.Agreement.isConfirmed)</dt>
+                 <dd>
+                    @Html.EditorFor(model => model.isConfirmed, Model.isConfirmed)
+                 </dd>
+                 <dt></dt>
+                 <dd>
+                    <input type="submit" value="Change" class="btn btn-default" align="left" />
+                </dd>
+                }
+             }
+
+        </dl>
+	</div>
+	<p>
+		@Html.ActionLink("Back to List", "Index")
+	</p>
+	</div>

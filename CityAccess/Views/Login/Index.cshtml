@@ -1,0 +1,115 @@
+﻿@model  CityAccess.User
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="Header">
+    <div class="Section-Title col-md-3">
+        <h1>Login</h1>
+    </div>
+</div>
+
+<div class="Content">
+    <div id="login_div" class="login-div">
+        @if (Request.Browser.ScreenPixelsWidth >= 768)
+    {
+        <table>
+            <tr>
+                <td>
+                    @using (Html.BeginForm("Authorize", "Login", FormMethod.Post))
+                {
+                    <table>
+                        <tr>
+                            <td class="username-label">@Html.DisplayNameFor(model => model.username)</td>
+                            <td>@Html.EditorFor(model => model.username)</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>@Html.ValidationMessageFor(model => model.username)</td>
+                        </tr>
+                        <tr>
+                            <td class="password-label">@Html.DisplayNameFor(model => model.password)</td>
+                            <td>@Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", @Value = "" } })</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>@Html.ValidationMessageFor(model => model.password)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <label class="validation_error">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input class="btn btn-default" type="submit" name="name" value="Login" />
+                                <input class="btn" type="reset" name="name" value="Clear" />
+                            </td>
+                        </tr>
+                    </table>
+            }
+                </td>
+            </tr>
+        </table>
+        }
+        else
+        {
+        <table>
+            <tr>
+                <td>
+                    @using (Html.BeginForm("Authorize", "Login", FormMethod.Post))
+                    {
+                <table>
+                    <tr>
+                        <td class="username-label">@Html.DisplayNameFor(model => model.username)</td>
+                        <td>@Html.EditorFor(model => model.username, new { htmlAttributes = new { style = "width:80%" } })</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Html.ValidationMessageFor(model => model.username)</td>
+                    </tr>
+                    <tr>
+                        <td class="password-label">@Html.DisplayNameFor(model => model.password)</td>
+                        <td>@Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", @Value = "", style ="width:80%" } })</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Html.ValidationMessageFor(model => model.password)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label class="validation_error">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @if (Request.Browser.ScreenPixelsWidth <= 768)
+                            {
+                                <input class="btn btn-default" type="submit" name="name" value="Login" />
+                            }
+                        </td>
+                        <td>
+                            @if (Request.Browser.ScreenPixelsWidth > 768) {
+                            <input class="btn btn-default" type="submit" name="name" value="Login" />
+                            }
+                            <input class="btn" type="reset" name="name" value="Clear" />
+                        </td>
+                    </tr>
+                </table>
+                     }
+                </td>
+            </tr>
+            <tr></tr>
+            <tr>
+            </tr>
+        </table>
+
+
+        }
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

@@ -1,0 +1,103 @@
+﻿@model CityAccess.UsLog
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<div class="Header">
+	<div class="Section-Title col-md-3">
+		<h1>Details</h1>
+
+	</div>
+</div>
+
+<div class="Content">
+    <div class="primaryDiv">
+        <h4>User</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.user.username)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.user.username)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.user.fullName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.user.fullName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.user.email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.user.email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.user.phone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.user.phone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.user.lastLoginDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.user.lastLoginDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.user.isActive)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.user.isActive)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.user.Partner.tradeName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.user.Partner.tradeName)
+            </dd>
+            <dt>
+                @Html.DisplayName("Calendar Link")
+            </dt>
+            <dd>
+                @Html.ActionLink("www.cityaccess.pt/Users/Ical?s=" + Model.user.UserIcalLink, "Ical", new { s = Model.user.UserIcalLink })
+            </dd>
+            @Html.ActionLink("Edit", "UserEdit", new { id = Model.user.ID }, new { @class = "btn btn-default" }) |
+
+
+            @Html.ActionLink("Change Password", "PasswordEdit", new { id = Model.user.ID }, new { @class = "btn btn-default" })
+
+        </dl>
+
+    </div>
+    <div class="secondaryDiv">
+        <hr class="hr-style" />
+        <dl>
+            @foreach (var item in Model.UserLog_List)
+            {
+                <dt>
+                    @Html.DisplayFor(model => item.User.username) at  @Html.DisplayFor(model => item.Date) at @Html.DisplayFor(model => item.Time) :
+                </dt>
+                <dd>
+                    @*Html.DisplayFor(model => item.notes)*@
+                    @Html.Raw(Html.Encode(item.notes).Replace("\n", "<br />"))
+                </dd>
+            }
+        </dl>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+﻿@model IEnumerable<CityAccess.Partner>
+
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+}
+
+<div class="Header">
+    <div class="Section-Title col-md-6">
+        <h1>Market</h1>
+    </div>
+</div>
+
+
+<div style="padding: 0px 40px 60px 40px; font-size: 12px" class="Content">
+
+    @*<form asp-controller="Agreements" asp-action="Search" method="get" style="padding-left:0px;padding-bottom:10px;">
+        <div class="search-wrapper">
+
+            @using (Html.BeginForm())
+            {
+            <div class="col-md-10" style="padding-right:5px;">
+                <div id="filt2" class="text-search" style="float:left;">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    @Html.TextBox("searchFilter")
+                </div>
+                <input  type="submit" value="Search" />
+            </div>
+            }
+        </div>
+    </form>*@
+
+
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            if ($(window).width() < 768) {
+                $("#MainTable").removeClass("table");
+                $("div").removeClass("table-wrapper");
+                $("#filt2").css('width', '100%');
+                $(".logo").css('height', '60px');
+            }
+        });
+    </script>
+
+    <div class="table-wrapper">
+        <table id="MainTable" class="table market">
+            <thead class="market" role="rowgroup">
+                <tr class="market" role="row">
+                    <th role="columnheader" class="market">
+                        
+                    </th>
+                    <th role="columnheader" class="market">
+                        Trade name
+                    </th>
+                    <th role="columnheader" class="market">
+                        Description
+                    </th>
+                    <th role="columnheader" class="market">
+                        Contact e-mail
+                    </th>
+                    <th role="columnheader" class="market">
+                        Contact phone
+                    </th>
+                </tr>
+            </thead>
+
+
+                    @{ 
+                        var base64 = string.Empty;
+                        var imgSrc = string.Empty;
+                    }
+
+            <tbody class="market" role="rowgroup">
+                @foreach (var item in Model)
+                {
+                    <tr class="market" role="row">
+                        <td id="logoTD" role="gridcell" class="market logo">
+
+                            @if (item.PartnerLogoes.First().Image.Length > 0)
+                            {
+                            base64 = Convert.ToBase64String(item.PartnerLogoes.First().Image);
+                            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                            <img src="@imgSrc" alt="IMAGES" style=" height:50px; width:35px" align="left" />
+                            }
+                            else
+                            {
+                            <span>-</span>
+                            }
+                        </td>
+                        <td role="gridcell" class="market">
+                            <a href="@Url.Action("Details/"+item.ID, null, new { area = string.Empty, controller = "Market" }, Request.Url.Scheme)"> @Html.DisplayFor(modelItem => item.tradeName)</a>
+                        </td>
+                        <td role="gridcell" class="market">
+                            @Html.DisplayFor(modelItem => item.description)
+                        </td>
+                        <td role="gridcell" class="market">
+                            @if (item.ContactEmail != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.ContactEmail)
+                            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                        </td>
+                        <td role="gridcell" class="market">
+                            @if (item.ContactPhone != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.ContactPhone)
+                            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

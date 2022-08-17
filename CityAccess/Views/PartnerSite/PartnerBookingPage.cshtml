@@ -1,0 +1,7 @@
+﻿@model PartnerSiteElements
+@{
+    Layout = "~/Views/Shared/PartnerSiteLayout.cshtml";
+}
+
+@Html.Action("Index", "Booking", new { agID = TempData["ag"] })
+

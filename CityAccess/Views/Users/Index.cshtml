@@ -1,0 +1,84 @@
+﻿@model IEnumerable<CityAccess.User>
+
+@{
+	ViewBag.Title = "Users";
+}
+
+
+<div class="Header">
+	<div class="Section-Title col-md-3">
+		<h1>Users</h1>
+	</div>
+    <div class="Button-Action create-butt">
+        @Html.ActionLink("Create New", "Create")
+    </div>
+</div>
+
+<div class="Content">
+	<table class="table">
+		<tr>
+			<th>
+				Username
+			</th>
+			<th>
+				Full Name
+			</th>
+			<th>
+				Email
+			</th>
+			<th>
+				Phone
+			</th>
+			<th>
+				Last Login
+			</th>
+			<th>
+				Trade Name
+			</th>
+            <th>
+                Calendar Link
+            </th>
+			<th></th>
+            
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.username)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.fullName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.email)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.phone)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.lastLoginDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Partner.tradeName)
+				</td>
+                <td>
+                    @Html.ActionLink("www.cityaccess.pt/Users/Ical?s=" + item.UserIcalLink, "Ical", new { s = item.UserIcalLink })
+                </td>
+				<td>
+                    @if(ViewBag.userAdmin != null)
+                    {
+                        @Html.ActionLink("Edit", "Edit", "Users", new { id = item.ID }, null)
+                    }else
+                     {
+                    @Html.ActionLink("Edit |", "Edit", "Users", new { id = item.ID }, null) 
+					@Html.ActionLink(" Details |", "Details", new { id = item.ID }) 
+					@Html.ActionLink(" Delete", "Delete", new { id = item.ID })
+                    }
+				</td>
+			</tr>
+		}
+
+	</table>
+	</div>

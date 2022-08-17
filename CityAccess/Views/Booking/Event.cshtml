@@ -1,0 +1,197 @@
+﻿@model MultipleEvent
+
+@{
+    Layout = null;
+}
+
+<title>Event Creation</title>
+@Styles.Render("~/Content/css")
+<script src="~/Scripts/SortTable.js"></script>
+<div class="calendar-back" style="padding-top:15px;">
+  <div>
+        @using (Html.BeginForm())
+        {
+
+          @Html.AntiForgeryToken()
+          @Html.HiddenFor(model => model.serviceID)
+          <div class="col-md-11 col-md-offset-1" style="padding-bottom:5px;">
+              <div class="col-md-4">
+                  @Html.LabelFor(model => model.startDate, htmlAttributes: new { @class = "control-label" })
+                  @Html.EditorFor(model => model.startDate, new { htmlAttributes = new { style = "width: 150px; height: 25px" } })
+                  @Html.ValidationMessageFor(model => model.eventDate, "", new { @class = "text-danger" })
+              </div>
+              <div class="col-md-4">
+                  @Html.LabelFor(model => model.endDate, htmlAttributes: new { @class = "control-label" })
+                  @Html.EditorFor(model => model.endDate, new { htmlAttributes = new { style = "width: 150px; height: 25px" } })
+                  @Html.ValidationMessageFor(model => model.eventDate, "", new { @class = "text-danger" })
+              </div>
+              <div class="col-md-4">
+                  <input type="submit" value="Filter" class="btn btn-default" />
+              </div>
+          </div>
+
+        }
+      <div></div>
+     <div  style="padding-top: 40px;">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.serviceID)
+            <div class="table-wrapper">
+                <table id="MainTable" class="table event">
+                    <thead class="event" role="rowgroup" style="font-size:13px;">
+                        <tr class="event" role="row">
+                            <th></th>
+                            <th role="columnheader" class="event">
+                                Day
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTableDate(1)"></a>
+                            </th>
+                            <th role="columnheader" class="event">
+                                From
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(2)"></a>
+                            </th>
+                            <th role="columnheader" class="event">
+                                To
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(3)"></a>
+                            </th>
+                            <th role="columnheader" class="event">
+                                Max Persons
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTableN(4)"></a>
+                            </th>
+                            <th role="columnheader" class="event">
+                                Booked
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTableN(5)"></a>
+                            </th>
+                            <th role="columnheader" class="event">
+                                Spaces
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTableN(6)"></a>
+                            </th>
+                            <th role="columnheader" class="event">
+                                Status
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(7)"></a>
+                            </th>
+                            <th role="columnheader" class="event">
+                                Notes
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(8)"></a>
+                            </th>
+                            <th role="columnheader" class="event">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="market" role="rowgroup" style="font-size:12px;">
+                        @foreach (var item in Model.Events)
+                        {                            
+                            <tr class="event" role="row">
+                                @Html.HiddenFor(modelItem => item.spaces, htmlAttributes: new { @id = item.ID })
+                                @Html.HiddenFor(modelItem => item.eventDate, htmlAttributes: new { @id = item.ID + "Date" })
+                                @Html.HiddenFor(modelItem => item.startTime, htmlAttributes: new { @id = item.ID + "Time" })
+
+                                <td>
+                                    @if (item.spaces > 0)
+                                    {
+                                        @Html.RadioButtonFor(model => Model.ID, item.ID)
+                                    }
+                                </td>
+                                <td role="gridcell" class="event">
+                                    @Html.DisplayFor(modelItem => item.eventDate)
+                                </td>
+                                <td role="gridcell" class="event">
+                                    @Html.DisplayFor(modelItem => item.startTime)
+                                </td>
+                                <td role="gridcell" class="event">
+                                    @Html.DisplayFor(modelItem => item.endTime)
+                                </td>
+                                <td role="gridcell" class="event" style="text-align: center;">
+                                    @Html.DisplayFor(modelItem => item.maxPersons)
+                                </td>
+                                <td role="gridcell" class="event" style="text-align: center;">
+                                    @Html.DisplayFor(modelItem => item.booked)
+                                </td>
+                                <td role="gridcell" class="event" style="text-align: center;">
+                                    @Html.DisplayFor(modelItem => item.spaces)
+                                </td>
+                                <td role="gridcell" class="event">
+                                    @Html.DisplayFor(modelItem => item.stateID)
+                                    @*@Html.DropDownListFor(modelItem => item.stateID, new SelectList(ViewBag.stateID, "ID", "ID", item.stateID), htmlAttributes: new { @class = "form-control", style = "width: 125px; height: 23px; font-size: 12px; color:#3a6d98;" })
+                                    @Html.ValidationMessageFor(modelItem => item.stateID, "", new { @class = "text-danger" })*@
+                                </td>
+                                <td role="gridcell" class="event">
+                                    <span class="multi">  @Html.MultiBreakLine(modelItem => item.notes) </span>
+                                    @*@Html.EditorFor(modelItem => item.notes, new { htmlAttributes = new { @class = "form-control", maxlength = "1000" } })
+                                    @Html.ValidationMessageFor(modelItem => item.notes, "", new { @class = "text-danger" })*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @*@Html.HiddenFor(model => model.Events)*@
+            <div class="col-md-12" style="padding-top:15px;">
+                <input type="button" value="Choose" onclick="PassValue()" class="btn btn-default" />
+            </div>
+        }
+         </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+<script>
+    function PassValue() {
+        if (window.opener != null && !window.opener.closed) {
+
+            var EventID = window.opener.document.getElementById("Request_eventID");
+            EventID.value = $("input[type='radio'][name='ID']:checked").val();
+
+            spaces = document.getElementById(EventID.value).value;
+
+            var date = document.getElementById(EventID.value + "Date").value;
+            var time = document.getElementById(EventID.value + "Time").value;
+
+            var EventDate = window.opener.document.getElementById("Request_eventDate");
+
+            var EventTime = window.opener.document.getElementById("Request_eventTime");
+
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
+
+            date =  [year, month, day].join('-');
+
+
+            EventDate.value = date;
+            EventTime.value = time;
+
+            var numPers = window.opener.document.getElementById("Request_nrPersons");
+
+            numPers.disabled = false;
+
+            while (numPers.firstChild) {
+                numPers.removeChild(numPers.firstChild);
+            }
+
+            var newOptions = [];
+
+            for (var i = 1; i <= spaces; i++) {
+                newOptions.push(i);
+            }
+
+            $.each(newOptions, function (index, value) {
+                var opt = document.createElement("OPTION");
+                opt.innerHTML = value;
+                opt.value = value;
+
+                numPers.appendChild(opt);
+            });
+        }
+        window.close();
+    }
+</script>

@@ -1,0 +1,272 @@
+﻿@model MultipleEvent
+
+@{
+    Layout = null;
+}
+
+<title>Event Creation</title>
+@Styles.Render("~/Content/css")
+<div class="calendar-back">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.serviceID)
+    <div class="event-left-container">
+
+        <div class="col-md-8" style="text-align:center;"><b>Date/Time</b></div>
+        <hr class="col-md-7 col-md-offset-1" style="margin-top: 3px; border-color:rgb(29,204,197)">
+
+        <div class="col-md-12" style="padding-bottom:5px;">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.startDate, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.startDate, new { htmlAttributes = new { style = "width: 150px; height: 25px" } })
+                @Html.ValidationMessageFor(model => model.eventDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.endDate, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.endDate, new { htmlAttributes = new { style = "width: 150px; height: 25px" } })
+                @Html.ValidationMessageFor(model => model.eventDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-12" style="padding-bottom:5px;">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.startTime, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.startTime, new { htmlAttributes = new { style = "width: 150px; height: 25px" } })
+                @Html.ValidationMessageFor(model => model.startTime, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.endTime, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.endTime, new { htmlAttributes = new { style = "width: 150px; height: 25px" } })
+                @Html.ValidationMessageFor(model => model.endTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="col-md-8" style="text-align:center;margin-top:25px;"><b>Recurrence Pattern</b></div>
+        <hr class="col-md-7 col-md-offset-1" style="margin-top:3px; border-color:rgb(29,204,197)">
+
+        <div class="col-md-12" style="padding-bottom:5px;">
+
+            <div class="col-md-6 vertical-radio-buttons" style="padding-bottom:15px;">
+                <div class="col-md-12">
+                    @Html.Label("Once")
+                    @Html.RadioButtonFor(model => model.frequency, "Once", htmlAttributes: new { @id = "1", onchange = "RadioEvent()" })
+                </div>
+                <div class="col-md-12">
+                    @Html.Label("Daily")
+                    @Html.RadioButtonFor(model => model.frequency, "Daily", htmlAttributes: new { @id = "2", onchange = "RadioEvent()" })
+                </div>
+                <div class="col-md-12">
+                    @Html.Label("Weekly")
+                    @Html.RadioButtonFor(model => model.frequency, "Weekly", htmlAttributes: new { @id = "3", onchange = "RadioEvent()" })
+                </div>
+                <div class="col-md-12">
+                    @Html.Label("Monthly")
+                    @Html.RadioButtonFor(model => model.frequency, "Monthly", htmlAttributes: new { @id = "4", onchange = "RadioEvent()" })
+                </div>
+            </div>
+
+            <div class="col-md-6 vertical-radio-buttons">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Monday)
+                    @Html.CheckBoxFor(model => model.Monday)
+                </div>
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Tuesday)
+                    @Html.CheckBoxFor(model => model.Tuesday)
+                </div>
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Wednesday)
+                    @Html.CheckBoxFor(model => model.Wednesday)
+                </div>
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Thursday)
+                    @Html.CheckBoxFor(model => model.Thursday)
+                </div>
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Friday)
+                    @Html.CheckBoxFor(model => model.Friday)
+                </div>
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Saturday)
+                    @Html.CheckBoxFor(model => model.Saturday)
+                </div>
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Sunday)
+                    @Html.CheckBoxFor(model => model.Sunday)
+                </div>
+            </div>
+        </div>
+
+        <hr class="col-md-7 col-md-offset-1" style="border-color:rgb(29,204,197)">
+
+        <div class="col-md-8 col-md-offset-1" style="padding-bottom:5px;">
+            <div class="col-md-12" style="padding-top:10px;">
+                @Html.LabelFor(model => model.maxPersons, htmlAttributes: new { @class = "control-label", style="width:80px;" })
+                @Html.DropDownListFor(model => model.maxPersons, Enumerable.Range(1, 100).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { htmlAttributes = new { style = "width: 50px;" } })
+                @Html.ValidationMessageFor(model => model.maxPersons, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-12" style="padding-top:5px;">
+                @Html.LabelFor(model => model.notes, htmlAttributes: new { @class = "control-label ", style = "width:80px;" })
+                @Html.EditorFor(model => model.notes, new { htmlAttributes = new { @class = "form-control", maxlength = "1000" } })
+                @Html.ValidationMessageFor(model => model.notes, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-12" style="padding-top:15px;">
+                <input type="submit" value="Add" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    }
+
+    <script src="~/Scripts/SortTable.js"></script>
+
+        <div class="event-right-container">
+         @using (Html.BeginForm())
+         {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.serviceID)
+            <div class="table-wrapper">
+                <table id="MainTable" class="table eventService">
+                    <thead class="eventService" role="rowgroup" style="font-size:13px;">
+                        <tr class="eventService" role="row">
+                            <th role="columnheader" class="eventService">
+                                Day
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTableDate(0)"></a>
+                            </th>
+                            <th role="columnheader" class="eventService">
+                                From
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(1)"></a>
+                            </th>
+                            <th role="columnheader" class="eventService">
+                                To
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(2)"></a>
+                            </th>
+                            <th role="columnheader" class="eventService">
+                                Max Persons
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTableN(3)"></a>
+                            </th>
+                            <th role="columnheader" class="eventService">
+                                Booked
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTableN(4)"></a>
+                            </th>
+                            <th role="columnheader" class="eventService">
+                                Spaces
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTableN(5)"></a>
+                            </th>
+                            <th role="columnheader" class="eventService">
+                                Status
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(6)"></a>
+                            </th>
+                            <th role="columnheader" class="eventService">
+                                Notes
+                                <a class="glyphicon glyphicon-sort sortIcon" aria-hidden="true" onclick="sortTable(7)"></a>
+                            </th>
+                            <th role="columnheader" class="eventService">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="market" role="rowgroup" style="font-size:12px;">
+
+                        @for (int i=0; i < Model.Events.Count(); i++)
+                        {
+                            @Html.HiddenFor(x => x.Events[i].ID)
+                            <tr class="eventService" role="row">
+
+                                <td role="gridcell" class="eventService">
+                                    @Html.DisplayFor(x => x.Events[i].eventDate)
+                                </td>
+                                <td role="gridcell" class="eventService">
+                                    @Html.DisplayFor(x => x.Events[i].startTime)
+                                </td>
+                                <td role="gridcell" class="eventService">
+                                    @Html.DisplayFor(x => x.Events[i].endTime)
+                                </td>
+                                <td role="gridcell" class="eventService"  style="text-align: center;">
+                                    @Html.DisplayFor(x => x.Events[i].maxPersons)
+                                </td>
+                                <td role="gridcell" class="eventService"  style="text-align: center;">
+                                    @Html.DisplayFor(x => x.Events[i].booked)
+                                </td>
+                                <td role="gridcell" class="eventService"  style="text-align: center;">
+                                    @Html.DisplayFor(x => x.Events[i].spaces)
+                                </td>
+                                <td role="gridcell" class="eventService">
+                                    @Html.DropDownListFor(x => x.Events[i].stateID, new SelectList(ViewBag.stateID, "ID", "ID", Model.Events[i].stateID), htmlAttributes: new { @class = "drop form-control", style = " width: 125px; height: 23px; font-size: 12px; color:#3a6d98;" })
+                                    @Html.ValidationMessageFor(x => x.Events[i].stateID, "", new { @class = "text-danger" })
+                                </td>
+                                <td role="gridcell" class="eventService">
+                                    @Html.EditorFor(x => x.Events[i].notes, new { htmlAttributes = new { @class = "form-control", maxlength = "1000" } })
+                                    @Html.ValidationMessageFor(x => x.Events[i].notes, "", new { @class = "text-danger" })
+                                </td>
+                                <td role="gridcell" class="eventService">
+                                    @if (Model.Events[i].booked == 0) {
+                                    <span class="glyphicon glyphicon-remove" onclick="Remove(@Model.Events[i].ID, @Model.Events[i].serviceID)" data-html="true" style="padding-left: 4px; color:red;"></span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @*@Html.HiddenFor(model => model.Events)*@
+            <div class="col-md-12" style="padding-top:15px;">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+            }
+        </div>
+</div>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <script>
+    function Remove(a, b)
+    {
+        var result = confirm("Do you want to delete the event?");
+        if (result) {
+            //Logic to delete the item
+            $.post("/Services/DeleteEvent", { id: a, servID: b }, function (data) {
+                    //do whatever with the response
+                window.location.reload(false);
+                });  
+        }
+    }
+
+        function RadioEvent()
+        {
+            if (document.getElementById('1').checked || document.getElementById('3').checked || document.getElementById('4').checked) {
+                $("#Monday").attr("disabled", true);
+                $("#Monday").removeAttr("checked");
+
+                $("#Tuesday").attr("disabled", true);
+                $("#Tuesday").removeAttr("checked");
+
+                $("#Wednesday").attr("disabled", true);
+                $("#Wednesday").removeAttr("checked");
+
+                $("#Thursday").attr("disabled", true);
+                $("#Thursday").removeAttr("checked");
+
+                $("#Friday").attr("disabled", true);
+                $("#Friday").removeAttr("checked");
+
+                $("#Saturday").attr("disabled", true);
+                $("#Saturday").removeAttr("checked");
+
+                $("#Sunday").attr("disabled", true);
+                $("#Sunday").removeAttr("checked");
+            }
+            else
+            {
+                $("#Monday").attr("disabled", false);
+                $("#Tuesday").attr("disabled", false);
+                $("#Wednesday").attr("disabled", false);
+                $("#Thursday").attr("disabled", false);
+                $("#Friday").attr("disabled", false);
+                $("#Saturday").attr("disabled", false);
+                $("#Sunday").attr("disabled", false);
+            }
+        }
+    </script>

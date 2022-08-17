@@ -1,0 +1,297 @@
+﻿@model CityAccess.BookingFilters
+@{
+//Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset='utf-8' />
+
+    @*<script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+
+    <link href='fullcalendar/core/main.css' rel='stylesheet' />
+    <link href='fullcalendar/daygrid/main.css' rel='stylesheet' />
+    <link href='fullcalendar/timegrid/main.css' rel='stylesheet' />
+
+    <script src='fullcalendar/core/main.js'></script>
+    <script src='fullcalendar/daygrid/main.js'></script>
+    <script src='fullcalendar/timegrid/main.js'></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <script>
+        var calendar;
+        var element;
+        var new_element = "";
+        var img;
+        @{
+            var base64 = string.Empty;
+            var imgSrc = string.Empty;
+        }
+
+
+        function Popup(event) {
+            var content = "";
+            var title = "";
+
+            if (event.extendedProps.eventID != null) {
+                content = "<p><b>Partner:</b> " + event.extendedProps.partner + "</p>" +
+                    "<p><b>Date:</b> " + event.extendedProps.datee + "</p>" +
+                    "<p><b>Time:</b> " + event.extendedProps.time + "</p>" +
+                    "<p><b>Client name:</b> " + event.extendedProps.client + "</p>" +
+                    "<p><b>Number of persons:</b> " + event.extendedProps.numberP + "</p>" +
+                    "<p><b>Status:</b> " + event.extendedProps.status + "</p>" +
+                    "<p><b>Notes:</b> " + event.extendedProps.notes + "</p>";
+
+                    title = "Event#" + event.id + '-' + event.title;
+
+            } else {
+                content = "<p><b>Partner:</b> " + event.extendedProps.partner + "</p>" +
+                    "<p><b>Date:</b> " + event.extendedProps.datee + "</p>" +
+                    "<p><b>Time:</b> " + event.extendedProps.time + "</p>" +
+                    "<p><b>Client name:</b> " + event.extendedProps.client + "</p>" +
+                    "<p><b>Phone number:</b> " + event.extendedProps.phone + "</p>" +
+                    "<p><b>Number of persons:</b> " + event.extendedProps.numberP + "</p>" +
+                    "<p><b>Status:</b> " + event.extendedProps.status + "</p>" +
+                    "<p><b>Notes:</b> " + event.extendedProps.notes + "</p>" +
+                    "<p style='text-align:center;'><a href='/ServicesBooked/Edit/" + event.id + "' style='color:blue;'>Request Details</a></p>";
+
+                     title = event.id + '-' + event.title;
+            }
+
+
+            $("#dialog").empty();
+
+            $("#dialog").dialog({ title: title });
+
+            $("#dialog").append(content);
+            $("#dialog").dialog();
+
+            $(".ui-dialog-titlebar-close").empty();
+            $(".ui-dialog-titlebar-close").append("<span class='ui-button-icon-primary ui-icon ui-icon-close'></span>");
+        }
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['timeGrid', 'dayGrid'],
+                defaultView: 'timeGridWeek',
+                contentHeight: '100%',
+                defaultDate: new Date(),
+                timeFormat: 'h(:mm)a',
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'timeGridDay,timeGridWeek,dayGridWeek,dayGridMonth'
+                },
+                buttonText: {
+                    dayGridWeek: 'week list'
+                },
+                eventLimit: true,
+                eventRender:
+                    function(info) {
+
+                        $(info.el).empty(); // empty the element content so i can create my own custom content
+
+                        if (info.event.extendedProps.eventID != null) {
+                            if (info.event.extendedProps.logo != null) {
+                                new_element =
+                                    '<div style="overflow-wrap: break-word;">' +
+                                    ' <img id=' + info.event.id + ' src="data:image/gif;base64,' + btoa(String.fromCharCode(...new Uint8Array(info.event.extendedProps.logo))) + '" alt="IMAGES" style="padding-right: 7px; height:40px; width:28px" align="left"/>' +
+                                'Event#' + info.event.id + '-<b>' + info.event.title + '</b>-' + info.event.extendedProps.numberP + '</div>';
+                            }
+                            else {
+                                new_element =
+                                    'Event#' + info.event.id + '-<b>' + info.event.title + '</b>-' + info.event.extendedProps.numberP;
+                            }
+                        }
+                        else
+                        {
+                            if (info.event.extendedProps.logo != null) {
+                                new_element =
+                                    '<div style="overflow-wrap: break-word;">' +
+                                    ' <img id=' + info.event.id + ' src="data:image/gif;base64,' + btoa(String.fromCharCode(...new Uint8Array(info.event.extendedProps.logo))) + '" alt="IMAGES" style="padding-right: 7px; height:40px; width:28px" align="left"/>' +
+                                    info.event.id + '-<b>' + info.event.title + '</b>-' + info.event.extendedProps.client + '</div>';
+                            }
+                            else {
+                                new_element =
+                                    info.event.id + '-<b>' + info.event.title + '</b>-' + info.event.extendedProps.client;
+                            }
+                        }
+
+
+                        $(info.el).append(new_element);;
+                    },
+                views: {
+                    dayGrid: {
+                        eventLimit: 2 // adjust to 6 only for timeGridWeek/timeGridDay
+                    },
+                    timeGrid: {
+                        eventLimit: 1 // adjust to 6 only for timeGridWeek/timeGridDay
+                    }
+                },
+                eventClick:
+                    function (info) {
+                        Popup(info.event);
+                    }
+            });
+        });
+
+    </script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Calendar view</title>
+    @*@Styles.Render("~/Content/css")*@
+</head>
+<body>
+    <div style="padding: 0px 40px 60px 40px; font-size: 12px">
+        <div class="search-wrapper" style="font-size: 12px;">
+            <div class="col-md-1 calendarFilter-text"><strong>Status</strong></div>
+            <div class="col-md-2">
+                @Html.DropDownListFor(a => a.Status, Model.StatusFilters, "Active", htmlAttributes: new { @class = "no-padding form-horizontal ", style = "width:100px; height: 30px;", @id = "statusDrop" })
+            </div>
+            <div class="col-md-1 calendarFilter-text"><strong>Agent</strong></div>
+            <div class="col-md-2">
+                @Html.DropDownListFor(a => a.Operator, new SelectList(ViewBag.operators, "tradeName", "tradeName"), " ", htmlAttributes: new { @class = "no-padding form-horizontal col-md-1 col-sm-1", style = "width:120px; height: 30px;", @id = "operatorDrop" })
+            </div>
+            <div class="col-md-1"><strong>Service Name</strong></div>
+            <div class="col-md-2">
+                @Html.DropDownListFor(a => a.ServTitle, new SelectList(ViewBag.Service, "name", "name"), " ", htmlAttributes: new { @class = "no-padding form-horizontal ", style = "width: 140px; height: 30px;", @id = "serviceDrop" })
+            </div>
+            <div class="col-md-1"><strong>Start Date</strong></div>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "no-padding form-horizontal", style = "width:120px; height: 30px;", @id = "dateDrop" } })
+            </div>
+            <div class="col-md-1"><input type="button" value="Filter" onclick='PushEvents(1)' class=" btn btn -default" /></div>
+            <div class="col-md-1"><input type='button' value='Clear' onClick='resetFilters()' class=' btn btn -default' /></div>
+        </div>
+        <div class="calendarBtn">
+            <input type="button" value="List View" onclick="window.location.href='@Url.Action("Index", "ServicesBooked")'" class=" btn btn-default" />
+        </div>
+
+        <div class="calendar-back">
+            <div id="calendar" style="width:98%;"></div>
+
+            <div id="dialog"></div>
+
+            <script>
+                $(document).ready(function () {
+                    PushEvents(0);
+                });
+
+                function PushEvents(initial) {
+
+                    var requests = new Array();
+                    var parts = 0;
+                    var startTime;
+                    var endDate;
+                    var date;
+                    var time;
+                    var color = '';
+                    var titl;
+                    var eventIDs = new Array();
+                    var event;
+                    var duration;
+
+
+
+                    $.getJSON('/ServicesBooked/Active',
+                        {
+                            Status: $('#statusDrop').val(),
+                            Operator: $('#operatorDrop').val(),
+                            ServTitle: $('#serviceDrop').val()
+                        },
+                        function (data) {
+
+                            if (initial != 0) {
+                                var events = calendar.getEventSources();
+                                events[0].remove();
+
+                                var startDate = $('#dateDrop').val();
+
+
+
+                                if (startDate != "") {
+                                    calendar.gotoDate(startDate);
+                                }
+                            }
+
+                            $.each(data, function (i, v) {
+
+                                date = moment(v.EventDate);
+                                time = moment(v.EventTime).format("HH:mm");
+                                endDate = moment(v.EventDate);
+
+                                parts = time.split(/:/);
+                                date = date.add(parts[0], 'hours').add(parts[1], 'minutes');
+                                endDate = endDate.add(parts[0], 'hours').add(parts[1], 'minutes');
+
+                                if (v.Duration != null) {
+
+                                    duration = moment(v.Duration).format("HH:mm");
+                                    parts = duration.split(/:/);
+                                    endDate = endDate.add(parts[0], 'hours').add(parts[1], 'minutes');
+
+                                } else {
+                                    endDate = endDate.add(1, 'hours');
+                                }
+
+                                date = new Date(date).toISOString();
+                                endDate = new Date(endDate).toISOString();
+
+                                if (v.StateID === 'Approved' || v.StateID === 'Invoiced') {
+                                    color = '#82E0AA';
+                                }
+                                else {
+                                    if (v.StateID === 'Submitted') {
+                                        color = '#85C1E9';
+                                    }
+                                    else {
+                                        if (v.StateID === 'Canceled') {
+                                            color = '#EC7063';
+                                        }
+                                    }
+                                }
+
+                                requests.push({
+                                    id: v.ID,
+                                    title: v.Aglabel != null ? v.Aglabel : v.Servlabel,
+                                    start: date,
+                                    end: endDate,
+                                    color: color,
+                                    allday: false,
+                                    client: v.ContactName,
+                                    logo: v.logo,
+                                    phone: v.ContactPhone,
+                                    numberP: v.NrPersons != null ? v.NrPersons : "Non specified number",
+                                    status: v.StateID,
+                                    notes: v.Notes != null ? v.Notes : "This request has no notes",
+                                    partner: v.AgOp != null ? v.AgOp : "General Agreement",
+                                    datee: moment(v.EventDate).format("DD-MM-YYYY"),
+                                    time: time, 
+                                    eventID: v.eventID
+                                });
+                                eventIDs.push(v.ID);
+                            })
+
+                            calendar.render();
+                            calendar.addEventSource(requests);
+
+                        });
+                }
+
+            </script>
+
+        </div>
+    </div>
+</body>
+</html>

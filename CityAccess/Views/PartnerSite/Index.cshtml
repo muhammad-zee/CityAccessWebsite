@@ -1,0 +1,71 @@
+﻿<div class="tabsConfig">
+
+    <!-- Nav tabs -->
+    <ul id="tabstrip" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active" id="homepage"><a href="#HomePageImg" aria-controls="first" role="tab" data-toggle="tab">Homepage Image</a></li>
+        <li role="presentation" id="logo"><a href="#Logo" aria-controls="second" role="tab" data-toggle="tab">Logo</a></li>
+        <li role="presentation" id="links"><a href="#HeaderLinks" aria-controls="third" role="tab" data-toggle="tab">Header Links</a></li>
+        <li role="presentation" id="style"><a href="#Style" aria-controls="fourth" role="tab" data-toggle="tab">Style</a></li>
+        <li role="presentation" id="advanced"><a href="#Advanced" aria-controls="fifth" role="tab" data-toggle="tab">Advanced</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="HomePageImg">
+
+            @{
+            if (TempData["Tab"] == null)
+            {
+                Html.RenderAction("HomePageImg");
+            }
+            }
+        </div>
+        <div role="tabpanel" class="tab-pane" id="Logo">
+
+        </div>
+        <div role="tabpanel" class="tab-pane active" id="HeaderLinks">
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="Style">
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="Advanced">
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+     var ReloadedTab = '@TempData["Tab"]';
+
+      $(document).ready(function () {
+        if (ReloadedTab.length)
+        {
+            $("#" + ReloadedTab + " a").trigger("click");
+        }
+      });
+
+        $('#tabstrip a').click(function (e) {
+        e.preventDefault()
+        var tabID = $(this).attr("href").substr(1);
+        $(".tab-pane").each(function () {
+            console.log("clearing " + $(this).attr("id") + " tab");
+            $(this).empty();
+        });
+       
+        $.ajax({
+            url: "/@ViewContext.RouteData.Values["controller"]/" + tabID,
+            cache: false,
+            type: "get",
+            dataType: "html",
+            success: function (result) {
+                $("#" + tabID).html(result);
+            }
+
+        })
+            $(this).tab('show');
+});
+</script>

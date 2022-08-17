@@ -1,0 +1,324 @@
+﻿@model CityAccess.Service
+
+@{
+	ViewBag.Title = "Create";
+}
+
+<div class="Header">
+	<div class="Section-Title col-md-3">
+		<h1>Create</h1>
+	</div>
+</div>
+
+
+<div class="Content">
+    @using (Html.BeginForm("Create", "Services", FormMethod.Post, new { encType = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Service</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.typeID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("typeID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.typeID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", style = "width: 200px; ", maxlength = "50" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control", maxlength = "500" } })
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control", style = "width: 110px; " } })
+                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.commissionValue, htmlAttributes: new { @class = "control-label col-md-2", style = "padding-top: 0px;" })
+            <div class="col-md-10">
+                @* Por dropdown com as opções da LOV *@
+                <div class="col-md-2" style="padding-left:0px; padding-bottom: 3px;">
+                    @Html.DropDownList("comissionType", new SelectList(ViewBag.commission, "ID", "label"), htmlAttributes: new { @class = "form-control", style = "width: 115px; height: 23px; font-size: 12px; align:left;" })
+                </div>
+                <div class="col-md-5" style="padding-left:0px;">
+                    @Html.EditorFor(model => model.commissionValue, new { htmlAttributes = new { @class = "form-control", style = "width: 60px; height: 23px;" } })
+                </div>
+                @Html.ValidationMessageFor(model => model.commissionValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaxPersonNum, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaxPersonNum, new { htmlAttributes = new { @class = "form-control", style = "width: 60px;" } })
+                @Html.ValidationMessageFor(model => model.MaxPersonNum, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MinPersonNum, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MinPersonNum, new { htmlAttributes = new { @class = "form-control", style = "width: 60px;" } })
+                @Html.ValidationMessageFor(model => model.MinPersonNum, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Availability1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @* Dropdown com availability *@
+                @Html.DropDownList("Availability1", new SelectList(ViewBag.availability, "ID", "label"), htmlAttributes: new { @class = "form-control", style = "width: 115px; height: 23px; font-size: 12px; align:left;" })
+                @Html.ValidationMessageFor(model => model.Availability1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @* Dropdown pricetype *@
+                <div class="col-md-2" style="padding-left:0px; padding-bottom: 3px;">
+                    @Html.DropDownList("priceType", new SelectList(ViewBag.price, "ID", "label"), htmlAttributes: new { @class = "form-control", style = "width: 115px; height: 23px; font-size: 12px; align:left;" })
+                </div>
+                <div class="col-md-5" style="padding-left:0px;">
+                    @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control", style = "width: 60px;  height: 23px;" } })
+                </div>
+                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Override1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Override1, new { htmlAttributes = new { @class = "form-control", style = "width: 75px; font-size: 12px;" } })
+                @Html.ValidationMessageFor(model => model.Override1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PaymentAgent, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @* Dropdown paymentagenttype *@
+                <div class="col-md-2" style="padding-left:0px; padding-bottom: 3px;">
+                    @Html.DropDownList("PaymentAgentType", new SelectList(ViewBag.paymentAgent, "ID", "label"), htmlAttributes: new { @class = "form-control", style = "width: 115px; height: 23px; font-size: 12px; align:left;" })
+                </div>
+                <div class="col-md-5" style="padding-left:0px;">
+                    @Html.EditorFor(model => model.PaymentAgent, new { htmlAttributes = new { @class = "form-control", style = "width: 60px;  height: 23px;" } })
+                </div>
+                @Html.ValidationMessageFor(model => model.PaymentAgent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.agentInstructions, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.agentInstructions, new { htmlAttributes = new { @class = "form-control", maxlength = "1500" } })
+                @Html.ValidationMessageFor(model => model.agentInstructions, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmationText, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ConfirmationText, new { htmlAttributes = new { @class = "form-control", maxlength = "1500" } })
+                @Html.ValidationMessageFor(model => model.ConfirmationText, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cancellationPolicy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cancellationPolicy, new { htmlAttributes = new { @class = "form-control", maxlength = "1500" } })
+                @Html.ValidationMessageFor(model => model.cancellationPolicy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cityID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("cityID", null, htmlAttributes: new { @class = "form-control", style = "width: 115px;" })
+                @Html.ValidationMessageFor(model => model.cityID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isPublic, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.isPublic)
+                    @Html.ValidationMessageFor(model => model.isPublic, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isActive, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.isActive)
+                    @Html.ValidationMessageFor(model => model.isActive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        @if (Session["admin"] != null)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.operatorID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("operatorID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.operatorID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+}
+        <div class="form-group">
+            @Html.LabelFor(model => model.ServiceImages.First().Image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.file, new { type = "file" })
+                @*<input type="file" name="ImageData" id="ImageData" onchange="fileCheck(this);" />*@
+            </div>
+        </div>
+
+        <hr />
+        <p>Add an aditional field to your service.</p>
+        @*<span>Label</span>
+        <span>Is active</span>
+        <span>Is mandatory</span>
+        <span>Type</span>*@
+
+        <div id="dynamicFields">
+        </div>
+
+        <div class=" col-md-offset-3 dropdown" style="margin-bottom: 2%;">
+            <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+            </button>
+            <div class="dropdown-content">
+                <form>
+                    <a onclick="addField('Date')" href="#">Date</a>
+                    <a onclick="addField('Time')" href="#">Time</a>
+                    <a onclick="addField('Text')" href="#">Text</a>
+                    <a onclick="addField('Multi')" href="#">Multiline Text</a>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    }
+
+
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script>
+
+        var dateID = 1;
+        var timeID = 1;
+        var textID = 1;
+        var multiID = 1;
+
+        var controlDate = 0;
+        var controlTime = 0;
+        var controlText = 0;
+        var controlMulti = 0;
+
+        var fieldID = 0;
+
+
+
+        function addField(a) {
+
+            var fields = $("#dynamicFields");
+            var content;
+            var d = 'e';
+
+            if (a == "Date" && controlDate < 3) {
+                controlDate = controlDate + 1;
+                content = $("<div class='no-padding form-group' id =date" + dateID + " ><div><span style='float:left;'>Label:<input class='form - control  text - box single - line' data-val='true' data-val-required='Mandatory Field.' id='fieldName" + dateID + "' name='fieldName" + dateID + "' type='text' value='' style='width: 78%; margin-left:4px;'></span><span style='margin-left:2%;'>Is active:<input class='check - box' data-val='true' data-val-required='The Is active field is required.' id='field" + dateID + "IsActive' name='field" + dateID + "IsActive' type='checkbox' value='true' style='margin-left:4px;'><input name='field" + dateID +"IsActive' type='hidden' value='false' ></span><span style='margin-left:2%;'>Is mandatory:<input class='check - box' data-val='true' data-val-required='The Is active field is required.' id='field" + dateID + "IsMandatory' name='field" + dateID + "IsMandatory' type='checkbox' value='true' style='margin-left:4px;'><input name='field" + dateID +"IsMandatory' type='hidden' value='false' ></span><span style='margin-left:2%;'>Type: Date</span><a onclick='removeField(date" + dateID + ",1," + dateID + ")' href='#' style='margin-left: 3%'><span class='glyphicon glyphicon-remove' style='color:red;'></span></a><span class='field-validation-valid text-danger' data-valmsg-for='Request.extraDate1' data-valmsg-replace='true'></span></div ></div>");
+                fields.append(content);
+                dateID = dateID + 1;
+            } else {
+                if (a == "Time" && controlTime < 3) {
+                    controlTime = controlTime + 1;
+                    fieldID = timeID + 3;
+                    content = $("<div class='no-padding form-group' id =time" + timeID + " ><div><span style='float:left;'>Label:<input class='form - control  text - box single - line' data-val='true' data-val-required='Mandatory Field.' id='fieldName" + fieldID + "' name='fieldName" + fieldID + "' type='text' value='' style='width: 78%; margin-left:4px;'></span><span style='margin-left:2%;'>Is active:<input class='check - box' data-val='true' data-val-required='The Is active field is required.' id='field" + fieldID + "IsActive' name='field" + fieldID + "IsActive' type='checkbox' value='true' style='margin-left:4px;'><input name='field" + fieldID + "IsActive' type='hidden' value='false' ></span><span style='margin-left:2%;'>Is mandatory:<input class='check - box' data-val='true' data-val-required='The Is active field is required.' id='field" + fieldID + "IsMandatory' name='field" + fieldID + "IsMandatory' type='checkbox' value='true' style='margin-left:4px;'><input name='field" + fieldID + "IsMandatory' type='hidden' value='false' ></span><span style='margin-left:2%;'>Type: Time</span><a onclick='removeField(time" + timeID + ",2" + timeID + ")' href='#' style='margin-left: 3%'><span class='glyphicon glyphicon-remove' style='color:red;'></span></a><span class='field-validation-valid text-danger' data-valmsg-for='Request.extraTime1' data-valmsg-replace='true'></span></div ></div>");
+                    fields.append(content);
+                    timeID = timeID + 1;
+                } else {
+                    if (a == "Text" && controlText < 3) {
+                        controlText = controlText + 1;
+                        fieldID = textID + 6;
+                        content = $("<div class='no-padding form-group' id =text" + textID + " ><div><span style='float:left;'>Label:<input class='form - control  text - box single - line' data-val='true' data-val-required='Mandatory Field.' id='fieldName" + fieldID + "' name='fieldName" + fieldID + "' type='text' value='' style='width: 78%; margin-left:4px;'></span><span style='margin-left:2%;'>Is active:<input class='check - box' data-val='true' data-val-required='The Is active field is required.' id='field" + fieldID + "IsActive' name='field" + fieldID + "IsActive' type='checkbox' value='true' style='margin-left:4px;'><input name='field" + fieldID + "IsActive' type='hidden' value='false' ></span><span style='margin-left:2%;'>Is mandatory:<input class='check - box' data-val='true' data-val-required='The Is active field is required.' id='field" + fieldID + "IsMandatory' name='field" + fieldID + "IsMandatory' type='checkbox' value='true' style='margin-left:4px;'><input name='field" + fieldID + "IsMandatory' type='hidden' value='false' ></span><span style='margin-left:2%;'>Type: Text</span><a onclick='removeField(text" + textID + ",3," + textID + ")' href='#' style='margin-left: 3%'><span class='glyphicon glyphicon-remove' style='color:red;'></span></a><span class='field-validation-valid text-danger' data-valmsg-for='Request.extraTime1' data-valmsg-replace='true'></span></div ></div>");
+                        fields.append(content);
+                        textID = textID + 1;
+                    } else {
+                        if (a == "Multi" && controlMulti < 3) {
+                            controlMulti = controlMulti + 1;
+                            fieldID = multiID + 9;
+                            content = $("<div class='no-padding form-group' id =multi" + multiID + " ><div><span style='float:left;'>Label:<input class='form - control  text - box single - line' data-val='true' data-val-required='Mandatory Field.' id='fieldName" + fieldID + "' name='fieldName" + fieldID + "' type='text' value='' style='width: 78%; margin-left:4px;'></span><span style='margin-left:2%;'>Is active:<input class='check - box' data-val='true' data-val-required='The Is active field is required.' id='field" + fieldID + "IsActive' name='field" + fieldID + "IsActive' type='checkbox' value='true' style='margin-left:4px;'><input name='field" + fieldID + "IsActive' type='hidden' value='false' ></span><span style='margin-left:2%;'>Is mandatory:<input class='check - box' data-val='true' data-val-required='The Is active field is required.' id='field" + fieldID + "IsMandatory' name='field" + fieldID + "IsMandatory' type='checkbox' value='true' style='margin-left:4px;'><input name='field" + fieldID + "IsMandatory' type='hidden' value='false' ></span><span style='margin-left:2%;'>Type: Notes</span><a onclick='removeField(multi" + multiID + ",4," + multiID + ")' href='#' style='margin-left: 3%'><span class='glyphicon glyphicon-remove' style='color:red;'></span></a><span class='field-validation-valid text-danger' data-valmsg-for='Request.extraTime1' data-valmsg-replace='true'></span></div ></div>");
+                            fields.append(content);
+                            multiID = multiID + 1;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        function removeField(b, c, d) {
+
+            if (c == 1) {
+                controlDate = controlDate - 1;
+                dateID = d;
+            }
+            if (c == 2) {
+                controlTime = controlTime - 1;
+                timeID = d;
+            }
+            if (c == 3) {
+                controlText = controlText - 1;
+                textID = d;
+            }
+            if (c == 4) {
+                controlMulti = controlMulti - 1;
+                multiID = d;
+            }
+
+            $(b).remove();
+        }
+    </script>
+
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

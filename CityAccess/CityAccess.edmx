@@ -1,0 +1,2756 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CityAccessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agreement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="partnerID" Type="int" />
+          <Property Name="serviceID" Type="int" Nullable="false" />
+          <Property Name="label" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="messageTemplate" Type="nvarchar" MaxLength="1500" />
+          <Property Name="agentInstructions" Type="nvarchar" MaxLength="1500" />
+          <Property Name="cancellationPolicy" Type="nvarchar" MaxLength="1500" />
+          <Property Name="needsApproval" Type="bit" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="commissionType" Type="int" />
+          <Property Name="commissionValue" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Override1" Type="bit" />
+          <Property Name="PaymentAgent" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="EmailToCustomer" Type="varchar" MaxLength="50" />
+          <Property Name="PaymentAgentType" Type="int" />
+          <Property Name="priceType" Type="int" />
+          <Property Name="TypeCommission" Type="int" />
+          <Property Name="isConfirmed" Type="bit" />
+        </EntityType>
+        <EntityType Name="AgreementLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="nvarchar" MaxLength="7" Nullable="false" />
+          <Property Name="agreementID" Type="int" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="notes" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Binarys">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Binary" Type="varbinary(max)" />
+          <Property Name="partnerSite_ID" Type="int" />
+          <Property Name="isBackground" Type="bit" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="commissionType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="label" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DynamicField">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fieldType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DynamicFieldAlternative">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="label" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dynamicfieldID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DynamicFieldAlternativeMl">
+          <Key>
+            <PropertyRef Name="languageID" />
+            <PropertyRef Name="dynamicfieldalternativeID" />
+          </Key>
+          <Property Name="languageID" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="label" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dynamicfieldalternativeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DynamicFieldMl">
+          <Key>
+            <PropertyRef Name="languageID" />
+            <PropertyRef Name="dynamicfieldID" />
+          </Key>
+          <Property Name="languageID" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="label" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dynamicfieldID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User" Type="int" Nullable="false" />
+          <Property Name="errorDate" Type="date" Nullable="false" />
+          <Property Name="errorTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="errorMsg" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="errorURL" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="serviceID" Type="int" Nullable="false" />
+          <Property Name="eventDate" Type="date" Nullable="false" />
+          <Property Name="startTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="endTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="maxPersons" Type="int" Nullable="false" />
+          <Property Name="stateID" Type="nvarchar" MaxLength="20" />
+          <Property Name="notes" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="EventState">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FontStyle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="languageLabel" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="partnerSiteID" Type="int" Nullable="false" />
+          <Property Name="value" Type="nvarchar" MaxLength="200" />
+          <Property Name="posHorizontal" Type="int" Nullable="false" />
+          <Property Name="posVertical" Type="int" />
+          <Property Name="text" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="IsDropMaster" Type="bit" />
+        </EntityType>
+        <EntityType Name="Partner">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tradeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="550" />
+          <Property Name="fiscalID" Type="nvarchar" MaxLength="50" />
+          <Property Name="countryID" Type="nvarchar" MaxLength="50" />
+          <Property Name="invoiceName" Type="nvarchar" MaxLength="50" />
+          <Property Name="invoiceAddress" Type="nvarchar" MaxLength="500" />
+          <Property Name="isAgent" Type="bit" />
+          <Property Name="isOperator" Type="bit" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="30" />
+          <Property Name="ContactPhone" Type="varchar" MaxLength="20" />
+          <Property Name="ContactEmail" Type="varchar" MaxLength="50" />
+          <Property Name="isPublic" Type="bit" />
+          <Property Name="invitedby" Type="int" />
+          <Property Name="isTest" Type="bit" />
+          <Property Name="IcalLink" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="PartnerLogo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartnerID" Type="int" />
+          <Property Name="Image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="PartnerSite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="partnerID" Type="int" Nullable="false" />
+          <Property Name="css" Type="nvarchar(max)" />
+          <Property Name="FontStyle" Type="nvarchar" MaxLength="40" />
+          <Property Name="linkID" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="agreementID" Type="int" Nullable="false" />
+          <Property Name="bookerId" Type="int" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="eventDate" Type="date" Nullable="false" />
+          <Property Name="eventTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="notes" Type="nvarchar" MaxLength="1000" />
+          <Property Name="contactName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="contactEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="contactPhone" Type="nchar" MaxLength="20" />
+          <Property Name="nrPersons" Type="int" />
+          <Property Name="pickupLocation" Type="nvarchar" MaxLength="100" />
+          <Property Name="dropoffLocation" Type="nvarchar" MaxLength="100" />
+          <Property Name="returnPickup" Type="nvarchar" MaxLength="100" />
+          <Property Name="returnDropoff" Type="nvarchar" MaxLength="100" />
+          <Property Name="flightNr" Type="nchar" MaxLength="20" />
+          <Property Name="returnDate" Type="date" />
+          <Property Name="returnTime" Type="time" Precision="7" />
+          <Property Name="returnFlight" Type="nchar" MaxLength="20" />
+          <Property Name="stateID" Type="nvarchar" MaxLength="20" />
+          <Property Name="reference" Type="nvarchar" MaxLength="50" />
+          <Property Name="bookDate" Type="date" />
+          <Property Name="bookTime" Type="time" Precision="7" />
+          <Property Name="extraDate1" Type="date" />
+          <Property Name="extraDate2" Type="date" />
+          <Property Name="extraDate3" Type="date" />
+          <Property Name="extraTime1" Type="time" Precision="7" />
+          <Property Name="extraTime2" Type="time" Precision="7" />
+          <Property Name="extraTime3" Type="time" Precision="7" />
+          <Property Name="extraText1" Type="nvarchar" MaxLength="100" />
+          <Property Name="extraText2" Type="nvarchar" MaxLength="100" />
+          <Property Name="extraText3" Type="nvarchar" MaxLength="100" />
+          <Property Name="extraMultiText1" Type="nvarchar" MaxLength="1000" />
+          <Property Name="extraMultiText2" Type="nvarchar" MaxLength="1000" />
+          <Property Name="extraMultiText3" Type="nvarchar" MaxLength="1000" />
+          <Property Name="OperatorNotes" Type="nvarchar" MaxLength="1000" />
+          <Property Name="eventID" Type="int" />
+          <Property Name="ResponsibleId" Type="int" />
+          <Property Name="ClientNotes" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="RequestLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="nvarchar" MaxLength="7" Nullable="false" />
+          <Property Name="requestID" Type="int" Nullable="false" />
+          <Property Name="userID" Type="int" />
+          <Property Name="notes" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typeID" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" />
+          <Property Name="cityID" Type="int" />
+          <Property Name="isPublic" Type="bit" Nullable="false" />
+          <Property Name="operatorID" Type="int" />
+          <Property Name="fieldName1" Type="nvarchar" MaxLength="50" />
+          <Property Name="fieldName2" Type="nvarchar" MaxLength="50" />
+          <Property Name="fieldName3" Type="nvarchar" MaxLength="50" />
+          <Property Name="fieldName4" Type="nvarchar" MaxLength="50" />
+          <Property Name="fieldName5" Type="nvarchar" MaxLength="50" />
+          <Property Name="fieldName6" Type="nvarchar" MaxLength="50" />
+          <Property Name="fieldName7" Type="nvarchar" MaxLength="50" />
+          <Property Name="fieldName8" Type="nvarchar" MaxLength="50" />
+          <Property Name="fieldName9" Type="nvarchar" MaxLength="50" />
+          <Property Name="fieldName10" Type="nvarchar" MaxLength="50" />
+          <Property Name="fieldName11" Type="nvarchar" MaxLength="50" />
+          <Property Name="fieldName12" Type="nvarchar" MaxLength="50" />
+          <Property Name="field1IsActive" Type="bit" />
+          <Property Name="field2IsActive" Type="bit" />
+          <Property Name="field3IsActive" Type="bit" />
+          <Property Name="field4IsActive" Type="bit" />
+          <Property Name="field5IsActive" Type="bit" />
+          <Property Name="field6IsActive" Type="bit" />
+          <Property Name="field7IsActive" Type="bit" />
+          <Property Name="field8IsActive" Type="bit" />
+          <Property Name="field9IsActive" Type="bit" />
+          <Property Name="field10IsActive" Type="bit" />
+          <Property Name="field11IsActive" Type="bit" />
+          <Property Name="field12IsActive" Type="bit" />
+          <Property Name="field1IsMandatory" Type="bit" />
+          <Property Name="field2IsMandatory" Type="bit" />
+          <Property Name="field3IsMandatory" Type="bit" />
+          <Property Name="field4IsMandatory" Type="bit" />
+          <Property Name="field5IsMandatory" Type="bit" />
+          <Property Name="field6IsMandatory" Type="bit" />
+          <Property Name="field7IsMandatory" Type="bit" />
+          <Property Name="field8IsMandatory" Type="bit" />
+          <Property Name="field9IsMandatory" Type="bit" />
+          <Property Name="field10IsMandatory" Type="bit" />
+          <Property Name="field11IsMandatory" Type="bit" />
+          <Property Name="field12IsMandatory" Type="bit" />
+          <Property Name="fieldName1Type" Type="int" />
+          <Property Name="fieldName2Type" Type="int" />
+          <Property Name="fieldName3Type" Type="int" />
+          <Property Name="fieldName4Type" Type="int" />
+          <Property Name="fieldName5Type" Type="int" />
+          <Property Name="fieldName6Type" Type="int" />
+          <Property Name="fieldName7Type" Type="int" />
+          <Property Name="fieldName8Type" Type="int" />
+          <Property Name="fieldName9Type" Type="int" />
+          <Property Name="fieldName10Type" Type="int" />
+          <Property Name="fieldName11Type" Type="int" />
+          <Property Name="fieldName12Type" Type="int" />
+          <Property Name="MaxPersonNum" Type="int" />
+          <Property Name="MinPersonNum" Type="int" />
+          <Property Name="Override1" Type="bit" />
+          <Property Name="PaymentAgent" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="ExecutionControl" Type="bit" />
+          <Property Name="Voucher" Type="bit" />
+          <Property Name="agentInstructions" Type="nvarchar" MaxLength="1500" />
+          <Property Name="ConfirmationText" Type="nvarchar" MaxLength="1500" />
+          <Property Name="cancellationPolicy" Type="nvarchar" MaxLength="1500" />
+          <Property Name="commissionValue" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="price" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="priceType" Type="int" />
+          <Property Name="comissionType" Type="int" />
+          <Property Name="PaymentAgentType" Type="int" />
+          <Property Name="Availability1" Type="int" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="Duration" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="ServiceImages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="serviceID" Type="int" />
+          <Property Name="Image" Type="varbinary(max)" />
+          <Property Name="sequenceNR" Type="int" />
+        </EntityType>
+        <EntityType Name="serviceType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="hasReturn" Type="bit" Nullable="false" />
+          <Property Name="isTransfer" Type="bit" />
+          <Property Name="LanguageID" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StateTransitions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Origin" Type="nvarchar" MaxLength="30" />
+          <Property Name="Destiny" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Style">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="partnerSiteID" Type="int" Nullable="false" />
+          <Property Name="BackgroundColor" Type="nvarchar" MaxLength="40" />
+          <Property Name="FontColor" Type="nvarchar" MaxLength="40" />
+          <Property Name="MenuPosition" Type="bit" />
+          <Property Name="LogoPosition" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="lastLoginDate" Type="datetime" />
+          <Property Name="partnerId" Type="int" Nullable="false" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="emailConfirmed" Type="bit" />
+          <Property Name="isAdmin" Type="bit" />
+          <Property Name="UserIcalLink" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="UserLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="nvarchar" MaxLength="7" Nullable="false" />
+          <Property Name="editorID" Type="int" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="notes" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <Association Name="FK_Agreement_DynamicFieldAlternative">
+          <End Role="DynamicFieldAlternative" Type="Self.DynamicFieldAlternative" Multiplicity="0..1" />
+          <End Role="Agreement" Type="Self.Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreement">
+              <PropertyRef Name="priceType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agreement_DynamicFieldAlternative2">
+          <End Role="DynamicFieldAlternative" Type="Self.DynamicFieldAlternative" Multiplicity="0..1" />
+          <End Role="Agreement" Type="Self.Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreement">
+              <PropertyRef Name="TypeCommission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agreement_DynamicFieldAlternative3">
+          <End Role="DynamicFieldAlternative" Type="Self.DynamicFieldAlternative" Multiplicity="0..1" />
+          <End Role="Agreement" Type="Self.Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreement">
+              <PropertyRef Name="PaymentAgentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agreement_Partner">
+          <End Role="Partner" Type="Self.Partner" Multiplicity="0..1" />
+          <End Role="Agreement" Type="Self.Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreement">
+              <PropertyRef Name="partnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agreement_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Agreement" Type="Self.Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreement">
+              <PropertyRef Name="serviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgreementLog_Request">
+          <End Role="Agreement" Type="Self.Agreement" Multiplicity="1" />
+          <End Role="AgreementLog" Type="Self.AgreementLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agreement">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AgreementLog">
+              <PropertyRef Name="agreementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgreementLog_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AgreementLog" Type="Self.AgreementLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AgreementLog">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Binarys_PartnerSite">
+          <End Role="PartnerSite" Type="Self.PartnerSite" Multiplicity="0..1" />
+          <End Role="Binarys" Type="Self.Binarys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartnerSite">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Binarys">
+              <PropertyRef Name="partnerSite_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicFieldAlternative_DynamicField">
+          <End Role="DynamicField" Type="Self.DynamicField" Multiplicity="1" />
+          <End Role="DynamicFieldAlternative" Type="Self.DynamicFieldAlternative" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicField">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DynamicFieldAlternative">
+              <PropertyRef Name="dynamicfieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicFieldAlternativeMl_DynamicFieldAlternative">
+          <End Role="DynamicFieldAlternative" Type="Self.DynamicFieldAlternative" Multiplicity="1" />
+          <End Role="DynamicFieldAlternativeMl" Type="Self.DynamicFieldAlternativeMl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DynamicFieldAlternativeMl">
+              <PropertyRef Name="dynamicfieldalternativeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicFieldAlternativeMl_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="DynamicFieldAlternativeMl" Type="Self.DynamicFieldAlternativeMl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DynamicFieldAlternativeMl">
+              <PropertyRef Name="languageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicFieldMl_DynamicField">
+          <End Role="DynamicField" Type="Self.DynamicField" Multiplicity="1" />
+          <End Role="DynamicFieldMl" Type="Self.DynamicFieldMl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicField">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DynamicFieldMl">
+              <PropertyRef Name="dynamicfieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicFieldMl_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="DynamicFieldMl" Type="Self.DynamicFieldMl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DynamicFieldMl">
+              <PropertyRef Name="languageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ErrorLog_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ErrorLog" Type="Self.ErrorLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ErrorLog">
+              <PropertyRef Name="User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_EventState">
+          <End Role="EventState" Type="Self.EventState" Multiplicity="0..1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventState">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="stateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="serviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partner_ID">
+          <End Role="Partner" Type="Self.Partner" Multiplicity="0..1" />
+          <End Role="PartnerLogo" Type="Self.PartnerLogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartnerLogo">
+              <PropertyRef Name="PartnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerSite_FontStyle">
+          <End Role="FontStyle" Type="Self.FontStyle" Multiplicity="0..1" />
+          <End Role="PartnerSite" Type="Self.PartnerSite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FontStyle">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartnerSite">
+              <PropertyRef Name="FontStyle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerSite_Partner">
+          <End Role="Partner" Type="Self.Partner" Multiplicity="1" />
+          <End Role="PartnerSite" Type="Self.PartnerSite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartnerSite">
+              <PropertyRef Name="partnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_Agreement">
+          <End Role="Agreement" Type="Self.Agreement" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agreement">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="agreementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_State">
+          <End Role="State" Type="Self.State" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="stateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="bookerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_User2">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="ResponsibleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestLog_Request">
+          <End Role="Request" Type="Self.Request" Multiplicity="1" />
+          <End Role="RequestLog" Type="Self.RequestLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RequestLog">
+              <PropertyRef Name="requestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestLog_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="RequestLog" Type="Self.RequestLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RequestLog">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="cityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_DynamicFieldAlternative">
+          <End Role="DynamicFieldAlternative" Type="Self.DynamicFieldAlternative" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="priceType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_DynamicFieldAlternative2">
+          <End Role="DynamicFieldAlternative" Type="Self.DynamicFieldAlternative" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="comissionType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_DynamicFieldAlternative3">
+          <End Role="DynamicFieldAlternative" Type="Self.DynamicFieldAlternative" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="PaymentAgentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_DynamicFieldAlternative4">
+          <End Role="DynamicFieldAlternative" Type="Self.DynamicFieldAlternative" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="Availability1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_ID">
+          <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
+          <End Role="ServiceImages" Type="Self.ServiceImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ServiceImages">
+              <PropertyRef Name="serviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Partner">
+          <End Role="Partner" Type="Self.Partner" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="operatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Service1" Type="Self.Service" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Service1">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Service1" Type="Self.Service" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_serviceType">
+          <End Role="serviceType" Type="Self.serviceType" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="serviceType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="typeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_serviceType_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="0..1" />
+          <End Role="serviceType" Type="Self.serviceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="serviceType">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Style_PartnerSite">
+          <End Role="PartnerSite" Type="Self.PartnerSite" Multiplicity="1" />
+          <End Role="Style" Type="Self.Style" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartnerSite">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Style">
+              <PropertyRef Name="partnerSiteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Partner">
+          <End Role="Partner" Type="Self.Partner" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="partnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLog_Editor">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserLog" Type="Self.UserLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserLog">
+              <PropertyRef Name="editorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLog_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserLog" Type="Self.UserLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserLog">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CityAccessModelStoreContainer">
+          <EntitySet Name="Agreement" EntityType="Self.Agreement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgreementLog" EntityType="Self.AgreementLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Binarys" EntityType="Self.Binarys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="commissionType" EntityType="Self.commissionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DynamicField" EntityType="Self.DynamicField" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DynamicFieldAlternative" EntityType="Self.DynamicFieldAlternative" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DynamicFieldAlternativeMl" EntityType="Self.DynamicFieldAlternativeMl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DynamicFieldMl" EntityType="Self.DynamicFieldMl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventState" EntityType="Self.EventState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FontStyle" EntityType="Self.FontStyle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Link" EntityType="Self.Link" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partner" EntityType="Self.Partner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartnerLogo" EntityType="Self.PartnerLogo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartnerSite" EntityType="Self.PartnerSite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestLog" EntityType="Self.RequestLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceImages" EntityType="Self.ServiceImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="serviceType" EntityType="Self.serviceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StateTransitions" EntityType="Self.StateTransitions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Style" EntityType="Self.Style" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLog" EntityType="Self.UserLog" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Agreement_DynamicFieldAlternative" Association="Self.FK_Agreement_DynamicFieldAlternative">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternative" />
+            <End Role="Agreement" EntitySet="Agreement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agreement_DynamicFieldAlternative2" Association="Self.FK_Agreement_DynamicFieldAlternative2">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternative" />
+            <End Role="Agreement" EntitySet="Agreement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agreement_DynamicFieldAlternative3" Association="Self.FK_Agreement_DynamicFieldAlternative3">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternative" />
+            <End Role="Agreement" EntitySet="Agreement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agreement_Partner" Association="Self.FK_Agreement_Partner">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="Agreement" EntitySet="Agreement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agreement_Service" Association="Self.FK_Agreement_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Agreement" EntitySet="Agreement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgreementLog_Request" Association="Self.FK_AgreementLog_Request">
+            <End Role="Agreement" EntitySet="Agreement" />
+            <End Role="AgreementLog" EntitySet="AgreementLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgreementLog_User" Association="Self.FK_AgreementLog_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="AgreementLog" EntitySet="AgreementLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Binarys_PartnerSite" Association="Self.FK_Binarys_PartnerSite">
+            <End Role="PartnerSite" EntitySet="PartnerSite" />
+            <End Role="Binarys" EntitySet="Binarys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicFieldAlternative_DynamicField" Association="Self.FK_DynamicFieldAlternative_DynamicField">
+            <End Role="DynamicField" EntitySet="DynamicField" />
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternative" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicFieldAlternativeMl_DynamicFieldAlternative" Association="Self.FK_DynamicFieldAlternativeMl_DynamicFieldAlternative">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternative" />
+            <End Role="DynamicFieldAlternativeMl" EntitySet="DynamicFieldAlternativeMl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicFieldAlternativeMl_Language" Association="Self.FK_DynamicFieldAlternativeMl_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="DynamicFieldAlternativeMl" EntitySet="DynamicFieldAlternativeMl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicFieldMl_DynamicField" Association="Self.FK_DynamicFieldMl_DynamicField">
+            <End Role="DynamicField" EntitySet="DynamicField" />
+            <End Role="DynamicFieldMl" EntitySet="DynamicFieldMl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicFieldMl_Language" Association="Self.FK_DynamicFieldMl_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="DynamicFieldMl" EntitySet="DynamicFieldMl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ErrorLog_User" Association="Self.FK_ErrorLog_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ErrorLog" EntitySet="ErrorLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_EventState" Association="Self.FK_Event_EventState">
+            <End Role="EventState" EntitySet="EventState" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Service" Association="Self.FK_Event_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partner_ID" Association="Self.FK_Partner_ID">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="PartnerLogo" EntitySet="PartnerLogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerSite_FontStyle" Association="Self.FK_PartnerSite_FontStyle">
+            <End Role="FontStyle" EntitySet="FontStyle" />
+            <End Role="PartnerSite" EntitySet="PartnerSite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerSite_Partner" Association="Self.FK_PartnerSite_Partner">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="PartnerSite" EntitySet="PartnerSite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_Agreement" Association="Self.FK_Request_Agreement">
+            <End Role="Agreement" EntitySet="Agreement" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_State" Association="Self.FK_Request_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_User" Association="Self.FK_Request_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_User2" Association="Self.FK_Request_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestLog_Request" Association="Self.FK_RequestLog_Request">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="RequestLog" EntitySet="RequestLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestLog_User" Association="Self.FK_RequestLog_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="RequestLog" EntitySet="RequestLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_City" Association="Self.FK_Service_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_DynamicFieldAlternative" Association="Self.FK_Service_DynamicFieldAlternative">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternative" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_DynamicFieldAlternative2" Association="Self.FK_Service_DynamicFieldAlternative2">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternative" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_DynamicFieldAlternative3" Association="Self.FK_Service_DynamicFieldAlternative3">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternative" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_DynamicFieldAlternative4" Association="Self.FK_Service_DynamicFieldAlternative4">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternative" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_ID" Association="Self.FK_Service_ID">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceImages" EntitySet="ServiceImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Partner" Association="Self.FK_Service_Partner">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Service" Association="Self.FK_Service_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Service1" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Service1" Association="Self.FK_Service_Service1">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Service1" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_serviceType" Association="Self.FK_Service_serviceType">
+            <End Role="serviceType" EntitySet="serviceType" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_serviceType_Language" Association="Self.FK_serviceType_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="serviceType" EntitySet="serviceType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Style_PartnerSite" Association="Self.FK_Style_PartnerSite">
+            <End Role="PartnerSite" EntitySet="PartnerSite" />
+            <End Role="Style" EntitySet="Style" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Partner" Association="Self.FK_User_Partner">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLog_Editor" Association="Self.FK_UserLog_Editor">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserLog" EntitySet="UserLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLog_User" Association="Self.FK_UserLog_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserLog" EntitySet="UserLog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CityAccessModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agreement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="partnerID" Type="Int32" />
+          <Property Name="serviceID" Type="Int32" Nullable="false" />
+          <Property Name="label" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="messageTemplate" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="agentInstructions" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="cancellationPolicy" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="needsApproval" Type="Boolean" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="commissionType" Type="Int32" />
+          <Property Name="commissionValue" Type="Decimal" Precision="15" Scale="2" />
+          <NavigationProperty Name="Service" Relationship="CityAccessModel.FK_Agreement_Service" FromRole="Agreement" ToRole="Service" />
+          <NavigationProperty Name="Requests" Relationship="CityAccessModel.FK_Request_Agreement" FromRole="Agreement" ToRole="Request" />
+          <NavigationProperty Name="Partner" Relationship="CityAccessModel.FK_Agreement_Partner" FromRole="Agreement" ToRole="Partner" />
+          <NavigationProperty Name="AgreementLogs" Relationship="CityAccessModel.FK_AgreementLog_Request" FromRole="Agreement" ToRole="AgreementLog" />
+          <Property Name="Override1" Type="Boolean" />
+          <Property Name="PaymentAgent" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="EmailToCustomer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentAgentType" Type="Int32" />
+          <Property Name="priceType" Type="Int32" />
+          <Property Name="TypeCommission" Type="Int32" />
+          <NavigationProperty Name="DynamicField" Relationship="CityAccessModel.FK_Agreement_DynamicField" FromRole="Agreement" ToRole="DynamicField" />
+          <NavigationProperty Name="DynamicFieldAlternative" Relationship="CityAccessModel.FK_Agreement_DynamicFieldAlternative" FromRole="Agreement" ToRole="DynamicFieldAlternative" />
+          <NavigationProperty Name="DynamicFieldAlternative1" Relationship="CityAccessModel.FK_Agreement_DynamicFieldAlternative2" FromRole="Agreement" ToRole="DynamicFieldAlternative" />
+          <NavigationProperty Name="DynamicFieldAlternative2" Relationship="CityAccessModel.FK_Agreement_DynamicFieldAlternative3" FromRole="Agreement" ToRole="DynamicFieldAlternative" />
+          <Property Name="isConfirmed" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Services" Relationship="CityAccessModel.FK_Service_City" FromRole="City" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="commissionType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="label" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Partner">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tradeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="fiscalID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="countryID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="invoiceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="invoiceAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="isAgent" Type="Boolean" />
+          <Property Name="isOperator" Type="Boolean" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Partner" FromRole="Partner" ToRole="User" />
+          <NavigationProperty Name="Services" Relationship="CityAccessModel.FK_Service_Partner" FromRole="Partner" ToRole="Service" />
+          <NavigationProperty Name="Agreements" Relationship="CityAccessModel.FK_Agreement_Partner" FromRole="Partner" ToRole="Agreement" />
+          <NavigationProperty Name="PartnerLogoes" Relationship="CityAccessModel.FK_Partner_ID" FromRole="Partner" ToRole="PartnerLogo" />
+          <Property Name="ContactPerson" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isPublic" Type="Boolean" />
+          <Property Name="invitedby" Type="Int32" />
+          <Property Name="isTest" Type="Boolean" />
+          <Property Name="IcalLink" Type="Guid" />
+          <NavigationProperty Name="PartnerSites" Relationship="CityAccessModel.FK_PartnerSite_Partner" FromRole="Partner" ToRole="PartnerSite" />
+        </EntityType>
+        <EntityType Name="serviceType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Services" Relationship="CityAccessModel.FK_Service_serviceType" FromRole="serviceType" ToRole="Service" />
+          <Property Name="hasReturn" Type="Boolean" Nullable="false" />
+          <Property Name="isTransfer" Type="Boolean" />
+          <Property Name="LanguageID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Language" Relationship="CityAccessModel.FK_serviceType_Language" FromRole="serviceType" ToRole="Language" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastLoginDate" Type="DateTime" Precision="3" />
+          <Property Name="partnerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Partner" Relationship="Self.FK_User_Partner" FromRole="User" ToRole="Partner" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="emailConfirmed" Type="Boolean" />
+          <NavigationProperty Name="Requests" Relationship="CityAccessModel.FK_Request_User" FromRole="User" ToRole="Request" />
+          <NavigationProperty Name="RequestLogs" Relationship="CityAccessModel.FK_RequestLog_User" FromRole="User" ToRole="RequestLog" />
+          <NavigationProperty Name="AgreementLogs" Relationship="CityAccessModel.FK_AgreementLog_User" FromRole="User" ToRole="AgreementLog" />
+          <NavigationProperty Name="ErrorLogs" Relationship="CityAccessModel.FK_ErrorLog_User" FromRole="User" ToRole="ErrorLog" />
+          <Property Name="isAdmin" Type="Boolean" />
+          <NavigationProperty Name="Requests1" Relationship="CityAccessModel.FK_Request_User2" FromRole="User" ToRole="Request" />
+          <NavigationProperty Name="UserLogs" Relationship="CityAccessModel.FK_UserLog_Editor" FromRole="User" ToRole="UserLog" />
+          <NavigationProperty Name="UserLogs1" Relationship="CityAccessModel.FK_UserLog_User" FromRole="User" ToRole="UserLog" />
+          <Property Name="UserIcalLink" Type="Guid" />
+        </EntityType>
+        <Association Name="FK_User_Partner">
+          <End Type="Self.Partner" Multiplicity="1" Role="Partner" />
+          <End Type="Self.User" Multiplicity="*" Role="User" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="partnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CityAccessEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agreements" EntityType="Self.Agreement" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="commissionTypes" EntityType="Self.commissionType" />
+          <EntitySet Name="Partners" EntityType="Self.Partner" />
+          <EntitySet Name="serviceTypes" EntityType="Self.serviceType" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_User_Partner" Association="Self.FK_User_Partner">
+            <End EntitySet="Partners" Role="Partner" />
+            <End EntitySet="Users" Role="User" />
+          </AssociationSet>
+          <EntitySet Name="Services" EntityType="CityAccessModel.Service" />
+          <AssociationSet Name="FK_Agreement_Service" Association="CityAccessModel.FK_Agreement_Service">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="Agreement" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_City" Association="CityAccessModel.FK_Service_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Partner" Association="CityAccessModel.FK_Service_Partner">
+            <End Role="Partner" EntitySet="Partners" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_serviceType" Association="CityAccessModel.FK_Service_serviceType">
+            <End Role="serviceType" EntitySet="serviceTypes" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <EntitySet Name="Requests" EntityType="CityAccessModel.Request" />
+          <AssociationSet Name="FK_Request_Agreement" Association="CityAccessModel.FK_Request_Agreement">
+            <End Role="Agreement" EntitySet="Agreements" />
+            <End Role="Request" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_User" Association="CityAccessModel.FK_Request_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Request" EntitySet="Requests" />
+          </AssociationSet>
+          <EntitySet Name="States" EntityType="CityAccessModel.State" />
+          <AssociationSet Name="FK_Request_State" Association="CityAccessModel.FK_Request_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="Request" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agreement_Partner" Association="CityAccessModel.FK_Agreement_Partner">
+            <End Role="Partner" EntitySet="Partners" />
+            <End Role="Agreement" EntitySet="Agreements" />
+          </AssociationSet>
+          <EntitySet Name="ServiceImages" EntityType="CityAccessModel.ServiceImage" />
+          <AssociationSet Name="FK_Service_ID" Association="CityAccessModel.FK_Service_ID">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="ServiceImage" EntitySet="ServiceImages" />
+          </AssociationSet>
+          <EntitySet Name="PartnerLogoes" EntityType="CityAccessModel.PartnerLogo" />
+          <AssociationSet Name="FK_Partner_ID" Association="CityAccessModel.FK_Partner_ID">
+            <End Role="Partner" EntitySet="Partners" />
+            <End Role="PartnerLogo" EntitySet="PartnerLogoes" />
+          </AssociationSet>
+          <EntitySet Name="RequestLogs" EntityType="CityAccessModel.RequestLog" />
+          <AssociationSet Name="FK_RequestLog_Request" Association="CityAccessModel.FK_RequestLog_Request">
+            <End Role="Request" EntitySet="Requests" />
+            <End Role="RequestLog" EntitySet="RequestLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestLog_User" Association="CityAccessModel.FK_RequestLog_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="RequestLog" EntitySet="RequestLogs" />
+          </AssociationSet>
+          <EntitySet Name="AgreementLogs" EntityType="CityAccessModel.AgreementLog" />
+          <AssociationSet Name="FK_AgreementLog_Request" Association="CityAccessModel.FK_AgreementLog_Request">
+            <End Role="Agreement" EntitySet="Agreements" />
+            <End Role="AgreementLog" EntitySet="AgreementLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgreementLog_User" Association="CityAccessModel.FK_AgreementLog_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AgreementLog" EntitySet="AgreementLogs" />
+          </AssociationSet>
+          <EntitySet Name="DynamicFields" EntityType="CityAccessModel.DynamicField" />
+          <EntitySet Name="DynamicFieldAlternatives" EntityType="CityAccessModel.DynamicFieldAlternative" />
+          <EntitySet Name="DynamicFieldAlternativeMls" EntityType="CityAccessModel.DynamicFieldAlternativeMl" />
+          <EntitySet Name="DynamicFieldMls" EntityType="CityAccessModel.DynamicFieldMl" />
+          <EntitySet Name="ErrorLogs" EntityType="CityAccessModel.ErrorLog" />
+          <EntitySet Name="Languages" EntityType="CityAccessModel.Language" />
+          <AssociationSet Name="FK_Agreement_DynamicField" Association="CityAccessModel.FK_Agreement_DynamicField">
+            <End Role="DynamicField" EntitySet="DynamicFields" />
+            <End Role="Agreement" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicFieldAlternative_DynamicField" Association="CityAccessModel.FK_DynamicFieldAlternative_DynamicField">
+            <End Role="DynamicField" EntitySet="DynamicFields" />
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternatives" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicFieldMl_DynamicField" Association="CityAccessModel.FK_DynamicFieldMl_DynamicField">
+            <End Role="DynamicField" EntitySet="DynamicFields" />
+            <End Role="DynamicFieldMl" EntitySet="DynamicFieldMls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_DynamicField" Association="CityAccessModel.FK_Service_DynamicField">
+            <End Role="DynamicField" EntitySet="DynamicFields" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicFieldAlternativeMl_DynamicFieldAlternative" Association="CityAccessModel.FK_DynamicFieldAlternativeMl_DynamicFieldAlternative">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternatives" />
+            <End Role="DynamicFieldAlternativeMl" EntitySet="DynamicFieldAlternativeMls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicFieldAlternativeMl_Language" Association="CityAccessModel.FK_DynamicFieldAlternativeMl_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="DynamicFieldAlternativeMl" EntitySet="DynamicFieldAlternativeMls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicFieldMl_Language" Association="CityAccessModel.FK_DynamicFieldMl_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="DynamicFieldMl" EntitySet="DynamicFieldMls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ErrorLog_User" Association="CityAccessModel.FK_ErrorLog_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ErrorLog" EntitySet="ErrorLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agreement_DynamicFieldAlternative" Association="CityAccessModel.FK_Agreement_DynamicFieldAlternative">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternatives" />
+            <End Role="Agreement" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agreement_DynamicFieldAlternative2" Association="CityAccessModel.FK_Agreement_DynamicFieldAlternative2">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternatives" />
+            <End Role="Agreement" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agreement_DynamicFieldAlternative3" Association="CityAccessModel.FK_Agreement_DynamicFieldAlternative3">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternatives" />
+            <End Role="Agreement" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_DynamicFieldAlternative" Association="CityAccessModel.FK_Service_DynamicFieldAlternative">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternatives" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_DynamicFieldAlternative2" Association="CityAccessModel.FK_Service_DynamicFieldAlternative2">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternatives" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_DynamicFieldAlternative3" Association="CityAccessModel.FK_Service_DynamicFieldAlternative3">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternatives" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_DynamicFieldAlternative4" Association="CityAccessModel.FK_Service_DynamicFieldAlternative4">
+            <End Role="DynamicFieldAlternative" EntitySet="DynamicFieldAlternatives" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_serviceType_Language" Association="CityAccessModel.FK_serviceType_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="serviceType" EntitySet="serviceTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Service" Association="CityAccessModel.FK_Service_Service">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="Service1" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Service1" Association="CityAccessModel.FK_Service_Service1">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="Service1" EntitySet="Services" />
+          </AssociationSet>
+          <EntitySet Name="Events" EntityType="CityAccessModel.Event" />
+          <EntitySet Name="EventStates" EntityType="CityAccessModel.EventState" />
+          <AssociationSet Name="FK_Event_EventState" Association="CityAccessModel.FK_Event_EventState">
+            <End Role="EventState" EntitySet="EventStates" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Service" Association="CityAccessModel.FK_Event_Service">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <EntitySet Name="UserLogs" EntityType="CityAccessModel.UserLog" />
+          <AssociationSet Name="FK_Request_User2" Association="CityAccessModel.FK_Request_User2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Request" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLog_Editor" Association="CityAccessModel.FK_UserLog_Editor">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserLog" EntitySet="UserLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLog_User" Association="CityAccessModel.FK_UserLog_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserLog" EntitySet="UserLogs" />
+          </AssociationSet>
+          <EntitySet Name="Binarys" EntityType="CityAccessModel.Binary" />
+          <EntitySet Name="FontStyles" EntityType="CityAccessModel.FontStyle" />
+          <EntitySet Name="Links" EntityType="CityAccessModel.Link" />
+          <EntitySet Name="PartnerSites" EntityType="CityAccessModel.PartnerSite" />
+          <AssociationSet Name="FK_Binarys_PartnerSite" Association="CityAccessModel.FK_Binarys_PartnerSite">
+            <End Role="PartnerSite" EntitySet="PartnerSites" />
+            <End Role="Binary" EntitySet="Binarys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerSite_FontStyle" Association="CityAccessModel.FK_PartnerSite_FontStyle">
+            <End Role="FontStyle" EntitySet="FontStyles" />
+            <End Role="PartnerSite" EntitySet="PartnerSites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_link_PartnerSite" Association="CityAccessModel.FK_link_PartnerSite">
+            <End Role="PartnerSite" EntitySet="PartnerSites" />
+            <End Role="Link" EntitySet="Links" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerSite_Partner" Association="CityAccessModel.FK_PartnerSite_Partner">
+            <End Role="Partner" EntitySet="Partners" />
+            <End Role="PartnerSite" EntitySet="PartnerSites" />
+          </AssociationSet>
+          <EntitySet Name="Styles" EntityType="CityAccessModel.Style" />
+          <AssociationSet Name="FK_Style_PartnerSite" Association="CityAccessModel.FK_Style_PartnerSite">
+            <End Role="PartnerSite" EntitySet="PartnerSites" />
+            <End Role="Style" EntitySet="Styles" />
+          </AssociationSet>
+          <EntitySet Name="StateTransitions" EntityType="CityAccessModel.StateTransition" />
+          <EntitySet Name="sysdiagrams" EntityType="CityAccessModel.sysdiagram" />
+          </EntityContainer>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typeID" Type="Int32" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="cityID" Type="Int32" />
+          <Property Name="isPublic" Type="Boolean" Nullable="false" />
+          <Property Name="operatorID" Type="Int32" />
+          <NavigationProperty Name="Agreements" Relationship="CityAccessModel.FK_Agreement_Service" FromRole="Service" ToRole="Agreement" />
+          <NavigationProperty Name="City" Relationship="CityAccessModel.FK_Service_City" FromRole="Service" ToRole="City" />
+          <NavigationProperty Name="Partner" Relationship="CityAccessModel.FK_Service_Partner" FromRole="Service" ToRole="Partner" />
+          <NavigationProperty Name="serviceType" Relationship="CityAccessModel.FK_Service_serviceType" FromRole="Service" ToRole="serviceType" />
+          <NavigationProperty Name="ServiceImages" Relationship="CityAccessModel.FK_Service_ID" FromRole="Service" ToRole="ServiceImage" />
+          <Property Name="fieldName1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fieldName2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fieldName3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fieldName4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fieldName5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fieldName6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fieldName7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fieldName8" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fieldName9" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fieldName10" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fieldName11" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fieldName12" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="field1IsActive" Type="Boolean" />
+          <Property Name="field2IsActive" Type="Boolean" />
+          <Property Name="field3IsActive" Type="Boolean" />
+          <Property Name="field4IsActive" Type="Boolean" />
+          <Property Name="field5IsActive" Type="Boolean" />
+          <Property Name="field6IsActive" Type="Boolean" />
+          <Property Name="field7IsActive" Type="Boolean" />
+          <Property Name="field8IsActive" Type="Boolean" />
+          <Property Name="field9IsActive" Type="Boolean" />
+          <Property Name="field10IsActive" Type="Boolean" />
+          <Property Name="field11IsActive" Type="Boolean" />
+          <Property Name="field12IsActive" Type="Boolean" />
+          <Property Name="field1IsMandatory" Type="Boolean" />
+          <Property Name="field2IsMandatory" Type="Boolean" />
+          <Property Name="field3IsMandatory" Type="Boolean" />
+          <Property Name="field4IsMandatory" Type="Boolean" />
+          <Property Name="field5IsMandatory" Type="Boolean" />
+          <Property Name="field6IsMandatory" Type="Boolean" />
+          <Property Name="field7IsMandatory" Type="Boolean" />
+          <Property Name="field8IsMandatory" Type="Boolean" />
+          <Property Name="field9IsMandatory" Type="Boolean" />
+          <Property Name="field10IsMandatory" Type="Boolean" />
+          <Property Name="field11IsMandatory" Type="Boolean" />
+          <Property Name="field12IsMandatory" Type="Boolean" />
+          <Property Name="fieldName1Type" Type="Int32" />
+          <Property Name="fieldName2Type" Type="Int32" />
+          <Property Name="fieldName3Type" Type="Int32" />
+          <Property Name="fieldName4Type" Type="Int32" />
+          <Property Name="fieldName5Type" Type="Int32" />
+          <Property Name="fieldName6Type" Type="Int32" />
+          <Property Name="fieldName7Type" Type="Int32" />
+          <Property Name="fieldName8Type" Type="Int32" />
+          <Property Name="fieldName9Type" Type="Int32" />
+          <Property Name="fieldName10Type" Type="Int32" />
+          <Property Name="fieldName11Type" Type="Int32" />
+          <Property Name="fieldName12Type" Type="Int32" />
+          <Property Name="MaxPersonNum" Type="Int32" />
+          <Property Name="MinPersonNum" Type="Int32" />
+          <Property Name="Override1" Type="Boolean" />
+          <Property Name="PaymentAgent" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="ExecutionControl" Type="Boolean" />
+          <Property Name="Voucher" Type="Boolean" />
+          <Property Name="agentInstructions" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="ConfirmationText" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="cancellationPolicy" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="commissionValue" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="price" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="priceType" Type="Int32" />
+          <Property Name="comissionType" Type="Int32" />
+          <Property Name="PaymentAgentType" Type="Int32" />
+          <Property Name="Availability1" Type="Int32" />
+          <NavigationProperty Name="DynamicField" Relationship="CityAccessModel.FK_Service_DynamicField" FromRole="Service" ToRole="DynamicField" />
+          <NavigationProperty Name="DynamicFieldAlternative" Relationship="CityAccessModel.FK_Service_DynamicFieldAlternative" FromRole="Service" ToRole="DynamicFieldAlternative" />
+          <NavigationProperty Name="DynamicFieldAlternative1" Relationship="CityAccessModel.FK_Service_DynamicFieldAlternative2" FromRole="Service" ToRole="DynamicFieldAlternative" />
+          <NavigationProperty Name="DynamicFieldAlternative2" Relationship="CityAccessModel.FK_Service_DynamicFieldAlternative3" FromRole="Service" ToRole="DynamicFieldAlternative" />
+          <NavigationProperty Name="DynamicFieldAlternative3" Relationship="CityAccessModel.FK_Service_DynamicFieldAlternative4" FromRole="Service" ToRole="DynamicFieldAlternative" />
+          <NavigationProperty Name="Service1" Relationship="CityAccessModel.FK_Service_Service" FromRole="Service" ToRole="Service1" />
+          <NavigationProperty Name="Service2" Relationship="CityAccessModel.FK_Service_Service" FromRole="Service1" ToRole="Service" />
+          <NavigationProperty Name="Service11" Relationship="CityAccessModel.FK_Service_Service1" FromRole="Service" ToRole="Service1" />
+          <NavigationProperty Name="Service3" Relationship="CityAccessModel.FK_Service_Service1" FromRole="Service1" ToRole="Service" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="Duration" Type="Time" Precision="7" />
+          <NavigationProperty Name="Events" Relationship="CityAccessModel.FK_Event_Service" FromRole="Service" ToRole="Event" />
+        </EntityType>
+        <Association Name="FK_Agreement_Service">
+          <End Type="CityAccessModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="CityAccessModel.Agreement" Role="Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreement">
+              <PropertyRef Name="serviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_City">
+          <End Type="CityAccessModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="cityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Partner">
+          <End Type="CityAccessModel.Partner" Role="Partner" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="operatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_serviceType">
+          <End Type="CityAccessModel.serviceType" Role="serviceType" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="serviceType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="typeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="agreementID" Type="Int32" Nullable="false" />
+          <Property Name="bookerId" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="eventDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="eventTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="contactName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="contactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="contactPhone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="nrPersons" Type="Int32" />
+          <Property Name="pickupLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dropoffLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="flightNr" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="returnDate" Type="DateTime" Precision="0" />
+          <Property Name="returnTime" Type="Time" Precision="7" />
+          <Property Name="returnFlight" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Agreement" Relationship="CityAccessModel.FK_Request_Agreement" FromRole="Request" ToRole="Agreement" />
+          <NavigationProperty Name="User" Relationship="CityAccessModel.FK_Request_User" FromRole="Request" ToRole="User" />
+          <Property Name="stateID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="State" Relationship="CityAccessModel.FK_Request_State" FromRole="Request" ToRole="State" />
+          <Property Name="reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="returnPickup" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="returnDropoff" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RequestLogs" Relationship="CityAccessModel.FK_RequestLog_Request" FromRole="Request" ToRole="RequestLog" />
+          <Property Name="bookDate" Type="DateTime" Precision="0" />
+          <Property Name="bookTime" Type="Time" Precision="7" />
+          <Property Name="extraDate1" Type="DateTime" Precision="0" />
+          <Property Name="extraDate2" Type="DateTime" Precision="0" />
+          <Property Name="extraDate3" Type="DateTime" Precision="0" />
+          <Property Name="extraTime1" Type="Time" Precision="7" />
+          <Property Name="extraTime2" Type="Time" Precision="7" />
+          <Property Name="extraTime3" Type="Time" Precision="7" />
+          <Property Name="extraText1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="extraText2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="extraText3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="extraMultiText1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="extraMultiText2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="extraMultiText3" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="OperatorNotes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="eventID" Type="Int32" />
+          <Property Name="ResponsibleId" Type="Int32" />
+          <NavigationProperty Name="User1" Relationship="CityAccessModel.FK_Request_User2" FromRole="Request" ToRole="User" />
+          <Property Name="ClientNotes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          </EntityType>
+        <Association Name="FK_Request_Agreement">
+          <End Type="CityAccessModel.Agreement" Role="Agreement" Multiplicity="1" />
+          <End Type="CityAccessModel.Request" Role="Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agreement">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="agreementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_User">
+          <End Type="CityAccessModel.User" Role="User" Multiplicity="1" />
+          <End Type="CityAccessModel.Request" Role="Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="bookerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Requests" Relationship="CityAccessModel.FK_Request_State" FromRole="State" ToRole="Request" />
+        </EntityType>
+        <Association Name="FK_Request_State">
+          <End Type="CityAccessModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Request" Role="Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="stateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agreement_Partner">
+          <End Type="CityAccessModel.Partner" Role="Partner" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Agreement" Role="Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreement">
+              <PropertyRef Name="partnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ServiceImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="serviceID" Type="Int32" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="sequenceNR" Type="Int32" />
+          <NavigationProperty Name="Service" Relationship="CityAccessModel.FK_Service_ID" FromRole="ServiceImage" ToRole="Service" />
+        </EntityType>
+        <Association Name="FK_Service_ID">
+          <End Type="CityAccessModel.Service" Role="Service" Multiplicity="0..1" />
+          <End Type="CityAccessModel.ServiceImage" Role="ServiceImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ServiceImage">
+              <PropertyRef Name="serviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PartnerLogo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartnerID" Type="Int32" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Partner" Relationship="CityAccessModel.FK_Partner_ID" FromRole="PartnerLogo" ToRole="Partner" />
+        </EntityType>
+        <Association Name="FK_Partner_ID">
+          <End Type="CityAccessModel.Partner" Role="Partner" Multiplicity="0..1" />
+          <End Type="CityAccessModel.PartnerLogo" Role="PartnerLogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartnerLogo">
+              <PropertyRef Name="PartnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RequestLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="requestID" Type="Int32" Nullable="false" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Request" Relationship="CityAccessModel.FK_RequestLog_Request" FromRole="RequestLog" ToRole="Request" />
+          <NavigationProperty Name="User" Relationship="CityAccessModel.FK_RequestLog_User" FromRole="RequestLog" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_RequestLog_Request">
+          <End Type="CityAccessModel.Request" Role="Request" Multiplicity="1" />
+          <End Type="CityAccessModel.RequestLog" Role="RequestLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RequestLog">
+              <PropertyRef Name="requestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestLog_User">
+          <End Type="CityAccessModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="CityAccessModel.RequestLog" Role="RequestLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RequestLog">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AgreementLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="agreementID" Type="Int32" Nullable="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agreement" Relationship="CityAccessModel.FK_AgreementLog_Request" FromRole="AgreementLog" ToRole="Agreement" />
+          <NavigationProperty Name="User" Relationship="CityAccessModel.FK_AgreementLog_User" FromRole="AgreementLog" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_AgreementLog_Request">
+          <End Type="CityAccessModel.Agreement" Role="Agreement" Multiplicity="1" />
+          <End Type="CityAccessModel.AgreementLog" Role="AgreementLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agreement">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AgreementLog">
+              <PropertyRef Name="agreementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgreementLog_User">
+          <End Type="CityAccessModel.User" Role="User" Multiplicity="1" />
+          <End Type="CityAccessModel.AgreementLog" Role="AgreementLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AgreementLog">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DynamicField">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fieldType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agreements" Relationship="CityAccessModel.FK_Agreement_DynamicField" FromRole="DynamicField" ToRole="Agreement" />
+          <NavigationProperty Name="DynamicFieldAlternatives" Relationship="CityAccessModel.FK_DynamicFieldAlternative_DynamicField" FromRole="DynamicField" ToRole="DynamicFieldAlternative" />
+          <NavigationProperty Name="DynamicFieldMls" Relationship="CityAccessModel.FK_DynamicFieldMl_DynamicField" FromRole="DynamicField" ToRole="DynamicFieldMl" />
+          <NavigationProperty Name="Services" Relationship="CityAccessModel.FK_Service_DynamicField" FromRole="DynamicField" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="DynamicFieldAlternative">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="label" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dynamicfieldID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DynamicField" Relationship="CityAccessModel.FK_DynamicFieldAlternative_DynamicField" FromRole="DynamicFieldAlternative" ToRole="DynamicField" />
+          <NavigationProperty Name="DynamicFieldAlternativeMls" Relationship="CityAccessModel.FK_DynamicFieldAlternativeMl_DynamicFieldAlternative" FromRole="DynamicFieldAlternative" ToRole="DynamicFieldAlternativeMl" />
+          <NavigationProperty Name="Agreements" Relationship="CityAccessModel.FK_Agreement_DynamicFieldAlternative" FromRole="DynamicFieldAlternative" ToRole="Agreement" />
+          <NavigationProperty Name="Agreements1" Relationship="CityAccessModel.FK_Agreement_DynamicFieldAlternative2" FromRole="DynamicFieldAlternative" ToRole="Agreement" />
+          <NavigationProperty Name="Agreements2" Relationship="CityAccessModel.FK_Agreement_DynamicFieldAlternative3" FromRole="DynamicFieldAlternative" ToRole="Agreement" />
+          <NavigationProperty Name="Services" Relationship="CityAccessModel.FK_Service_DynamicFieldAlternative" FromRole="DynamicFieldAlternative" ToRole="Service" />
+          <NavigationProperty Name="Services1" Relationship="CityAccessModel.FK_Service_DynamicFieldAlternative2" FromRole="DynamicFieldAlternative" ToRole="Service" />
+          <NavigationProperty Name="Services2" Relationship="CityAccessModel.FK_Service_DynamicFieldAlternative3" FromRole="DynamicFieldAlternative" ToRole="Service" />
+          <NavigationProperty Name="Services3" Relationship="CityAccessModel.FK_Service_DynamicFieldAlternative4" FromRole="DynamicFieldAlternative" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="DynamicFieldAlternativeMl">
+          <Key>
+            <PropertyRef Name="languageID" />
+            <PropertyRef Name="dynamicfieldalternativeID" />
+          </Key>
+          <Property Name="languageID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="label" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dynamicfieldalternativeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DynamicFieldAlternative" Relationship="CityAccessModel.FK_DynamicFieldAlternativeMl_DynamicFieldAlternative" FromRole="DynamicFieldAlternativeMl" ToRole="DynamicFieldAlternative" />
+          <NavigationProperty Name="Language" Relationship="CityAccessModel.FK_DynamicFieldAlternativeMl_Language" FromRole="DynamicFieldAlternativeMl" ToRole="Language" />
+        </EntityType>
+        <EntityType Name="DynamicFieldMl">
+          <Key>
+            <PropertyRef Name="languageID" />
+            <PropertyRef Name="dynamicfieldID" />
+          </Key>
+          <Property Name="languageID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="label" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dynamicfieldID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DynamicField" Relationship="CityAccessModel.FK_DynamicFieldMl_DynamicField" FromRole="DynamicFieldMl" ToRole="DynamicField" />
+          <NavigationProperty Name="Language" Relationship="CityAccessModel.FK_DynamicFieldMl_Language" FromRole="DynamicFieldMl" ToRole="Language" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User" Type="Int32" Nullable="false" />
+          <Property Name="errorDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="errorTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="errorMsg" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="errorURL" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User1" Relationship="CityAccessModel.FK_ErrorLog_User" FromRole="ErrorLog" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="languageLabel" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DynamicFieldAlternativeMls" Relationship="CityAccessModel.FK_DynamicFieldAlternativeMl_Language" FromRole="Language" ToRole="DynamicFieldAlternativeMl" />
+          <NavigationProperty Name="DynamicFieldMls" Relationship="CityAccessModel.FK_DynamicFieldMl_Language" FromRole="Language" ToRole="DynamicFieldMl" />
+          <NavigationProperty Name="serviceTypes" Relationship="CityAccessModel.FK_serviceType_Language" FromRole="Language" ToRole="serviceType" />
+        </EntityType>
+        <Association Name="FK_Agreement_DynamicField">
+          <End Type="CityAccessModel.DynamicField" Role="DynamicField" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Agreement" Role="Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicField">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreement">
+              <PropertyRef Name="priceType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicFieldAlternative_DynamicField">
+          <End Type="CityAccessModel.DynamicField" Role="DynamicField" Multiplicity="1" />
+          <End Type="CityAccessModel.DynamicFieldAlternative" Role="DynamicFieldAlternative" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicField">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DynamicFieldAlternative">
+              <PropertyRef Name="dynamicfieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicFieldMl_DynamicField">
+          <End Type="CityAccessModel.DynamicField" Role="DynamicField" Multiplicity="1" />
+          <End Type="CityAccessModel.DynamicFieldMl" Role="DynamicFieldMl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicField">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DynamicFieldMl">
+              <PropertyRef Name="dynamicfieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_DynamicField">
+          <End Type="CityAccessModel.DynamicField" Role="DynamicField" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicField">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="priceType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicFieldAlternativeMl_DynamicFieldAlternative">
+          <End Type="CityAccessModel.DynamicFieldAlternative" Role="DynamicFieldAlternative" Multiplicity="1" />
+          <End Type="CityAccessModel.DynamicFieldAlternativeMl" Role="DynamicFieldAlternativeMl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DynamicFieldAlternativeMl">
+              <PropertyRef Name="dynamicfieldalternativeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicFieldAlternativeMl_Language">
+          <End Type="CityAccessModel.Language" Role="Language" Multiplicity="1" />
+          <End Type="CityAccessModel.DynamicFieldAlternativeMl" Role="DynamicFieldAlternativeMl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DynamicFieldAlternativeMl">
+              <PropertyRef Name="languageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicFieldMl_Language">
+          <End Type="CityAccessModel.Language" Role="Language" Multiplicity="1" />
+          <End Type="CityAccessModel.DynamicFieldMl" Role="DynamicFieldMl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DynamicFieldMl">
+              <PropertyRef Name="languageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ErrorLog_User">
+          <End Type="CityAccessModel.User" Role="User" Multiplicity="1" />
+          <End Type="CityAccessModel.ErrorLog" Role="ErrorLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ErrorLog">
+              <PropertyRef Name="User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agreement_DynamicFieldAlternative">
+          <End Type="CityAccessModel.DynamicFieldAlternative" Role="DynamicFieldAlternative" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Agreement" Role="Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreement">
+              <PropertyRef Name="priceType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agreement_DynamicFieldAlternative2">
+          <End Type="CityAccessModel.DynamicFieldAlternative" Role="DynamicFieldAlternative" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Agreement" Role="Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreement">
+              <PropertyRef Name="TypeCommission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agreement_DynamicFieldAlternative3">
+          <End Type="CityAccessModel.DynamicFieldAlternative" Role="DynamicFieldAlternative" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Agreement" Role="Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreement">
+              <PropertyRef Name="PaymentAgentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_DynamicFieldAlternative">
+          <End Type="CityAccessModel.DynamicFieldAlternative" Role="DynamicFieldAlternative" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="priceType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_DynamicFieldAlternative2">
+          <End Type="CityAccessModel.DynamicFieldAlternative" Role="DynamicFieldAlternative" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="comissionType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_DynamicFieldAlternative3">
+          <End Type="CityAccessModel.DynamicFieldAlternative" Role="DynamicFieldAlternative" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="PaymentAgentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_DynamicFieldAlternative4">
+          <End Type="CityAccessModel.DynamicFieldAlternative" Role="DynamicFieldAlternative" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicFieldAlternative">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="Availability1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_serviceType_Language">
+          <End Type="CityAccessModel.Language" Role="Language" Multiplicity="0..1" />
+          <End Type="CityAccessModel.serviceType" Role="serviceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="serviceType">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Service">
+          <End Type="CityAccessModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="CityAccessModel.Service" Role="Service1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Service1">
+          <End Type="CityAccessModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="CityAccessModel.Service" Role="Service1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Service1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="serviceID" Type="Int32" Nullable="false" />
+          <Property Name="eventDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="startTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="endTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="maxPersons" Type="Int32" Nullable="false" />
+          <Property Name="stateID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EventState" Relationship="CityAccessModel.FK_Event_EventState" FromRole="Event" ToRole="EventState" />
+          <NavigationProperty Name="Service" Relationship="CityAccessModel.FK_Event_Service" FromRole="Event" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="EventState">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Events" Relationship="CityAccessModel.FK_Event_EventState" FromRole="EventState" ToRole="Event" />
+        </EntityType>
+        <Association Name="FK_Event_EventState">
+          <End Type="CityAccessModel.EventState" Role="EventState" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventState">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="stateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Service">
+          <End Type="CityAccessModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="CityAccessModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="serviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="editorID" Type="Int32" Nullable="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="CityAccessModel.FK_UserLog_Editor" FromRole="UserLog" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="CityAccessModel.FK_UserLog_User" FromRole="UserLog" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Request_User2">
+          <End Type="CityAccessModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Request" Role="Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="ResponsibleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLog_Editor">
+          <End Type="CityAccessModel.User" Role="User" Multiplicity="1" />
+          <End Type="CityAccessModel.UserLog" Role="UserLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserLog">
+              <PropertyRef Name="editorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLog_User">
+          <End Type="CityAccessModel.User" Role="User" Multiplicity="1" />
+          <End Type="CityAccessModel.UserLog" Role="UserLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserLog">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Binary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Binary1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="partnerSite_ID" Type="Int32" />
+          <Property Name="isBackground" Type="Boolean" />
+          <NavigationProperty Name="PartnerSite" Relationship="CityAccessModel.FK_Binarys_PartnerSite" FromRole="Binary" ToRole="PartnerSite" />
+        </EntityType>
+        <EntityType Name="FontStyle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PartnerSites" Relationship="CityAccessModel.FK_PartnerSite_FontStyle" FromRole="FontStyle" ToRole="PartnerSite" />
+        </EntityType>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="partnerSiteID" Type="Int32" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="posHorizontal" Type="Int32" Nullable="false" />
+          <Property Name="posVertical" Type="Int32" />
+          <Property Name="text" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PartnerSite" Relationship="CityAccessModel.FK_link_PartnerSite" FromRole="Link" ToRole="PartnerSite" />
+          <Property Name="IsDropMaster" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PartnerSite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="partnerID" Type="Int32" Nullable="false" />
+          <Property Name="css" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FontStyle" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="linkID" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Binarys" Relationship="CityAccessModel.FK_Binarys_PartnerSite" FromRole="PartnerSite" ToRole="Binary" />
+          <NavigationProperty Name="FontStyle1" Relationship="CityAccessModel.FK_PartnerSite_FontStyle" FromRole="PartnerSite" ToRole="FontStyle" />
+          <NavigationProperty Name="Links" Relationship="CityAccessModel.FK_link_PartnerSite" FromRole="PartnerSite" ToRole="Link" />
+          <NavigationProperty Name="Partner" Relationship="CityAccessModel.FK_PartnerSite_Partner" FromRole="PartnerSite" ToRole="Partner" />
+          <NavigationProperty Name="Styles" Relationship="CityAccessModel.FK_Style_PartnerSite" FromRole="PartnerSite" ToRole="Style" />
+        </EntityType>
+        <Association Name="FK_Binarys_PartnerSite">
+          <End Type="CityAccessModel.PartnerSite" Role="PartnerSite" Multiplicity="0..1" />
+          <End Type="CityAccessModel.Binary" Role="Binary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartnerSite">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Binary">
+              <PropertyRef Name="partnerSite_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerSite_FontStyle">
+          <End Type="CityAccessModel.FontStyle" Role="FontStyle" Multiplicity="0..1" />
+          <End Type="CityAccessModel.PartnerSite" Role="PartnerSite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FontStyle">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartnerSite">
+              <PropertyRef Name="FontStyle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_link_PartnerSite">
+          <End Type="CityAccessModel.PartnerSite" Role="PartnerSite" Multiplicity="1" />
+          <End Type="CityAccessModel.Link" Role="Link" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartnerSite">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Link">
+              <PropertyRef Name="partnerSiteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerSite_Partner">
+          <End Type="CityAccessModel.Partner" Role="Partner" Multiplicity="1" />
+          <End Type="CityAccessModel.PartnerSite" Role="PartnerSite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartnerSite">
+              <PropertyRef Name="partnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Style">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="partnerSiteID" Type="Int32" Nullable="false" />
+          <Property Name="BackgroundColor" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="FontColor" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="MenuPosition" Type="Boolean" />
+          <Property Name="LogoPosition" Type="Boolean" />
+          <NavigationProperty Name="PartnerSite" Relationship="CityAccessModel.FK_Style_PartnerSite" FromRole="Style" ToRole="PartnerSite" />
+        </EntityType>
+        <Association Name="FK_Style_PartnerSite">
+          <End Type="CityAccessModel.PartnerSite" Role="PartnerSite" Multiplicity="1" />
+          <End Type="CityAccessModel.Style" Role="Style" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartnerSite">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Style">
+              <PropertyRef Name="partnerSiteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StateTransition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Origin" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Destiny" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CityAccessModelStoreContainer" CdmEntityContainer="CityAccessEntities">
+          <EntitySetMapping Name="Agreements">
+            <EntityTypeMapping TypeName="CityAccessModel.Agreement">
+              <MappingFragment StoreEntitySet="Agreement">
+                <ScalarProperty Name="isConfirmed" ColumnName="isConfirmed" />
+                <ScalarProperty Name="TypeCommission" ColumnName="TypeCommission" />
+                <ScalarProperty Name="priceType" ColumnName="priceType" />
+                <ScalarProperty Name="PaymentAgentType" ColumnName="PaymentAgentType" />
+                <ScalarProperty Name="EmailToCustomer" ColumnName="EmailToCustomer" />
+                <ScalarProperty Name="PaymentAgent" ColumnName="PaymentAgent" />
+                <ScalarProperty Name="Override1" ColumnName="Override1" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="partnerID" ColumnName="partnerID" />
+                <ScalarProperty Name="serviceID" ColumnName="serviceID" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="messageTemplate" ColumnName="messageTemplate" />
+                <ScalarProperty Name="agentInstructions" ColumnName="agentInstructions" />
+                <ScalarProperty Name="cancellationPolicy" ColumnName="cancellationPolicy" />
+                <ScalarProperty Name="needsApproval" ColumnName="needsApproval" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="commissionType" ColumnName="commissionType" />
+                <ScalarProperty Name="commissionValue" ColumnName="commissionValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="CityAccessModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="commissionTypes">
+            <EntityTypeMapping TypeName="CityAccessModel.commissionType">
+              <MappingFragment StoreEntitySet="commissionType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partners">
+            <EntityTypeMapping TypeName="CityAccessModel.Partner">
+              <MappingFragment StoreEntitySet="Partner">
+                <ScalarProperty Name="IcalLink" ColumnName="IcalLink" />
+                <ScalarProperty Name="isTest" ColumnName="isTest" />
+                <ScalarProperty Name="invitedby" ColumnName="invitedby" />
+                <ScalarProperty Name="isPublic" ColumnName="isPublic" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="tradeName" ColumnName="tradeName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="fiscalID" ColumnName="fiscalID" />
+                <ScalarProperty Name="countryID" ColumnName="countryID" />
+                <ScalarProperty Name="invoiceName" ColumnName="invoiceName" />
+                <ScalarProperty Name="invoiceAddress" ColumnName="invoiceAddress" />
+                <ScalarProperty Name="isAgent" ColumnName="isAgent" />
+                <ScalarProperty Name="isOperator" ColumnName="isOperator" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="serviceTypes">
+            <EntityTypeMapping TypeName="CityAccessModel.serviceType">
+              <MappingFragment StoreEntitySet="serviceType">
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="isTransfer" ColumnName="isTransfer" />
+                <ScalarProperty Name="hasReturn" ColumnName="hasReturn" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CityAccessModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserIcalLink" ColumnName="UserIcalLink" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="emailConfirmed" ColumnName="emailConfirmed" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="lastLoginDate" ColumnName="lastLoginDate" />
+                <ScalarProperty Name="partnerId" ColumnName="partnerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="CityAccessModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Availability1" ColumnName="Availability1" />
+                <ScalarProperty Name="PaymentAgentType" ColumnName="PaymentAgentType" />
+                <ScalarProperty Name="comissionType" ColumnName="comissionType" />
+                <ScalarProperty Name="priceType" ColumnName="priceType" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="commissionValue" ColumnName="commissionValue" />
+                <ScalarProperty Name="cancellationPolicy" ColumnName="cancellationPolicy" />
+                <ScalarProperty Name="ConfirmationText" ColumnName="ConfirmationText" />
+                <ScalarProperty Name="agentInstructions" ColumnName="agentInstructions" />
+                <ScalarProperty Name="Voucher" ColumnName="Voucher" />
+                <ScalarProperty Name="ExecutionControl" ColumnName="ExecutionControl" />
+                <ScalarProperty Name="PaymentAgent" ColumnName="PaymentAgent" />
+                <ScalarProperty Name="Override1" ColumnName="Override1" />
+                <ScalarProperty Name="MinPersonNum" ColumnName="MinPersonNum" />
+                <ScalarProperty Name="MaxPersonNum" ColumnName="MaxPersonNum" />
+                <ScalarProperty Name="fieldName12Type" ColumnName="fieldName12Type" />
+                <ScalarProperty Name="fieldName11Type" ColumnName="fieldName11Type" />
+                <ScalarProperty Name="fieldName10Type" ColumnName="fieldName10Type" />
+                <ScalarProperty Name="fieldName9Type" ColumnName="fieldName9Type" />
+                <ScalarProperty Name="fieldName8Type" ColumnName="fieldName8Type" />
+                <ScalarProperty Name="fieldName7Type" ColumnName="fieldName7Type" />
+                <ScalarProperty Name="fieldName6Type" ColumnName="fieldName6Type" />
+                <ScalarProperty Name="fieldName5Type" ColumnName="fieldName5Type" />
+                <ScalarProperty Name="fieldName4Type" ColumnName="fieldName4Type" />
+                <ScalarProperty Name="fieldName3Type" ColumnName="fieldName3Type" />
+                <ScalarProperty Name="fieldName2Type" ColumnName="fieldName2Type" />
+                <ScalarProperty Name="fieldName1Type" ColumnName="fieldName1Type" />
+                <ScalarProperty Name="field12IsMandatory" ColumnName="field12IsMandatory" />
+                <ScalarProperty Name="field11IsMandatory" ColumnName="field11IsMandatory" />
+                <ScalarProperty Name="field10IsMandatory" ColumnName="field10IsMandatory" />
+                <ScalarProperty Name="field9IsMandatory" ColumnName="field9IsMandatory" />
+                <ScalarProperty Name="field8IsMandatory" ColumnName="field8IsMandatory" />
+                <ScalarProperty Name="field7IsMandatory" ColumnName="field7IsMandatory" />
+                <ScalarProperty Name="field6IsMandatory" ColumnName="field6IsMandatory" />
+                <ScalarProperty Name="field5IsMandatory" ColumnName="field5IsMandatory" />
+                <ScalarProperty Name="field4IsMandatory" ColumnName="field4IsMandatory" />
+                <ScalarProperty Name="field3IsMandatory" ColumnName="field3IsMandatory" />
+                <ScalarProperty Name="field2IsMandatory" ColumnName="field2IsMandatory" />
+                <ScalarProperty Name="field1IsMandatory" ColumnName="field1IsMandatory" />
+                <ScalarProperty Name="field12IsActive" ColumnName="field12IsActive" />
+                <ScalarProperty Name="field11IsActive" ColumnName="field11IsActive" />
+                <ScalarProperty Name="field10IsActive" ColumnName="field10IsActive" />
+                <ScalarProperty Name="field9IsActive" ColumnName="field9IsActive" />
+                <ScalarProperty Name="field8IsActive" ColumnName="field8IsActive" />
+                <ScalarProperty Name="field7IsActive" ColumnName="field7IsActive" />
+                <ScalarProperty Name="field6IsActive" ColumnName="field6IsActive" />
+                <ScalarProperty Name="field5IsActive" ColumnName="field5IsActive" />
+                <ScalarProperty Name="field4IsActive" ColumnName="field4IsActive" />
+                <ScalarProperty Name="field3IsActive" ColumnName="field3IsActive" />
+                <ScalarProperty Name="field2IsActive" ColumnName="field2IsActive" />
+                <ScalarProperty Name="field1IsActive" ColumnName="field1IsActive" />
+                <ScalarProperty Name="fieldName12" ColumnName="fieldName12" />
+                <ScalarProperty Name="fieldName11" ColumnName="fieldName11" />
+                <ScalarProperty Name="fieldName10" ColumnName="fieldName10" />
+                <ScalarProperty Name="fieldName9" ColumnName="fieldName9" />
+                <ScalarProperty Name="fieldName8" ColumnName="fieldName8" />
+                <ScalarProperty Name="fieldName7" ColumnName="fieldName7" />
+                <ScalarProperty Name="fieldName6" ColumnName="fieldName6" />
+                <ScalarProperty Name="fieldName5" ColumnName="fieldName5" />
+                <ScalarProperty Name="fieldName4" ColumnName="fieldName4" />
+                <ScalarProperty Name="fieldName3" ColumnName="fieldName3" />
+                <ScalarProperty Name="fieldName2" ColumnName="fieldName2" />
+                <ScalarProperty Name="fieldName1" ColumnName="fieldName1" />
+                <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+                <ScalarProperty Name="isPublic" ColumnName="isPublic" />
+                <ScalarProperty Name="cityID" ColumnName="cityID" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="typeID" ColumnName="typeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requests">
+            <EntityTypeMapping TypeName="CityAccessModel.Request">
+              <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="ClientNotes" ColumnName="ClientNotes" />
+                <ScalarProperty Name="ResponsibleId" ColumnName="ResponsibleId" />
+                <ScalarProperty Name="eventID" ColumnName="eventID" />
+                <ScalarProperty Name="OperatorNotes" ColumnName="OperatorNotes" />
+                <ScalarProperty Name="extraMultiText3" ColumnName="extraMultiText3" />
+                <ScalarProperty Name="extraMultiText2" ColumnName="extraMultiText2" />
+                <ScalarProperty Name="extraMultiText1" ColumnName="extraMultiText1" />
+                <ScalarProperty Name="extraText3" ColumnName="extraText3" />
+                <ScalarProperty Name="extraText2" ColumnName="extraText2" />
+                <ScalarProperty Name="extraText1" ColumnName="extraText1" />
+                <ScalarProperty Name="extraTime3" ColumnName="extraTime3" />
+                <ScalarProperty Name="extraTime2" ColumnName="extraTime2" />
+                <ScalarProperty Name="extraTime1" ColumnName="extraTime1" />
+                <ScalarProperty Name="extraDate3" ColumnName="extraDate3" />
+                <ScalarProperty Name="extraDate2" ColumnName="extraDate2" />
+                <ScalarProperty Name="extraDate1" ColumnName="extraDate1" />
+                <ScalarProperty Name="bookTime" ColumnName="bookTime" />
+                <ScalarProperty Name="bookDate" ColumnName="bookDate" />
+                <ScalarProperty Name="returnDropoff" ColumnName="returnDropoff" />
+                <ScalarProperty Name="returnPickup" ColumnName="returnPickup" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="stateID" ColumnName="stateID" />
+                <ScalarProperty Name="returnFlight" ColumnName="returnFlight" />
+                <ScalarProperty Name="returnTime" ColumnName="returnTime" />
+                <ScalarProperty Name="returnDate" ColumnName="returnDate" />
+                <ScalarProperty Name="flightNr" ColumnName="flightNr" />
+                <ScalarProperty Name="dropoffLocation" ColumnName="dropoffLocation" />
+                <ScalarProperty Name="pickupLocation" ColumnName="pickupLocation" />
+                <ScalarProperty Name="nrPersons" ColumnName="nrPersons" />
+                <ScalarProperty Name="contactPhone" ColumnName="contactPhone" />
+                <ScalarProperty Name="contactEmail" ColumnName="contactEmail" />
+                <ScalarProperty Name="contactName" ColumnName="contactName" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="eventTime" ColumnName="eventTime" />
+                <ScalarProperty Name="eventDate" ColumnName="eventDate" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="bookerId" ColumnName="bookerId" />
+                <ScalarProperty Name="agreementID" ColumnName="agreementID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="CityAccessModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceImages">
+            <EntityTypeMapping TypeName="CityAccessModel.ServiceImage">
+              <MappingFragment StoreEntitySet="ServiceImages">
+                <ScalarProperty Name="sequenceNR" ColumnName="sequenceNR" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="serviceID" ColumnName="serviceID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartnerLogoes">
+            <EntityTypeMapping TypeName="CityAccessModel.PartnerLogo">
+              <MappingFragment StoreEntitySet="PartnerLogo">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="PartnerID" ColumnName="PartnerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestLogs">
+            <EntityTypeMapping TypeName="CityAccessModel.RequestLog">
+              <MappingFragment StoreEntitySet="RequestLog">
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="requestID" ColumnName="requestID" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgreementLogs">
+            <EntityTypeMapping TypeName="CityAccessModel.AgreementLog">
+              <MappingFragment StoreEntitySet="AgreementLog">
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="agreementID" ColumnName="agreementID" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DynamicFields">
+            <EntityTypeMapping TypeName="CityAccessModel.DynamicField">
+              <MappingFragment StoreEntitySet="DynamicField">
+                <ScalarProperty Name="fieldType" ColumnName="fieldType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DynamicFieldAlternatives">
+            <EntityTypeMapping TypeName="CityAccessModel.DynamicFieldAlternative">
+              <MappingFragment StoreEntitySet="DynamicFieldAlternative">
+                <ScalarProperty Name="dynamicfieldID" ColumnName="dynamicfieldID" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DynamicFieldAlternativeMls">
+            <EntityTypeMapping TypeName="CityAccessModel.DynamicFieldAlternativeMl">
+              <MappingFragment StoreEntitySet="DynamicFieldAlternativeMl">
+                <ScalarProperty Name="dynamicfieldalternativeID" ColumnName="dynamicfieldalternativeID" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="languageID" ColumnName="languageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DynamicFieldMls">
+            <EntityTypeMapping TypeName="CityAccessModel.DynamicFieldMl">
+              <MappingFragment StoreEntitySet="DynamicFieldMl">
+                <ScalarProperty Name="dynamicfieldID" ColumnName="dynamicfieldID" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="languageID" ColumnName="languageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="CityAccessModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="errorURL" ColumnName="errorURL" />
+                <ScalarProperty Name="errorMsg" ColumnName="errorMsg" />
+                <ScalarProperty Name="errorTime" ColumnName="errorTime" />
+                <ScalarProperty Name="errorDate" ColumnName="errorDate" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="CityAccessModel.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="languageLabel" ColumnName="languageLabel" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="CityAccessModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="stateID" ColumnName="stateID" />
+                <ScalarProperty Name="maxPersons" ColumnName="maxPersons" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="eventDate" ColumnName="eventDate" />
+                <ScalarProperty Name="serviceID" ColumnName="serviceID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventStates">
+            <EntityTypeMapping TypeName="CityAccessModel.EventState">
+              <MappingFragment StoreEntitySet="EventState">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLogs">
+            <EntityTypeMapping TypeName="CityAccessModel.UserLog">
+              <MappingFragment StoreEntitySet="UserLog">
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="editorID" ColumnName="editorID" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Binarys">
+            <EntityTypeMapping TypeName="CityAccessModel.Binary">
+              <MappingFragment StoreEntitySet="Binarys">
+                <ScalarProperty Name="isBackground" ColumnName="isBackground" />
+                <ScalarProperty Name="partnerSite_ID" ColumnName="partnerSite_ID" />
+                <ScalarProperty Name="Binary1" ColumnName="Binary" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FontStyles">
+            <EntityTypeMapping TypeName="CityAccessModel.FontStyle">
+              <MappingFragment StoreEntitySet="FontStyle">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Links">
+            <EntityTypeMapping TypeName="CityAccessModel.Link">
+              <MappingFragment StoreEntitySet="Link">
+                <ScalarProperty Name="IsDropMaster" ColumnName="IsDropMaster" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="posVertical" ColumnName="posVertical" />
+                <ScalarProperty Name="posHorizontal" ColumnName="posHorizontal" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="partnerSiteID" ColumnName="partnerSiteID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartnerSites">
+            <EntityTypeMapping TypeName="CityAccessModel.PartnerSite">
+              <MappingFragment StoreEntitySet="PartnerSite">
+                <ScalarProperty Name="linkID" ColumnName="linkID" />
+                <ScalarProperty Name="FontStyle" ColumnName="FontStyle" />
+                <ScalarProperty Name="css" ColumnName="css" />
+                <ScalarProperty Name="partnerID" ColumnName="partnerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Styles">
+            <EntityTypeMapping TypeName="CityAccessModel.Style">
+              <MappingFragment StoreEntitySet="Style">
+                <ScalarProperty Name="LogoPosition" ColumnName="LogoPosition" />
+                <ScalarProperty Name="MenuPosition" ColumnName="MenuPosition" />
+                <ScalarProperty Name="FontColor" ColumnName="FontColor" />
+                <ScalarProperty Name="BackgroundColor" ColumnName="BackgroundColor" />
+                <ScalarProperty Name="partnerSiteID" ColumnName="partnerSiteID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StateTransitions">
+            <EntityTypeMapping TypeName="CityAccessModel.StateTransition">
+              <MappingFragment StoreEntitySet="StateTransitions">
+                <ScalarProperty Name="Destiny" ColumnName="Destiny" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CityAccessModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

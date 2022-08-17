@@ -1,0 +1,618 @@
+﻿@model CityAccess.Req_User
+@{
+    Layout = null;
+}
+
+
+        @{
+            var base64 = string.Empty;
+            var imgSrc = string.Empty;
+            if (Model.serviceImage != null)
+            {
+                base64 = Convert.ToBase64String(Model.serviceImage.Image);
+                imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+            }
+        }
+
+<div class="Content clearfix">
+    <div class="form-horizontal primaryDiv">
+        @using (Html.BeginForm("Create", "Booking", FormMethod.Post, new { id = "createBooking" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+
+                @Html.Label(Model.AgName)
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="no-padding form-group">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.Request.contactName, htmlAttributes: new { @class = "control-label  required", style = "padding-top:0px;" })
+                    </div>
+
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Request.contactName, new { htmlAttributes = new { @class = "form-control ", maxlength = "50" } })
+                        @Html.ValidationMessageFor(model => model.Request.contactName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="no-padding form-group">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.Request.contactEmail, htmlAttributes: new { @class = "control-label ", style = "padding-top:0px;" })
+                    </div>
+
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Request.contactEmail, new { htmlAttributes = new { @class = "form-control ", maxlength = "50" } })
+                        @Html.ValidationMessageFor(model => model.Request.contactEmail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="no-padding form-group">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.Request.contactPhone, htmlAttributes: new { @class = "control-label ", style = "padding-top:0px;" })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Request.contactPhone, new { htmlAttributes = new { @class = "form-control", style = "width: 200px", maxlength = "20" } })
+                        @Html.ValidationMessageFor(model => model.Request.contactPhone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="no-padding form-group">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.Request.eventDate, htmlAttributes: new { @class = "control-label  required", style = "padding-top:0px;" })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Request.eventDate, new { htmlAttributes = new { @class = "form-control", style = "width: 150px" } })
+                        @Html.ValidationMessageFor(model => model.Request.eventDate, "", new { @class = "text-danger" })
+                    </div>
+                    @if (ViewBag.Event == true)
+                    {
+                        @Html.HiddenFor(a => a.Request.eventID)
+                        <div class="" style="padding-left:15px;">
+                            <input id="eventBtn" type="button" onclick="window.open('@Url.Action("Event", "Booking", new { servID = Model.Agreement.Service.ID })', '_blank', 'left=100,top=100,width=1300,height=800,toolbar=1,resizable=0')" value="Choose Event" style="width:120px;height:28px;font-size:12px;" class="btn btn-default" />
+                        </div>
+                    }
+                </div>
+
+                <div class="no-padding form-group">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.Request.eventTime, htmlAttributes: new { @class = "control-label  required", style = "padding-top:0px;" })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Request.eventTime, new { htmlAttributes = new { @class = "form-control", style = "width: 115px" } })
+                        @Html.ValidationMessageFor(model => model.Request.eventTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="no-padding form-group">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.Request.nrPersons, htmlAttributes: new { @class = "control-label  required", style = "padding-top:0px;" })
+                    </div>
+                    <div class="col-md-7">
+                        @if (ViewBag.pType == "person")
+                        {
+                            @Html.DropDownListFor(model => model.Request.nrPersons, Enumerable.Range(1, 20).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), htmlAttributes: new { @class = "form-control, style = 'width:75px'", @onchange = "price(this)" })
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(model => model.Request.nrPersons, Enumerable.Range(1, 50).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), htmlAttributes: new { @class = "form-control, style = 'width:75px'" })
+                        }
+                        @Html.ValidationMessageFor(model => model.Request.nrPersons, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                if (ViewBag.Override == null)
+                {
+                    <div class="no-padding form-group">
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Request.price, htmlAttributes: new { @class = "control-label ", style = "padding-top:0px;" })
+                        </div>
+                        <div class="col-md-7">
+                                <div id="Request_price2">
+                                    @Html.DisplayFor(model => model.Agreement.price, new { id = "pric" })
+                                    <input id="Request_price" name="Request.price" type="hidden" value=@Model.PriceValue>
+                                </div>
+                        </div>
+                    </div>
+                }
+                <div class="no-padding form-group">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.Request.ClientNotes, htmlAttributes: new { @class = "control-label ", style = "padding-top:0px;" })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Request.ClientNotes, new { htmlAttributes = new { @class = "form-control", maxlength = "1000" } })
+                        @Html.ValidationMessageFor(model => model.Request.ClientNotes, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                if (ViewBag.extra1 != null)
+                {
+                    @Html.HiddenFor(a => a.Request.extra1, "True")
+                }
+                if (ViewBag.extra2 != null)
+                {
+                    @Html.HiddenFor(a => a.Request.extra2, "True")
+                }
+                if (ViewBag.extra3 != null)
+                {
+                    @Html.HiddenFor(a => a.Request.extra3, "True")
+                }
+                if (ViewBag.extra4 != null)
+                {
+                    @Html.HiddenFor(a => a.Request.extra4, "True")
+                }
+                if (ViewBag.extra5 != null)
+                {
+                    @Html.HiddenFor(a => a.Request.extra5, "True")
+                }
+                if (ViewBag.extra6 != null)
+                {
+                    @Html.HiddenFor(a => a.Request.extra6, "True")
+                }
+                if (ViewBag.extra7 != null)
+                {
+                    @Html.HiddenFor(a => a.Request.extra7, "True")
+                }
+                if (ViewBag.extra8 != null)
+                {
+                    @Html.HiddenFor(a => a.Request.extra8, "True")
+                }
+                if (ViewBag.extra9 != null)
+                {
+                    @Html.HiddenFor(a => a.Request.extra9, "True")
+                }
+                if (ViewBag.extra10 != null)
+                {
+                    @Html.HiddenFor(a => a.Request.extra10, "True")
+                }
+                if (ViewBag.extra11 != null)
+                {
+                    @Html.HiddenFor(a => a.Request.extra11, "True")
+                }
+                if (ViewBag.extra12 != null)
+                {
+                    @Html.HiddenFor(a => a.Request.extra12, "True")
+                }
+
+
+
+
+                if (ViewBag.NotTransfer == null)
+                {
+                    @Html.HiddenFor(a => a.Request.istransfer, new { Value = true })
+
+                <div class="no-padding form-group">
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Request.pickupLocation, htmlAttributes: new { @class = "control-label  ", style = "padding-top:0px;" })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Request.pickupLocation, new { htmlAttributes = new { @class = "form-control", maxlength = "100" } })
+                            @Html.ValidationMessageFor(model => model.Request.pickupLocation, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="no-padding form-group">
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Request.dropoffLocation, htmlAttributes: new { @class = "control-label  ", style = "padding-top:0px;" })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Request.dropoffLocation, new { htmlAttributes = new { @class = "form-control", maxlength = "100" } })
+                            @Html.ValidationMessageFor(model => model.Request.dropoffLocation, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="no-padding form-group">
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Request.flightNr, htmlAttributes: new { @class = "control-label ", style = "padding-top:0px;" })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Request.flightNr, new { htmlAttributes = new { @class = "form-control", style = "width:75px", maxlength = "20" } })
+                            @Html.ValidationMessageFor(model => model.Request.flightNr, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    }
+                    if (ViewBag.Control != null)
+                    {
+                    @Html.HiddenFor(a => a.Request.hasreturn, new { Value = true })
+
+                    <div class="no-padding form-group">
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Request.returnDate, htmlAttributes: new { @class = "control-label  required ", style = "padding-top:0px;" })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Request.returnDate, new { htmlAttributes = new { @class = "form-control", style = "width:150px" } })
+                            @Html.ValidationMessageFor(model => model.Request.returnDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="no-padding form-group">
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Request.returnTime, htmlAttributes: new { @class = "control-label  required ", style = "padding-top:0px;" })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Request.returnTime, new { htmlAttributes = new { @class = "form-control", style = "width:115px" } })
+                            @Html.ValidationMessageFor(model => model.Request.returnTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="no-padding form-group">
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Request.returnFlight, htmlAttributes: new { @class = "control-label  ", style = "padding-top:0px;" })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Request.returnFlight, new { htmlAttributes = new { @class = "form-control", style = "width:75px", maxlength = "20" } })
+                            @Html.ValidationMessageFor(model => model.Request.returnFlight, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="no-padding form-group">
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Request.returnPickup, htmlAttributes: new { @class = "control-label  ", style = "padding-top:0px;" })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Request.returnPickup, new { htmlAttributes = new { @class = "form-control", maxlength = "100" } })
+                            @Html.ValidationMessageFor(model => model.Request.returnPickup, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="no-padding form-group">
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Request.returnDropoff, htmlAttributes: new { @class = "control-label  ", style = "padding-top:0px;" })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Request.returnDropoff, new { htmlAttributes = new { @class = "form-control", maxlength = "100" } })
+                            @Html.ValidationMessageFor(model => model.Request.returnDropoff, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    }
+
+
+
+
+
+
+                    if (Model.Agreement.Service.field1IsActive == true)
+                    {
+                    <div class="form-group">
+                        <label class="control-label " style="float:left; padding-top: 0px;">
+                            @Html.DisplayFor(model => model.Agreement.Service.fieldName1)
+                            @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName1, "", new { @class = "text-danger" })
+                        </label>
+                        <div class="col-md-7" style="float:left;">
+                            @Html.EditorFor(model => model.Request.extraDate1)
+                            @Html.ValidationMessageFor(model => model.Request.extraDate1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    }
+                    if (Model.Agreement.Service.field2IsActive == true)
+                    {
+                    <div class="form-group">
+                        <label class="control-label " style="float:left;  padding-top: 0px;">
+                            @Html.DisplayFor(model => model.Agreement.Service.fieldName2)
+                            @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName2, "", new { @class = "text-danger" })
+                        </label>
+                        <div class="col-md-7" style="float:left;">
+                            @Html.EditorFor(model => model.Request.extraDate2)
+                            @Html.ValidationMessageFor(model => model.Request.extraDate2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    }
+                    if (Model.Agreement.Service.field3IsActive == true)
+                    {
+                    <div class="form-group">
+                        <label class="control-label " style="float:left; padding-top: 0px;">
+                            @Html.DisplayFor(model => model.Agreement.Service.fieldName3)
+                            @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName3, "", new { @class = "text-danger" })
+                        </label>
+                        <div class="col-md-7" style="float:left;">
+                            @Html.EditorFor(model => model.Request.extraDate3)
+                            @Html.ValidationMessageFor(model => model.Request.extraDate3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    }
+
+                    if (Model.Agreement.Service.field4IsActive == true)
+                    {
+                    <div class="form-group">
+                        <label class="control-label " style="float:left; padding-top: 0px;">
+                            @Html.DisplayFor(model => model.Agreement.Service.fieldName4)
+                            @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName4, "", new { @class = "text-danger" })
+                        </label>
+                        <div class="col-md-7" style="float:left;">
+                            @Html.EditorFor(model => model.Request.extraTime1)
+                            @Html.ValidationMessageFor(model => model.Request.extraTime1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    }
+                    if (Model.Agreement.Service.field5IsActive == true)
+                    {
+                    <div class="form-group">
+                        <label class="control-label " style="float:left; padding-top: 0px;">
+                            @Html.DisplayFor(model => model.Agreement.Service.fieldName5)
+                            @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName5, "", new { @class = "text-danger" })
+                        </label>
+                        <div class="col-md-7" style="float:left;">
+                            @Html.EditorFor(model => model.Request.extraTime2)
+                            @Html.ValidationMessageFor(model => model.Request.extraTime2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    }
+                    if (Model.Agreement.Service.field6IsActive == true)
+                    {
+                    <div class="form-group">
+                        <label class="control-label " style="float:left; padding-top: 0px;">
+                            @Html.DisplayFor(model => model.Agreement.Service.fieldName6)
+                            @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName6, "", new { @class = "text-danger" })
+                        </label>
+                        <div class="col-md-7" style="float:left;">
+                            @Html.EditorFor(model => model.Request.extraTime3)
+                            @Html.ValidationMessageFor(model => model.Request.extraTime3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    }
+                    if (Model.Agreement.Service.field7IsActive == true)
+                    {
+                    <div class="form-group">
+                        <label class="control-label " style="float:left; padding-top: 0px;">
+                            @Html.DisplayFor(model => model.Agreement.Service.fieldName7)
+                            @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName7, "", new { @class = "text-danger" })
+                        </label>
+                        <div class="col-md-7" style="float:left;">
+                            @Html.EditorFor(model => model.Request.extraText1, new { maxlength = "100" })
+                            @Html.ValidationMessageFor(model => model.Request.extraText1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    }
+                    if (Model.Agreement.Service.field8IsActive == true)
+                    {
+                    <div class="form-group">
+                        <label class="control-label " style="float:left; padding-top: 0px;">
+                            @Html.DisplayFor(model => model.Agreement.Service.fieldName8)
+                            @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName8, "", new { @class = "text-danger" })
+                        </label>
+                        <div class="col-md-7" style="float:left;">
+                            @Html.EditorFor(model => model.Request.extraText2, new { maxlength = "100" })
+                            @Html.ValidationMessageFor(model => model.Request.extraText2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    }
+                    if (Model.Agreement.Service.field9IsActive == true)
+                    {
+                    <div class="form-group">
+                        <label class="control-label " style="float:left; padding-top: 0px;">
+                            @Html.DisplayFor(model => model.Agreement.Service.fieldName9)
+                            @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName9, "", new { @class = "text-danger" })
+                        </label>
+                        <div class="col-md-7" style="float:left;">
+                            @Html.EditorFor(model => model.Request.extraText3, new { maxlength = "100" })
+                            @Html.ValidationMessageFor(model => model.Request.extraText3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    }
+                    if (Model.Agreement.Service.field10IsActive == true)
+                    {
+                    <div class="form-group">
+                        <label class="control-label " style="float:left; padding-top: 0px;">
+                            @Html.DisplayFor(model => model.Agreement.Service.fieldName10)
+                            @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName10, "", new { @class = "text-danger" })
+                        </label>
+                        <div class="col-md-7" style="float:left;">
+                            @Html.EditorFor(model => model.Request.extraMultiText1, new { maxlength = "1000" })
+                            @Html.ValidationMessageFor(model => model.Request.extraMultiText1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    }
+                    if (Model.Agreement.Service.field11IsActive == true)
+                    {
+                    <div class="form-group">
+                        <label class="control-label " style="float:left; padding-top: 0px;">
+                            @Html.DisplayFor(model => model.Agreement.Service.fieldName11)
+                            @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName11, "", new { @class = "text-danger" })
+                        </label>
+                        <div class="col-md-7" style="float:left;">
+                            @Html.EditorFor(model => model.Request.extraMultiText2, new { maxlength = "1000" })
+                            @Html.ValidationMessageFor(model => model.Request.extraMultiText2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    }
+
+                    if (Model.Agreement.Service.field12IsActive == true)
+                    {
+                    <div class="form-group">
+                        <label class="control-label " style="float:left; padding-top: 0px;">
+                            @Html.DisplayFor(model => model.Agreement.Service.fieldName12)
+                            @Html.ValidationMessageFor(model => model.Agreement.Service.fieldName12, "", new { @class = "text-danger" })
+                        </label>
+                        <div class="col-md-7" style="float:left;">
+                            @Html.EditorFor(model => model.Request.extraMultiText3, new { maxlength = "1000" })
+                            @Html.ValidationMessageFor(model => model.Request.extraMultiText3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    }
+
+                    @Html.HiddenFor(model => model.FromPartnerSite, new { Value = true })
+
+                    }
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button class="btn-default btn" data-url='@Url.Action("Create","Booking", new { request=Model.Request, FromPartnerSite = true } )' onclick="CreateBooking(@Model.Agreement.partnerID)">Book</button>
+                            @*<input type="submit" value="Book" class="btn btn-default" />*@
+                        </div>
+                    </div>
+                </div>
+
+        @*<div class="secondaryDiv">
+            <dl class="dl-horizontal">
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Agreement.Service.name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Agreement.Service.name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Agent")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Agreement.Partner.tradeName)
+                </dd>
+                <dt>
+                    @Html.DisplayName("Operator")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Agreement.Service.Partner.tradeName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Agreement Name")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AgName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Agreement.messageTemplate)
+                </dt>
+
+                <dd>
+                    <span class="multi"> @Html.MultiBreakLine(model => model.ConfirmationText)</span>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Agreement.agentInstructions)
+                </dt>
+
+                <dd>
+                    <span class="multi">@Html.MultiBreakLine(model => model.AgentInstructions)</span>
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Agreement.cancellationPolicy)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CancellationPolicy)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Agreement.needsApproval)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Agreement.needsApproval)
+                </dd>
+
+            </dl>
+        </div>*@    
+
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script>
+
+        var dateID = 1;
+        var timeID = 1;
+        var textID = 1;
+        var multiID = 1;
+
+        var controlDate = 0;
+        var controlTime = 0;
+        var controlText = 0;
+        var controlMulti = 0;
+
+        var fieldID = 0;
+
+
+
+        function addField(a) {
+
+            var fields = $("#dynamicFields");
+            var content;
+            var d = 'e';
+
+            if (a == "Date" && controlDate < 3) {
+                controlDate = controlDate + 1;
+                content = $("<div class='no-padding form-group' id =date" + dateID + " ><div><input class='form - control  text - box single - line' data-val='true' data-val-required='Mandatory Field.' id='Request_fieldName" + dateID + "' name='Request.fieldName" + dateID + "' type='text' value='' style='float:left; width: 20%;'><input class= 'form-control text-box single-line' data - val='true' data - val - date='The field Date must be a date.' data - val - required='Mandatory Field.' id = 'Request_extraDate" + dateID + "' name = 'Request.extraDate" + dateID + "' style = 'width: 150px;float: left; margin-left: 6.8%; margin-right: 2%;' type = 'date' value = '' ><a onclick='removeField(date" + dateID + ",1," + dateID + ")' href='#'><span class='glyphicon glyphicon-remove' style='color:red;'></span></a><span class='field-validation-valid text-danger' data-valmsg-for='Request.extraDate1' data-valmsg-replace='true'></span></div ></div>");
+                fields.append(content);
+                dateID = dateID + 1;
+            } else {
+                if (a == "Time" && controlTime < 3) {
+                    controlTime = controlTime + 1;
+                    fieldID = timeID + 3;
+                    content = $("<div class='no-padding form-group' id =time" + timeID + "><div><input class='form - control  text - box single - line' data-val='true' data-val-required='Mandatory Field.' id='Request_fieldName" + fieldID + "' name='Request.fieldName" + fieldID + "' type='text' value='' style='float:left; width: 20%;'><input class='form - control text - box single - line' data-val='true' data-val-required='Mandatory Field.' id='Request_extraTime" + timeID + "' name='Request.extraTime" + timeID + "' style='width: 100px; float:left; margin-left:6.8%; margin-right: 2%;' type='time' value=''><a onclick='removeField(time" + timeID + ", 2," + timeID + ")' href='#'><span class='glyphicon glyphicon-remove' style='color:red;'></span></a><span class='field-validation-valid text-danger' data-valmsg-for='Request.extraTime1' data-valmsg-replace='true'></span></div ></div>");
+                    fields.append(content);
+                    timeID = timeID + 1;
+                } else {
+                    if (a == "Text" && controlText < 3) {
+                        controlText = controlText + 1;
+                        fieldID = textID + 6;
+                        content = $("<div class='no-padding form-group' id=text" + textID + "><div><input class='form - control  text - box single - line' data-val='true' data-val-required='Mandatory Field.' id='Request_fieldName" + fieldID + "' name='Request.fieldName" + fieldID + "' type='text' value='' style='float:left; width: 20%;'><input class='form - control  text - box single - line' data-val='true' data-val-required='Mandatory Field.' id='Request_extraText" + textID + "' name='Request.extratext" + textID + "' type='text' value='' style='float:left; width: 20%;margin-left:6.8%; margin-right: 2%;'><a onclick='removeField(text" + textID + ", 3," + textID + ")' href='#'><span class='glyphicon glyphicon-remove' style='color:red;'></span></a><span class='field-validation-valid text-danger' data-valmsg-for='Request.extraText1' data-valmsg-replace='true'></span></div ></div>");
+                        fields.append(content);
+                        textID = textID + 1;
+                    } else {
+                        if (a == "Multi" && controlMulti < 3) {
+                            controlMulti = controlMulti + 1;
+                            fieldID = multiID + 9;
+                            content = $("<div class='no-padding form-group' id=multi" + multiID + "><div><input class='form - control  text - box single - line' data-val='true' data-val-required='Mandatory Field.' id='Request_fieldName" + fieldID + "' name='Request.fieldName" + fieldID + "' type='text' value='' style='float:left; width: 20%;'><textarea class='form - control text - box multi - line' id='Request_extraMultiText" + multiID + "' name='Request.extraMultiText" + multiID + "' style='float:left; margin-left: 6.8%; margin-right:2%; width:37%; height:62px;'></textarea><a onclick='removeField(multi" + multiID + ", 4," + multiID + ")' href='#'><span class='glyphicon glyphicon-remove' style='color:red;'></span></a><span class='field-validation-valid text-danger' data-valmsg-for='Request.extraMultiText1' data-valmsg-replace='true'></span></div ></div>");
+                            fields.append(content);
+                            multiID = multiID + 1;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        function removeField(b, c, d) {
+
+            if (c == 1) {
+                controlDate = controlDate - 1;
+                dateID = d;
+            }
+            if (c == 2) {
+                controlTime = controlTime - 1;
+                timeID = d;
+            }
+            if (c == 3) {
+                controlText = controlText - 1;
+                textID = d;
+            }
+            if (c == 4) {
+                controlMulti = controlMulti - 1;
+                multiID = d;
+            }
+
+            $(b).remove();
+        }
+
+            function price(obj) {
+                var e = obj.value;
+                var Nprice = e *@Model.Agreement.price;
+                $("#Request_price").val(Nprice);
+                $("#Request_price2").empty();
+                $("#Request_price2").html(Nprice);
+            }
+
+            function priceInit()
+            {
+                var pric = @Model.PriceValue;
+                $("#Request_price").val(pric);
+            }
+
+        window.onload = function () {
+           priceInit();
+        };
+
+        $(document).ready(function ()
+        {
+                if (@ViewBag.Event.ToString().ToLower())
+                {
+                    $("#Request_eventDate").attr("readonly", "readonly");
+                    $("#Request_eventTime").attr("readonly", "readonly");
+                    $("#Request_nrPersons").attr("disabled", true);
+                }
+        });
+
+    </script>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

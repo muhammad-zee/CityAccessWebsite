@@ -1,0 +1,2383 @@
+﻿
+/* cyrillic-ext */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Montserrat Light"), local("Montserrat-Light"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_cJD3gTD_u50.woff2) format("woff2");
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Montserrat Light"), local("Montserrat-Light"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_cJD3g3D_u50.woff2) format("woff2");
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Montserrat Light"), local("Montserrat-Light"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_cJD3gbD_u50.woff2) format("woff2");
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Montserrat Light"), local("Montserrat-Light"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_cJD3gfD_u50.woff2) format("woff2");
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Montserrat Light"), local("Montserrat-Light"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_cJD3gnD_g.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Montserrat Regular"), local("Montserrat-Regular"), url(https://fonts.gstatic.com/s/montserrat/v12/JTUSjIg1_i6t8kCHKm459WRhyzbi.woff2) format("woff2");
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Montserrat Regular"), local("Montserrat-Regular"), url(https://fonts.gstatic.com/s/montserrat/v12/JTUSjIg1_i6t8kCHKm459W1hyzbi.woff2) format("woff2");
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Montserrat Regular"), local("Montserrat-Regular"), url(https://fonts.gstatic.com/s/montserrat/v12/JTUSjIg1_i6t8kCHKm459WZhyzbi.woff2) format("woff2");
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Montserrat Regular"), local("Montserrat-Regular"), url(https://fonts.gstatic.com/s/montserrat/v12/JTUSjIg1_i6t8kCHKm459Wdhyzbi.woff2) format("woff2");
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Montserrat Regular"), local("Montserrat-Regular"), url(https://fonts.gstatic.com/s/montserrat/v12/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    src: local("Montserrat Medium"), local("Montserrat-Medium"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_ZpC3gTD_u50.woff2) format("woff2");
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    src: local("Montserrat Medium"), local("Montserrat-Medium"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_ZpC3g3D_u50.woff2) format("woff2");
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    src: local("Montserrat Medium"), local("Montserrat-Medium"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_ZpC3gbD_u50.woff2) format("woff2");
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    src: local("Montserrat Medium"), local("Montserrat-Medium"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_ZpC3gfD_u50.woff2) format("woff2");
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    src: local("Montserrat Medium"), local("Montserrat-Medium"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_ZpC3gnD_g.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Montserrat Bold"), local("Montserrat-Bold"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_dJE3gTD_u50.woff2) format("woff2");
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Montserrat Bold"), local("Montserrat-Bold"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_dJE3g3D_u50.woff2) format("woff2");
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Montserrat Bold"), local("Montserrat-Bold"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_dJE3gbD_u50.woff2) format("woff2");
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Montserrat Bold"), local("Montserrat-Bold"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_dJE3gfD_u50.woff2) format("woff2");
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Montserrat Bold"), local("Montserrat-Bold"), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_dJE3gnD_g.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 300;
+    src: local("Open Sans Light Italic"), local("OpenSans-LightItalic"), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWyV9hmIqOjjg.woff2) format("woff2");
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 300;
+    src: local("Open Sans Light Italic"), local("OpenSans-LightItalic"), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWyV9hvIqOjjg.woff2) format("woff2");
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 300;
+    src: local("Open Sans Light Italic"), local("OpenSans-LightItalic"), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWyV9hnIqOjjg.woff2) format("woff2");
+    unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 300;
+    src: local("Open Sans Light Italic"), local("OpenSans-LightItalic"), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWyV9hoIqOjjg.woff2) format("woff2");
+    unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 300;
+    src: local("Open Sans Light Italic"), local("OpenSans-LightItalic"), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWyV9hkIqOjjg.woff2) format("woff2");
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 300;
+    src: local("Open Sans Light Italic"), local("OpenSans-LightItalic"), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWyV9hlIqOjjg.woff2) format("woff2");
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 300;
+    src: local("Open Sans Light Italic"), local("OpenSans-LightItalic"), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWyV9hrIqM.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 400;
+    src: local("Open Sans Italic"), local("OpenSans-Italic"), url(https://fonts.gstatic.com/s/opensans/v15/mem6YaGs126MiZpBA-UFUK0Udc1UAw.woff2) format("woff2");
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 400;
+    src: local("Open Sans Italic"), local("OpenSans-Italic"), url(https://fonts.gstatic.com/s/opensans/v15/mem6YaGs126MiZpBA-UFUK0ddc1UAw.woff2) format("woff2");
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 400;
+    src: local("Open Sans Italic"), local("OpenSans-Italic"), url(https://fonts.gstatic.com/s/opensans/v15/mem6YaGs126MiZpBA-UFUK0Vdc1UAw.woff2) format("woff2");
+    unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 400;
+    src: local("Open Sans Italic"), local("OpenSans-Italic"), url(https://fonts.gstatic.com/s/opensans/v15/mem6YaGs126MiZpBA-UFUK0adc1UAw.woff2) format("woff2");
+    unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 400;
+    src: local("Open Sans Italic"), local("OpenSans-Italic"), url(https://fonts.gstatic.com/s/opensans/v15/mem6YaGs126MiZpBA-UFUK0Wdc1UAw.woff2) format("woff2");
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 400;
+    src: local("Open Sans Italic"), local("OpenSans-Italic"), url(https://fonts.gstatic.com/s/opensans/v15/mem6YaGs126MiZpBA-UFUK0Xdc1UAw.woff2) format("woff2");
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 400;
+    src: local("Open Sans Italic"), local("OpenSans-Italic"), url(https://fonts.gstatic.com/s/opensans/v15/mem6YaGs126MiZpBA-UFUK0Zdc0.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 700;
+    src: local("Open Sans Bold Italic"), local("OpenSans-BoldItalic"), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWiUNhmIqOjjg.woff2) format("woff2");
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 700;
+    src: local("Open Sans Bold Italic"), local("OpenSans-BoldItalic"), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWiUNhvIqOjjg.woff2) format("woff2");
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 700;
+    src: local("Open Sans Bold Italic"), local("OpenSans-BoldItalic"), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWiUNhnIqOjjg.woff2) format("woff2");
+    unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 700;
+    src: local("Open Sans Bold Italic"), local("OpenSans-BoldItalic"), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWiUNhoIqOjjg.woff2) format("woff2");
+    unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 700;
+    src: local("Open Sans Bold Italic"), local("OpenSans-BoldItalic"), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWiUNhkIqOjjg.woff2) format("woff2");
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 700;
+    src: local("Open Sans Bold Italic"), local("OpenSans-BoldItalic"), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWiUNhlIqOjjg.woff2) format("woff2");
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 700;
+    src: local("Open Sans Bold Italic"), local("OpenSans-BoldItalic"), url(https://fonts.gstatic.com/s/opensans/v15/memnYaGs126MiZpBA-UFUKWiUNhrIqM.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Open Sans Light"), local("OpenSans-Light"), url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UN_r8OX-hpOqc.woff2) format("woff2");
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Open Sans Light"), local("OpenSans-Light"), url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UN_r8OVuhpOqc.woff2) format("woff2");
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Open Sans Light"), local("OpenSans-Light"), url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UN_r8OXuhpOqc.woff2) format("woff2");
+    unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Open Sans Light"), local("OpenSans-Light"), url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UN_r8OUehpOqc.woff2) format("woff2");
+    unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Open Sans Light"), local("OpenSans-Light"), url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UN_r8OXehpOqc.woff2) format("woff2");
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Open Sans Light"), local("OpenSans-Light"), url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UN_r8OXOhpOqc.woff2) format("woff2");
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Open Sans Light"), local("OpenSans-Light"), url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UN_r8OUuhp.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Open Sans Regular"), local("OpenSans-Regular"), url(https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFWJ0bbck.woff2) format("woff2");
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Open Sans Regular"), local("OpenSans-Regular"), url(https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFUZ0bbck.woff2) format("woff2");
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Open Sans Regular"), local("OpenSans-Regular"), url(https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFWZ0bbck.woff2) format("woff2");
+    unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Open Sans Regular"), local("OpenSans-Regular"), url(https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFVp0bbck.woff2) format("woff2");
+    unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Open Sans Regular"), local("OpenSans-Regular"), url(https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFWp0bbck.woff2) format("woff2");
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Open Sans Regular"), local("OpenSans-Regular"), url(https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFW50bbck.woff2) format("woff2");
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Open Sans Regular"), local("OpenSans-Regular"), url(https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFVZ0b.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Open Sans Bold"), local("OpenSans-Bold"), url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UN7rgOX-hpOqc.woff2) format("woff2");
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Open Sans Bold"), local("OpenSans-Bold"), url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UN7rgOVuhpOqc.woff2) format("woff2");
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Open Sans Bold"), local("OpenSans-Bold"), url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UN7rgOXuhpOqc.woff2) format("woff2");
+    unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Open Sans Bold"), local("OpenSans-Bold"), url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UN7rgOUehpOqc.woff2) format("woff2");
+    unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Open Sans Bold"), local("OpenSans-Bold"), url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UN7rgOXehpOqc.woff2) format("woff2");
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Open Sans Bold"), local("OpenSans-Bold"), url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UN7rgOXOhpOqc.woff2) format("woff2");
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Open Sans Bold"), local("OpenSans-Bold"), url(https://fonts.gstatic.com/s/opensans/v15/mem5YaGs126MiZpBA-UN7rgOUuhp.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+body {
+    padding-bottom: 20px;
+    padding-top: 50px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+html,
+body {
+    font-family: "Open Sans";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: "Open Sans";
+}
+
+h1, .h1 {
+    font-size: 26px;
+}
+
+form {
+    padding: 0 40px;
+}
+
+
+select,
+textarea {
+    max-width: 280px;
+}
+
+input {
+    max-width:350px;
+}
+
+
+
+/*For the e-mail multiple input type*/
+.multipleInput-container {
+    border: 1px #ccc solid;
+    padding: 1px;
+    padding-bottom: 4px;
+    cursor: text;
+    font-size: 12px;
+    width: 358px;
+    float:left;
+}
+
+
+#clear {
+    clear: both;
+}
+
+    .multipleInput-container input {
+        font-size: 12px;
+        clear: both;
+        width: 350px;
+        height: 24px;
+        border: 0;
+        margin-bottom: 1px;
+    }
+
+    .multipleInput-container ul {
+        list-style-type: none;
+    }
+
+li.multipleInput-email {
+    float: left;
+    margin-right: 2px;
+    margin-bottom: 1px;
+    border: 1px #BBD8FB solid;
+    padding: 2px;
+    background: #F3F7FD;
+}
+
+.multipleInput-close {
+    width: 16px;
+    height: 16px;
+    background: url(close.png);
+    display: block;
+    float: right;
+    margin: 0 3px;
+}
+
+/*End of the above css for multiple email*/
+
+
+/*To center the cross in dialog windows*/
+.ui-dialog-titlebar-close .ui-icon-close {
+    position: relative !important;
+    margin-top: -1px !important;
+    margin-left: -1px !important;
+}
+
+
+
+
+.Card {
+    border-radius: 4px;
+    box-shadow: #111 0 1px 20px;
+    display: inline-block;
+    margin: 20px;
+    position: relative;
+    white-space: nowrap;
+    width: 210px;
+    height: 185px;
+}
+
+    .Card:first-child {
+        margin-left: 0;
+    }
+
+    .Card:last-child {
+        margin-right: 0;
+    }
+
+.Card-Image img {
+    width: 210px;
+}
+
+.Card-Image {
+    background-color: #eee;
+    position: relative;
+    width: 210px;
+}
+
+.Card-Title {
+    bottom: 10px;
+    color: #fff;
+    font-weight: bold;
+    left: 0;
+    padding: 20px;
+    position: absolute;
+}
+
+.Card-price {
+    background: linear-gradient(45deg, #1de099, #1dc8cd);
+    border-radius: 0 0 0 10px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.Card-TradeName {
+    background-color: #eff5f5;
+    color: #111;
+    padding: 10px 10px 10px; /*Estava: 10px 20px 26px*/
+    height: 80px;
+}
+
+.Card-Actions {
+    bottom: +8px; /*Estava -22*/
+    display: inline-block;
+    position: relative; /*Estava absolute*/
+    text-align: center;
+    width: 100%;
+}
+
+.Card-Action {
+    display: inline-block;
+}
+
+    .Card-Action a {
+        background: #fff;
+        border: 2px solid #9fdcc6;
+        border-radius: 25px;
+        color: #9fdcc6;
+        color: #9fdcc6;
+        display: inline-block;
+        font-family: "Montserrat", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        margin: 10px;
+        padding: 4px 14px;
+        text-decoration: none;
+        transition: background .5s;
+    }
+
+        .Card-Action a:hover {
+            background: #1dc8cd;
+            border: 2px solid #1dc8cd;
+            color: #fff;
+            text-decoration: none;
+        }
+
+.Header {
+    background: #eff5f5;
+    color: #111;
+    display: inline-block;
+    height: 65px; /*130px*/
+    line-height: 1;
+    padding: 0px 0px; /*estava 20px e 40px*/
+    width: 100%;
+}
+
+.Section-Title {
+    display: inline-block;
+    width: 50%; /*estava 50%*/
+}
+
+.Invite-Button {
+    position:absolute;
+    right: 300px;
+    display: inline-block;
+    margin: 10px 0 0;
+    text-align: right;
+    /*width: 40%;*/
+    vertical-align: top;
+    bottom: +20px;
+}
+
+.Invite-Button a {
+    border: 2px solid #9fdcc6;
+    border-radius: 25px;
+    color: #9fdcc6;
+    display: inline-block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 10px;
+    padding: 8px 30px;
+    transition: background .5s;
+}
+
+    .Invite-Button a:hover {
+        background-color: rgb(29, 222, 157);
+        border: 2px solid #1dc8cd;
+        color: #fff;
+        text-decoration: none;
+    }
+
+.Button-Action {
+    display: inline-block;
+    float: right;
+    margin: 10px 0 0;
+    text-align: right;
+    /*width: 40%;*/
+    vertical-align: top;
+}
+
+.Button-Action a {
+        border: 2px solid #9fdcc6;
+        border-radius: 25px;
+        color: #9fdcc6;
+        display: inline-block;
+        font-family: "Montserrat", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        margin: 10px;
+        padding: 8px 30px;
+        transition: background .5s;
+    }
+
+        .Button-Action a:hover {
+            background: #1dc8cd;
+            border: 2px solid #1dc8cd;
+            color: #fff;
+            text-decoration: none;
+        }
+
+.table-wrapper {
+    background-color: #eff5f5;
+    border-radius: 10px;
+    padding: 10px 40px;
+    /*overflow-x:auto;*/
+}
+
+.search-wrapper {
+    background-color: #eff5f5;
+    border-radius: 10px;
+    display: inline-block;
+    line-height: 1;
+    margin: 1% 0%;
+    /*padding: 20px 30px;*/
+    padding: 1% 3% 1% 3%;
+    width: 80%;
+}
+
+
+
+.text-search {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 3px;
+}
+
+    .text-search input {
+        border: 0;
+        border-radius: 4px;
+        color: #111;
+        padding: 8px 40px;
+        width: 100%;
+    }
+
+    .text-search span {
+        color: #1dc8cd;
+        font-size: 18px;
+        left: 8px;
+        position: absolute;
+        top: 6px;
+        z-index: 4;
+    }
+
+.search-wrapper select,
+.search-wrapper input[type="date"] {
+    background: #fff;
+    border: 0;
+    border-radius: 4px;
+    color: #111;
+    height: 38px;
+    margin: 0;
+    padding: 3px;
+}
+
+.search-wrapper > div > input[type="submit"] {
+    background: linear-gradient(45deg, #1de099, #1dc8cd);
+    border: 0;
+    border-radius: 20px;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+    padding: 8px 16px;
+}
+
+.container,
+.navbar-collapse.collapse {
+    padding: 0;
+    position: relative;
+}
+
+.navbar img {
+    margin: 20px 50px 50px;
+    width: 100px;
+}
+
+
+
+
+
+.navbar {
+    height: 100%;
+    top: 72px;
+    width: 200px;
+}
+
+    .navbar ul {
+        background: linear-gradient(45deg, #1de099, #1dc8cd);
+        height: 100%;
+        margin: 0;
+        overflow-y: scroll;
+        position: relative;
+        width: 100%;
+    }
+
+    .navbar li {
+        width: 100%;
+    }
+
+        .navbar li:hover {
+            background-color: rgba(58, 109, 152, .41);
+        }
+
+    .navbar ul::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .navbar ul::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    }
+
+    .navbar ul::-webkit-scrollbar-thumb {
+        background-color: #111;
+        outline: 1px solid #111;
+    }
+
+body {
+    min-height: 100vh;
+    min-width: 100vw;
+    padding: 0;
+}
+
+.body-content {
+    background-attachment: fixed;
+    background-image: url("Logo-watermark.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    margin-left: 200px;
+    min-height: calc(100vh - 72px);
+    min-width: calc(100vw - 200px);
+    padding: 0;
+    position: relative;
+    top: 72px;
+}
+
+
+
+.calendar-back {
+    background-attachment: fixed;
+    background-image: url("Logo-watermark.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh;
+}
+
+.navbar-header {
+    position: relative;
+}
+
+    .navbar-header a {
+        bottom: 16px;
+        font-size: 26px;
+        left: 15px;
+        position: relative;
+        text-align: center;
+        width: 200px;
+    }
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    border-bottom: 1px solid #b0d8fb;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    height: 65px;
+    padding: 20px 0 10px 30px;
+}
+
+    .navbar-inverse .navbar-nav > li > a.menu-group {
+        background: #42b79c;
+        box-shadow: inset 0 10px 20px 0 #61dab3;
+    }
+
+        .navbar-inverse .navbar-nav > li > a.menu-group:hover {
+            background: #33ad80;
+        }
+
+        .navbar-inverse .navbar-nav > li > a.menu-group.active {
+            border-left: 10px solid #acf9e0;
+        }
+
+    .navbar-inverse .navbar-nav > li > a.active {
+        border-left: 10px solid #b0d8fb;
+        padding-left: 20px;
+    }
+
+.navbar-header {
+    background-color: #111;
+}
+
+.Content {
+    /*padding: 20px 40px 60px 40px;*/
+    padding: 1% 4% 6% 4%;
+    margin-bottom: 9%;
+    height: 100%;
+}
+
+footer {
+    background-color: #fff;
+    border-top: 1px solid #111;
+    bottom: 0;
+    min-width: calc(100vw - 200px); /*estava 200 px*/
+    padding: 0.5% 1%;
+    position: fixed;
+    z-index: 1000;
+}
+
+.Content table {
+    margin: 0;
+}
+
+.Content .table tbody tr{
+    height:30px;
+}
+
+.Content .table tbody > tr > th {
+    border-bottom: 2px solid #777;
+    border-top: 0;
+    color: #777;
+}
+
+.Content .table .dropdown .btn {
+    border: 1px solid #111;
+    border-bottom: 2px solid #111;
+    border-radius: 4px;
+    border-top: 0;
+    color: #111;
+    line-height: 30px;
+    padding: 0 10px;
+    width: 150px;
+}
+
+.login-wrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 250px; /*estava 400px antes*/
+}
+
+    .login-wrapper .dropdown .btn {
+        background: transparent;
+        border: transparent;
+        padding: 16px 30px 16px 10px;
+        text-align: right;
+        width: 100%; /*estava 100 %*/
+    }
+
+        .login-wrapper .dropdown .btn .user-info {
+            display: inline-block;
+            height: 100%;
+            line-height: 20px;
+            position: relative;
+            vertical-align: bottom;
+        }
+
+        .login-wrapper .dropdown .btn .username {
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .login-wrapper .dropdown .btn .partner {
+            color: #111;
+            font-size: 12px;
+        }
+
+        .login-wrapper .dropdown .btn img {
+            display: inline;
+            margin-left: 20px;
+            width: 14%;
+        }
+
+    .login-wrapper ul.dropdown-menu {
+        left: auto;
+        right: 30px;
+    }
+
+select.form-control,
+.text-box {
+    border: 0;
+    border: 1px solid #ced4da;
+    border-radius: 0;
+    box-shadow: none;
+    color: #111;
+    line-height: 30px;
+    padding: 0 10px;
+}
+
+    .text-box.multi-line {
+            width: 220px;
+            height: 70px;
+            font-size: 12px;
+            line-height: 1;
+    }
+
+
+    .partnerSite.text-box.multi-line {
+        width: 400px;
+        height: 200px;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+
+.multi-line{
+    white-space: pre-wrap;
+}
+
+.contactBox {
+    padding: 0 10px;
+    width: 700px;
+    height: 490px;
+    border: 1px solid rgb(206, 212, 218);
+    overflow-y: auto;
+    /*border-color: rgb(206, 212, 218);*/
+}
+
+textarea {
+    max-width: 750px;
+}
+
+.multi {
+    width: 220px;
+    font-size: 13px;
+    line-height: 1;
+    display: block;
+} 
+
+.username-label,
+.password-label {
+    color: #111;
+    padding-right: 10px;
+    text-align: right;
+}
+
+.register-div {
+    color: #111;
+    font-size: 10px;
+    /* margin-top: 18px; */
+    padding-left: 10px;
+    text-align: center;
+}
+
+.create-butt {
+    position: center;
+}
+
+.btn {
+    background: #fff;
+    border: 2px solid #9fdcc6;
+    border-radius: 25px;
+    color: #9fdcc6;
+    color: #9fdcc6;
+    display: inline-block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 10px;
+    padding: 6px 16px;
+    text-decoration: none;
+    transition: background .5s;
+}
+
+    .btn:hover {
+        background: #1dc8cd;
+        border-color: #1dc8cd;
+        color: #fff;
+        text-decoration: none;
+    }
+
+.btn-default {
+    background: linear-gradient(45deg, #1de099, #1dc8cd);
+    border: 0;
+    border-radius: 20px;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+    padding: 8px 16px;
+}
+
+    .btn-default:hover,
+    .btn-default:active,
+    .btn-default:focus {
+        background: linear-gradient(45deg, #1de099, #1dc8cd);
+        color: #fff;
+        outline: none;
+    }
+
+dd {
+    margin-bottom: 10px;
+}
+
+.Serv-Image {
+    background-color: #eee;
+    position: relative;
+    width: 100px;
+}
+
+.form-horizontal .control-label {
+    color: #777;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.control-label {
+
+    font-size: 13px;
+    font-weight: 400;
+    text-align: left;
+}
+
+dl.dl-horizontal {
+    background: rgba(239, 245, 245, .78);
+    border-radius: 10px;
+    color: #777;
+    padding: 40px 20px;
+    margin-top: 0;
+}
+
+.inline-grid {
+    display: inline-grid;
+}
+
+.navbar span.glyphicon {
+    border: 2px solid #fff;
+    border-radius: 100%;
+    font-size: 14px;
+    margin: 0 4px 0 -12px;
+    padding: 4px 6px 7px;
+    width: 31px;
+}
+
+.log {
+    padding: 40px 20px;
+}
+
+hr.hr-style {
+    border-top: 2px solid #8ac3f3;
+}
+
+.required:after {
+    color: red;
+    content: "*";
+    display: inline;
+    font-weight: bold;
+}
+
+.MainHeader {
+    background: linear-gradient(45deg, #1de099, #1dc8cd);
+    font-family: "Montserrat", sans-serif;
+    font-size: 36px;
+    font-weight: 300;
+    height: 72px; /* 7.5%  */
+    letter-spacing: 3px;
+    line-height: 1;
+    padding: 20px;
+    position: fixed;
+    width: 100%;
+    z-index: 10000;
+}
+
+    .MainHeader a {
+        color: #fff;
+        margin: -4px 0 0 0;
+    }
+
+    .MainHeader img {
+        height: 100%;
+        margin: -6px 0 0 0;
+    }
+
+.Content .Card {
+    vertical-align: top;
+}
+
+.form-horizontal {
+    background: rgba(239, 245, 245, .78);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.canceled {
+    color: #f91e0e;
+    display: inline-block;
+}
+
+.no-padding {
+    padding: 1px 1px 1px 1px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.log {
+    padding: 40px 20px;
+}
+
+.margins-for-forms {
+margin-bottom: 5px;
+}
+
+.mobile-icon {
+    z-index: -1;
+    visibility: hidden;
+    float:right;
+}
+.market{
+
+}
+
+.mobile{
+
+}
+
+.marketDet {
+
+}
+
+.inviteLink {
+    display: none;
+}
+
+.event-left-container {
+    float: left;
+    width: 30%;
+    margin-bottom: 5%;
+    position: relative;
+    padding-top: 150px;
+}
+.event-right-container {
+    float: left;
+    width: 60%;
+    margin-left: 1%;
+    margin-bottom: 5%;
+    position: relative;
+    padding-top: 100px;
+}
+
+.primaryDiv{
+    float: left;
+    width: 55%;
+    margin-bottom: 5%;
+    position:relative;
+    padding-top: 100px;
+}
+
+.secondaryDiv {
+    float: left;
+    width: 35%;
+    margin-left: 4%;
+    margin-bottom: 5%;
+    position: relative;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    height: 30px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+.lead{
+    width: 100%;
+}
+
+.form-labels{
+    padding-top: 0px;
+}
+
+.sortIcon{
+    padding-left: 2px;
+    color: black;
+    font-size: 10px;
+}
+
+.bookSearch {
+    padding-right: 5px;
+    padding-bottom: 5px;
+    border-right: 0px;
+    margin-right:0px;
+}
+
+.agDrop{
+    bottom: +10px;
+    font-size: 13px;
+    padding-left: 5px;
+}
+
+.calendarFilter-text {
+    top: 7px;
+}
+
+.calendarBtn {
+    margin-right: 18px;
+    padding-right: 0px;
+    border-right: 0px;
+    width: 100px;
+    padding-top: 50px;
+    float: right;
+}
+
+.formInLists {
+
+}
+
+
+.vertical-radio-buttons input {
+    float: left;
+    margin-right: 3px;
+}
+
+/*For file upload buttons look*/
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+
+/*Experimental for tab borders in partner site configuration*/
+
+.tabsConfig {
+    padding: 2%;
+
+}
+
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    min-height: 75vh;
+    overflow:auto;
+    background-color: #ddd;
+    background-color: rgba(221,221,221,0.5);
+    border-top: 1px solid #ddd;
+}
+
+.nav-tabs {
+    margin-bottom: 0;
+    border-bottom: blue;
+}
+
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+        background-color: #ddd;
+        background-color: rgba(221,221,221,0.5);
+        border-bottom-color:  rgb(238,238,238);
+    }
+
+
+    /*.nav-tabs > li > a:hover {
+        border-bottom-color: rgba(221,221,221,0.5);
+    }*/
+
+
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+html[xmlns] .clearfix {
+    display: block;
+}
+
+* html .clearfix {
+    height: 1%;
+}
+
+
+
+@media (max-width: 1680px) {
+    .search-wrapper {
+        width: 90%;
+    }
+
+}
+
+@media (max-width: 1526px) and (min-width: 768px) {
+    .formInLists {
+        height: 170px;
+    }
+}
+
+
+@media(max-width: 1301px){
+    .eventService td .text-box.multi-line{
+        width:130px !important;
+    }
+}
+
+@media (max-width: 1440px)  {
+
+    .search-wrapper {
+        width: 100%;
+    }
+
+    .bookSearch {
+        width: 57%;
+    }
+
+    .calendarBtn {
+        float:left;
+        width: 100%;
+        padding-top: 0px;
+        padding-bottom: 45px;
+    }
+
+    .eventService td .text-box.multi-line {
+        width: 170px;
+    }
+}
+
+/*.secondary-btn {
+    margin: 0;
+    width: 13%;
+}*/
+
+    /*For the mobile look*/
+    @media (max-width: 768px) {
+
+        .calendarBtn{
+            display: none;
+        }
+
+
+        /*For the mobile looks of edit and details pages buttons*/
+        .secondary-btn{
+            margin-left:30%;
+            padding-bottom: 3%;
+        }
+
+
+        .inviteLink{
+            display: inline-block;
+        }
+
+
+        .Invite-Button{
+            display: none;
+        }
+
+
+        .Section-Title h1, h2 , h3{
+            width:auto;
+            font-size: 20px;
+        }
+
+
+        .primaryDiv, .secondaryDiv, .event-left-container, .event-right-container {
+            width: 90%;
+            float: none;
+            margin-left: 4%;
+            margin-bottom: 3%;
+        }
+
+        .agDrop{
+            bottom: +0px;
+        }
+
+        .calendarFilter-text{
+            top: 0px;
+        }
+
+
+        .navbar {
+            width: 0px;
+            -webkit-transition: all 0.1s; /* For Safari 3.1 to 6.0 */
+            transition: all 0.1s;
+        }
+
+        .navbar-inverse {
+            width: 0px;
+            /*transition: 0.3s;*/
+        }
+
+        .navbar-fixed-top {
+            width: 0px;
+            /*transition: 0.3s;*/
+        }
+
+        .container {
+            width: 100%;
+            margin-left: 0px;
+        }
+
+        .mobile-icon {
+            z-index:1;
+            visibility: visible;
+            float: left;
+        }
+
+        .MainHeader {
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+
+
+        .login-wrapper {
+            width: 240px;
+        }
+
+            .login-wrapper .dropdown .btn .username {
+                font-size: 16px;
+            }
+
+            .login-wrapper .dropdown .btn .partner {
+                font-size: 10px;
+            }
+
+            .login-wrapper .dropdown .btn {
+                padding-right: 5px;
+            }
+
+        .Button-Action {
+            width: 140px;
+        }
+
+            .Button-Action a {
+                font-size: 10px;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+        .search-wrapper {
+            margin-top: 3%;
+            padding-right: 0px;
+            width: 100%;
+        }
+
+        .filtersTable {
+            display: block;
+        }
+    }
+
+
+    .tooltip-inner {
+        max-width: none;
+        max-height: none;
+        white-space: nowrap;
+        overflow-wrap: break-word;
+    }
+
+    .tooltip1 {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+    }
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+    }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+
+
+    /*For mobile tables*/
+    @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+
+        /* Force table to not be like tables anymore */
+        .mobile table, .mobile thead, .mobile tbody, .mobile th, .mobile td, .mobile tr {
+            display: block;
+        }
+
+            /* Hide table headers (but not display: none;, for accessibility) */
+            .mobile thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+        .mobile tr {
+            margin: 0 0 1rem 0;
+        }
+
+            .mobile tr:nth-child(odd) {
+                background: #eff5f5;
+            }
+
+            .mobile tr:nth-child(even) {
+                background: #fbfdfd;
+            }
+
+        .mobile td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+
+            .mobile td:before {
+                /* Now like a table header */
+                position: absolute;
+                /*Top/left values mimic padding */
+                top: 0;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+
+            .mobile td:nth-of-type(1):before {
+                font-weight: bold;
+                content: "Request";
+            }
+
+            .mobile td:nth-of-type(2):before {
+                font-weight: bold;
+                content: "Operator";
+            }
+
+            .mobile td:nth-of-type(3):before {
+                font-weight: bold;
+                content: "Partner";
+            }
+
+            .mobile td:nth-of-type(4):before {
+                font-weight: bold;
+                content: "Service Name";
+            }
+
+            .mobile td:nth-of-type(5):before {
+                font-weight: bold;
+                content: "Customer";
+            }
+
+            .mobile td:nth-of-type(6):before {
+                font-weight: bold;
+                content: "Date";
+            }
+
+            .mobile td:nth-of-type(7):before {
+                font-weight: bold;
+                content: "Time";
+            }
+
+            .mobile td:nth-of-type(8):before {
+                font-weight: bold;
+                content: "Pax";
+            }
+
+            .mobile td:nth-of-type(9):before {
+                font-weight: bold;
+                content: "Status";
+            }
+
+            .mobile td:nth-of-type(10):before {
+                font-weight: bold;
+                content: "Pick up location";
+            }
+
+            .mobile td:nth-of-type(11):before {
+                font-weight: bold;
+                content: "Flight number";
+            }
+
+            .mobile td:nth-of-type(12):before {
+                font-weight: bold;
+                content: "Drop off Location";
+            }
+
+            .mobile td:nth-of-type(13):before {
+                font-weight: bold;
+                content: "Price";
+            }
+
+
+
+
+
+        .market table, .market thead, .market tbody, .market th, .market td, .market tr {
+            display: block;
+        }
+
+
+            /* Hide table headers (but not display: none;, for accessibility) */
+            .market thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+        .market tr {
+            margin: 0 0 1rem 0;
+        }
+
+            .market tr:nth-child(odd) {
+                background: #eff5f5;
+            }
+
+            .market tr:nth-child(even) {
+                background: #fbfdfd;
+            }
+
+        .market td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+
+            .market td:before {
+                /* Now like a table header */
+                position: absolute;
+                /*Top/left values mimic padding */
+                top: 0;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+
+
+
+            /*Label the data*/
+            .market td:nth-of-type(1):before {
+                font-weight: bold;
+                content: "Logo";
+            }
+
+            .market td:nth-of-type(2):before {
+                font-weight: bold;
+                content: "Trade name";
+            }
+
+            .market td:nth-of-type(3):before {
+                font-weight: bold;
+                content: "Description";
+            }
+
+            .market td:nth-of-type(4):before {
+                font-weight: bold;
+                content: "Contact e-mail";
+            }
+
+            .market td:nth-of-type(5):before {
+                font-weight: bold;
+                content: "Contact phone";
+            }
+
+
+
+
+
+
+        .marketDet table, .marketDet thead, .marketDet tbody, marketDet th, .marketDet td, .marketDet tr {
+            display: block;
+        }
+
+
+            /* Hide table headers (but not display: none;, for accessibility) */
+            .marketDet thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+        .marketDet tr {
+            margin: 0 0 1rem 0;
+        }
+
+            .marketDet tr:nth-child(odd) {
+                background: #eff5f5;
+            }
+
+            .marketDet tr:nth-child(even) {
+                background: #fbfdfd;
+            }
+
+        .marketDet td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+
+            .marketDet td:before {
+                /* Now like a table header */
+                position: absolute;
+                /*Top/left values mimic padding */
+                top: 0;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+
+
+
+            /*Label the data*/
+            .marketDet td:nth-of-type(1):before {
+                font-weight: bold;
+                content: " ";
+            }
+
+            .marketDet td:nth-of-type(2):before {
+                font-weight: bold;
+                content: "Service name";
+            }
+
+            .marketDet td:nth-of-type(3):before {
+                font-weight: bold;
+                content: "Price";
+            }
+
+            .marketDet td:nth-of-type(4):before {
+                font-weight: bold;
+                content: "City";
+            }
+
+            .marketDet td:nth-of-type(5):before {
+                font-weight: bold;
+                content: "Description";
+            }
+
+
+
+            /*gfgrgrwgrewgrgrew*/
+        .service table, .service thead, .service tbody, .service th, .service td, .service tr {
+            display: block;
+        }
+
+
+            /* Hide table headers (but not display: none;, for accessibility) */
+            .service thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+        .service tr {
+            margin: 0 0 1rem 0;
+        }
+
+            .service tr:nth-child(odd) {
+                background: #eff5f5;
+            }
+
+            .service tr:nth-child(even) {
+                background: #fbfdfd;
+            }
+
+        .service td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+
+            .service td:before {
+                /* Now like a table header */
+                position: absolute;
+                /*Top/left values mimic padding */
+                top: 0;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+
+
+
+            /*Label the data*/
+            .service td:nth-of-type(1):before {
+                font-weight: bold;
+                content: "Name";
+            }
+
+            .service td:nth-of-type(2):before {
+                font-weight: bold;
+                content: "Description";
+            }
+
+            .service td:nth-of-type(3):before {
+                font-weight: bold;
+                content: "Public";
+            }
+
+            .service td:nth-of-type(4):before {
+                font-weight: bold;
+                content: "City Name";
+            }
+
+            .service td:nth-of-type(5):before {
+                font-weight: bold;
+                content: "Trade Name";
+            }
+
+            .service td:nth-of-type(6):before {
+                font-weight: bold;
+                content: "Service Type";
+            }
+
+
+
+        /* Force table to not be like tables anymore */
+        .request table, .request thead, .request tbody, .request th, .request td, .request tr {
+            display: block;
+        }
+
+            /* Hide table headers (but not display: none;, for accessibility) */
+            .request thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+        .request tr {
+            margin: 0 0 1rem 0;
+        }
+
+            .request tr:nth-child(odd) {
+                background: #eff5f5;
+            }
+
+            .request tr:nth-child(even) {
+                background: #fbfdfd;
+            }
+
+        .request td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+
+            .request td:before {
+                /* Now like a table header */
+                position: absolute;
+                /*Top/left values mimic padding */
+                top: 0;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+
+            .request td:nth-of-type(1):before {
+                font-weight: bold;
+                content: "Request";
+            }
+
+            .request td:nth-of-type(2):before {
+                font-weight: bold;
+                content: "Service Name";
+            }
+
+            .request td:nth-of-type(3):before {
+                font-weight: bold;
+                content: "Partner";
+            }
+
+            .request td:nth-of-type(4):before {
+                font-weight: bold;
+                content: "Customer";
+            }
+
+            .request td:nth-of-type(5):before {
+                font-weight: bold;
+                content: "Date";
+            }
+
+            .request td:nth-of-type(6):before {
+                font-weight: bold;
+                content: "Time";
+            }
+
+            .request td:nth-of-type(7):before {
+                font-weight: bold;
+                content: "Pax";
+            }
+
+            .request td:nth-of-type(8):before {
+                font-weight: bold;
+                content: "Status";
+            }
+
+            .request td:nth-of-type(9):before {
+                font-weight: bold;
+                content: "Pick up Location";
+            }
+
+            .request td:nth-of-type(10):before {
+                font-weight: bold;
+                content: "Flight Number";
+            }
+
+            .request td:nth-of-type(11):before {
+                font-weight: bold;
+                content: "Drop off location";
+            }
+
+            .request td:nth-of-type(12):before {
+                font-weight: bold;
+                content: "Price";
+            }
+
+
+
+        /*Event tables for mobile*/
+
+        /* Force table to not be like tables anymore */
+        .event table, .event thead, .event tbody, .event th, .event td, .event tr {
+            display: block;
+        }
+
+            /* Hide table headers (but not display: none;, for accessibility) */
+            .event thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+        .event tr {
+            margin: 0 0 1rem 0;
+        }
+
+            .event tr:nth-child(odd) {
+                background: #eff5f5;
+            }
+
+            .event tr:nth-child(even) {
+                background: #fbfdfd;
+            }
+
+        .event td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+            text-align: center;
+        }
+
+            .event td:before {
+                /* Now like a table header */
+                position: absolute;
+                /*Top/left values mimic padding */
+                top: 0;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+
+            .event td .multi {
+                margin: 0px !important;
+                border: 0px !important;
+                display: inline;
+                padding-left: 75px;
+            }
+
+            .event td:nth-of-type(1):before {
+                font-weight: bold;
+                content: " ";
+            }
+
+            .event td:nth-of-type(2):before {
+                font-weight: bold;
+                content: "Day";
+            }
+
+            .event td:nth-of-type(3):before {
+                font-weight: bold;
+                content: "From";
+            }
+
+            .event td:nth-of-type(4):before {
+                font-weight: bold;
+                content: "To";
+            }
+
+            .event td:nth-of-type(5):before {
+                font-weight: bold;
+                content: "Max Persons";
+            }
+
+            .event td:nth-of-type(6):before {
+                font-weight: bold;
+                content: "Booked";
+            }
+
+            .event td:nth-of-type(7):before {
+                font-weight: bold;
+                content: "Spaces";
+            }
+
+            .event td:nth-of-type(8):before {
+                font-weight: bold;
+                content: "Status";
+            }
+
+            .event td:nth-of-type(9):before {
+                font-weight: bold;
+                content: "Notes";
+            }
+
+
+
+
+
+        /*Event-Service tables for mobile*/
+
+        /* Force table to not be like tables anymore */
+        .eventService table, .eventService thead, .eventService tbody, .eventService th, .eventService td, .eventService tr {
+            display: block;
+        }
+
+            /* Hide table headers (but not display: none;, for accessibility) */
+            .eventService thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+        .eventService tr {
+            margin: 0 0 1rem 0;
+        }
+
+            .eventService tr:nth-child(odd) {
+                background: #eff5f5;
+            }
+
+            .eventService tr:nth-child(even) {
+                background: #fbfdfd;
+            }
+
+        .eventService td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+            text-align: center;
+        }
+
+
+            .eventService td .text-box.multi-line {
+                width: 150px;
+            }
+
+            .eventService td:before {
+                /* Now like a table header */
+                position: absolute;
+                /*Top/left values mimic padding */
+                top: 0;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+
+            .eventService td .multi-line {
+                border: 0px !important;
+                display: inline;
+                margin-left: 90px;
+            }
+
+        .drop {
+            display: inline;
+            margin-left: 65px;
+        }
+
+
+
+        .eventService td:nth-of-type(1):before {
+            font-weight: bold;
+            content: "Day";
+        }
+
+        .eventService td:nth-of-type(2):before {
+            font-weight: bold;
+            content: "From";
+        }
+
+        .eventService td:nth-of-type(3):before {
+            font-weight: bold;
+            content: "To";
+        }
+
+        .eventService td:nth-of-type(4):before {
+            font-weight: bold;
+            content: "Max Persons";
+        }
+
+        .eventService td:nth-of-type(5):before {
+            font-weight: bold;
+            content: "Booked";
+        }
+
+        .eventService td:nth-of-type(6):before {
+            font-weight: bold;
+            content: "Spaces";
+        }
+
+        .eventService td:nth-of-type(7):before {
+            font-weight: bold;
+            content: "Status";
+        }
+
+        .eventService td:nth-of-type(8):before {
+            font-weight: bold;
+            content: "Notes";
+        }
+
+        .eventService td:nth-of-type(9):before {
+            font-weight: bold;
+            content: "Delete?";
+        }
+
+
+
+
+
+
+
+    }

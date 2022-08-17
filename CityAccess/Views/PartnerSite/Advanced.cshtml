@@ -1,0 +1,27 @@
+﻿@model CityAccess.PartnerSite
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("AdvancedPost", "PartnerSite", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID)
+    <div class=" primaryDiv">
+        <div class="form-group">
+            <div class=" col-md-8 col-md-offset-2">
+                @Html.Label("Partner site css")
+            </div>
+            <div class=" col-md-8 col-md-offset-2" style="padding-bottom:10px;">
+                @Html.EditorFor(model => model.css, new { htmlAttributes = new { @class = "form-control partnerSite" } })
+            </div>
+
+            <div class="col-md-8 col-md-offset-2 ">
+                <input type="submit" value="Save" class="btn btn-default" align="left"/>
+            </div>
+        </div>
+    </div>
+    <div class="secondaryDiv">
+        <p style="padding-top:30vh;">To reset the css code to its original state submit your preferences in the style tab.<</p>
+    </div>
+}

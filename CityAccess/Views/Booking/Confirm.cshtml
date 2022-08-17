@@ -1,0 +1,331 @@
+﻿@model CityAccess.Req_User
+
+@{
+    ViewBag.Title = "Confirm";
+}
+
+<div class="Header">
+    <div class="Section-Title col-md-3">
+        <h1>Confirm</h1>
+    </div>
+</div>
+
+<div class="Content">
+    @using (Html.BeginForm("Create", "Booking", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Please confirm your request data.</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.contactName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.contactName)
+                @Html.HiddenFor(model => model.Request.contactName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.contactEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.contactEmail)
+                @Html.HiddenFor(model => model.Request.contactEmail)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.contactPhone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.contactPhone)
+                @Html.HiddenFor(model => model.Request.contactPhone)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.eventDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.eventDate)
+                @Html.HiddenFor(model => model.Request.eventDate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.eventTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.eventTime)
+                @Html.HiddenFor(model => model.Request.eventTime)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.nrPersons, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.nrPersons)
+                @Html.HiddenFor(model => model.Request.nrPersons)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.price)
+                @Html.HiddenFor(model => model.Request.price)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.reference, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.reference)
+                @Html.HiddenFor(model => model.Request.reference)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.notes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.notes)
+                @Html.HiddenFor(model => model.Request.notes)
+            </div>
+        </div>
+
+        @if (ViewBag.NotTransfer == null)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.pickupLocation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.pickupLocation)
+                @Html.HiddenFor(model => model.Request.pickupLocation)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.dropoffLocation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.dropoffLocation)
+                @Html.HiddenFor(model => model.Request.dropoffLocation)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.flightNr, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.flightNr)
+                @Html.HiddenFor(model => model.Request.flightNr)
+            </div>
+        </div>
+}
+
+        @if (ViewBag.hasreturn != null)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.returnDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.returnDate)
+                @Html.HiddenFor(model => model.Request.returnDate)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.returnTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.returnTime)
+                @Html.HiddenFor(model => model.Request.returnTime)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.returnFlight, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.returnFlight)
+                @Html.HiddenFor(model => model.Request.returnFlight)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.returnPickup, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.returnPickup)
+                @Html.HiddenFor(model => model.Request.returnPickup)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request.returnDropoff, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Request.returnDropoff)
+                @Html.HiddenFor(model => model.Request.returnDropoff)
+            </div>
+        </div>
+}
+    @if (Model.Agreement.Service.field1IsActive == true)
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float:left;">
+            @Html.DisplayFor(model => model.Agreement.Service.fieldName1)
+            @Html.HiddenFor(model => model.Agreement.Service.fieldName1)
+            </label>
+            <div class="col-md-10" style="float:left;">
+                @Html.DisplayFor(model => model.Request.extraDate1)
+                @Html.HiddenFor(model => model.Request.extraDate1)
+            </div>
+        </div>
+        }
+        @if (Model.Agreement.Service.field2IsActive == true)
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float:left;">
+                @Html.DisplayFor(model => model.Agreement.Service.fieldName2)
+                @Html.HiddenFor(model => model.Agreement.Service.fieldName2)
+                </label>
+                <div class="col-md-10" style="float:left">
+                    @Html.DisplayFor(model => model.Request.extraDate2)
+                    @Html.HiddenFor(model => model.Request.extraDate2)
+                </div>
+        </div>
+}
+        @if (Model.Agreement.Service.field3IsActive == true)
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float:left;">
+                @Html.DisplayFor(model => model.Agreement.Service.fieldName3)
+                @Html.HiddenFor(model => model.Agreement.Service.fieldName3)
+                </label>
+                <div class="col-md-10" style="float:left;">
+                    @Html.DisplayFor(model => model.Request.extraDate3)
+                    @Html.HiddenFor(model => model.Request.extraDate3)
+                </div>
+        </div>
+}
+        @if (Model.Agreement.Service.field4IsActive == true)
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float:left;">
+                @Html.DisplayFor(model => model.Agreement.Service.fieldName4)
+                @Html.HiddenFor(model => model.Agreement.Service.fieldName4)
+                </label>
+                <div class="col-md-10" style="float:left;">
+                    @Html.DisplayFor(model => model.Request.extraTime1)
+                    @Html.HiddenFor(model => model.Request.extraTime1)
+                </div>
+        </div>
+}
+        @if (Model.Agreement.Service.field5IsActive == true)
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float:left;">
+                @Html.DisplayFor(model => model.Agreement.Service.fieldName5)
+                @Html.HiddenFor(model => model.Agreement.Service.fieldName5)
+                </label>
+                <div class="col-md-10" style="float:left">
+                    @Html.DisplayFor(model => model.Request.extraTime2)
+                    @Html.HiddenFor(model => model.Request.extraTime2)
+                </div>
+        </div>
+}
+        @if (Model.Agreement.Service.field6IsActive == true)
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float:left;">
+                @Html.DisplayFor(model => model.Agreement.Service.fieldName6)
+                @Html.HiddenFor(model => model.Agreement.Service.fieldName6)
+                </label>
+                <div class="col-md-10" style="float:left;">
+                    @Html.DisplayFor(model => model.Request.extraTime3)
+                    @Html.HiddenFor(model => model.Request.extraTime3)
+                </div>
+        </div>
+}
+        @if (Model.Agreement.Service.field7IsActive == true)
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float:left;">
+                @Html.DisplayFor(model => model.Agreement.Service.fieldName7)
+                @Html.HiddenFor(model => model.Agreement.Service.fieldName7)
+                </label>
+                <div class="col-md-10" style="float:left;">
+                    @Html.DisplayFor(model => model.Request.extraText1)
+                    @Html.HiddenFor(model => model.Request.extraText1)
+                </div>
+        </div>
+}
+        @if (Model.Agreement.Service.field8IsActive == true)
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float:left;">
+                @Html.DisplayFor(model => model.Agreement.Service.fieldName8)
+                @Html.HiddenFor(model => model.Agreement.Service.fieldName8)
+            </label>
+                <div class="col-md-10" style="float:left;">
+                    @Html.DisplayFor(model => model.Request.extraText2)
+                    @Html.HiddenFor(model => model.Request.extraText2)
+                </div>
+        </div>
+}
+        @if (Model.Agreement.Service.field9IsActive == true)
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float:left;">
+                @Html.DisplayFor(model => model.Agreement.Service.fieldName9)
+                @Html.HiddenFor(model => model.Agreement.Service.fieldName9)
+            </label>
+            <div class="col-md-10" style="float:left;">
+                @Html.DisplayFor(model => model.Request.extraText3)
+                @Html.HiddenFor(model => model.Request.extraText3)
+            </div>
+</div>
+}
+        @if (Model.Agreement.Service.field10IsActive == true)
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float:left;">
+                @Html.DisplayFor(model => model.Agreement.Service.fieldName10)
+                @Html.HiddenFor(model => model.Agreement.Service.fieldName10)
+                </label>
+                <div class="col-md-10" style="float:left;">
+                    @Html.DisplayFor(model => model.Request.extraMultiText1)
+                    @Html.HiddenFor(model => model.Request.extraMultiText1)
+                </div>
+        </div>
+}
+        @if (Model.Agreement.Service.field11IsActive == true)
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float:left;">
+                @Html.DisplayFor(model => model.Agreement.Service.fieldName11)
+                @Html.HiddenFor(model => model.Agreement.Service.fieldName11)
+                </label>
+                    <div class="col-md-10" style="float:left;">
+                        @Html.DisplayFor(model => model.Request.extraMultiText2)
+                        @Html.HiddenFor(model => model.Request.extraMultiText2)
+                    </div>
+</div>
+}
+        @if (Model.Agreement.Service.field12IsActive == true)
+    {
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float:left;">
+                @Html.DisplayFor(model => model.Agreement.Service.fieldName12)
+                @Html.HiddenFor(model => model.Agreement.Service.fieldName12)
+                </label>
+                <div class="col-md-10" style="float:left;">
+                    @Html.DisplayFor(model => model.Request.extraMultiText3)
+                    @Html.HiddenFor(model => model.Request.extraMultiText3)
+                </div>
+        </div>
+}
+
+
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Confirm Booking" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    }
+
+    <div>
+        <a href="javascript:history.back()">Back to Booking</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

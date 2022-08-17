@@ -1,0 +1,180 @@
+﻿@model LinksPlus
+@{
+    Layout = null;
+}
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+@using (Html.BeginForm("HeaderLinksPost", "PartnerSite", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="primaryDiv" id="primary">
+        @Html.EditorFor(x => x.Links)
+    </div>
+    <div class="secondaryDiv">
+        <div class="col-md-3 dropdown" style="margin-bottom: 7%;margin-top: 5%;">
+            <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+            </button>
+            <div class="dropdown-content">
+                <form>
+                    <a onclick="addDropdown()" href="#">Dropdown</a>
+                    <a onclick="addHorizontalField()" href="#">Button</a>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-3" style="margin-bottom: 7%;margin-top: 5%;">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+
+    <script>
+
+    var HorizontalLength = @ViewBag.MenuSize;
+    var ListLength = @ViewBag.ListLength;
+    var Drop_Pos = [];
+
+    function addHorizontalField() {
+
+        var html = "<div class='col-md-12 clearfix' id='Links_" + ListLength + "'>"
+            + "<input data-val='true' data-val-number='The field posHorizontal must be a number.' data-val-required='The posHorizontal field is required.' id='Links_" + ListLength + "__posHorizontal' name='Links[" + ListLength + "].posHorizontal' type='hidden' value=" + HorizontalLength + ">"
+
+            + "<input data-val='true' data-val-number='The field posVertical must be a number.' id='Links_" + ListLength + "__posVertical' name='Links[" + ListLength + "].posVertical' type='hidden' value='0'>"
+
+            + "<div class='col-md-2' ><label for='Links_" + ListLength + "__Button_Url' class='control-label'>Button Url</label></div>"
+
+            + " <div class='col-md-10' style='padding-bottom: 15px;'><input class='text-box single-line' id='Links_" + ListLength + "__value' name='Links[" + ListLength + "].value' type='text' value=''>"
+
+            + "<span class='glyphicon glyphicon-remove' onclick='Remove(Links_" + ListLength + ", Links_" + ListLength + "__posHorizontal, Links_" + ListLength + "__posVertical, " + ListLength +")' data-html='true' style='padding-left: 4px; color:red;'></span></div>"
+
+            + "<div class='col-md-2'><label for='Links_" + ListLength + "__Button_text' class='control-label'>Button text</label></div>"
+
+            +"<div class='col-md-10' style='padding-bottom: 35px;'><input class='text-box single-line' id='Links_" + ListLength + "__text' name='Links[" + ListLength + "].text' type='text' value=''></div></div>";
+
+        $("#primary").append(html);
+
+        HorizontalLength+=1;
+        ListLength+=1;
+    }
+
+    function addDropdown() {
+
+        var html = "<div class='col-md-12 clearfix' id='Links_" + ListLength + "'>"
+            + "<div id=" + HorizontalLength + "><input data-val='true' data-val-number='The field posHorizontal must be a number.' data-val-required='The posHorizontal field is required.' id='Links_" + ListLength + "__posHorizontal' name='Links[" + ListLength + "].posHorizontal' type='hidden' value=" + HorizontalLength + ">"
+
+            + "<input data-val='true' data-val-number='The field posVertical must be a number.' id='Links_" + ListLength + "__posVertical' name='Links[" + ListLength + "].posVertical' type='hidden' value='0'>"
+
+            + "<input id='Links_" + ListLength + "__IsDropMaster' name='Links[" + ListLength + "].IsDropMaster' type='hidden' value='true'>"
+
+            + "<div class='col-md-2'><label for='Links_" + ListLength + "__Button_Url' class='control-label'>Button Url</label></div>"
+
+            + "<div class='col-md-10' style='padding-bottom: 15px;'><input class='text-box single-line' id='Links_" + ListLength + "__value' name='Links[" + ListLength + "].value' type='text' value=''>"
+
+            + "<span class='glyphicon glyphicon-remove' onclick='Remove(Links_" + ListLength + ", Links_" + ListLength + "__posHorizontal, Links_" + ListLength + "__posVertical, " + ListLength +")' data-html='true' style='padding-left: 4px; color:red;'></span></div>"
+
+            + "<div class='col-md-2'><label for='Links_" + ListLength + "__Button_text' class='control-label'>Button text</label></div>"
+
+            + "<div class='col-md-10' style='padding-bottom: 35px;'><input class='text-box single-line' id='Links_" + ListLength + "__text' name='Links[" + ListLength + "].text' type='text' value=''></div></div>";
+
+        html = html + "<div class='col-md-9 col-md-offset-3 dropdown' style='margin-bottom: 5%;'><button type='button' class='btn btn-default btn-sm'><span class='glyphicon glyphicon-plus-sign' onclick='DropdownChild(" + HorizontalLength + ")'>Sub Field</span></button></div></div>";
+        $("#primary").append(html);
+
+        Drop_Pos[HorizontalLength] = 0;
+
+        HorizontalLength+=1;
+        ListLength+=1;
+    }
+
+    function DropdownChild(HorizontalPosition) {
+
+        Drop_Pos[HorizontalPosition] += 1;
+
+        var html = "<div class='col-md-12 clearfix' id='Links_" + ListLength + "'>"
+
+            +"<input data-val='true' data-val-number='The field posHorizontal must be a number.' data-val-required='The posHorizontal field is required.' id='Links_" + ListLength + "__posHorizontal' name='Links[" + ListLength + "].posHorizontal' type='hidden' value=" + HorizontalPosition + ">"
+
+            + "<input data-val='true' data-val-number='The field posVertical must be a number.' id='Links_" + ListLength + "__posVertical' name='Links[" + ListLength + "].posVertical' type='hidden' value=" + Drop_Pos[HorizontalPosition] + ">"
+
+            + "<div class='col-md-offset-1 col-md-2'><label for='Links_" + ListLength + "__Button_Url' class='control-label'>Button Url</label></div>"
+
+            + "<div class='col-md-9' style='padding-bottom: 15px;'><input class='text-box single-line' id='Links_" + ListLength + "__value' name='Links[" + ListLength + "].value' type='text' value=''>"
+
+            + "<span class='glyphicon glyphicon-remove' onclick='Remove(Links_" + ListLength + ", Links_" + ListLength + "__posHorizontal, Links_" + ListLength + "__posVertical, "+ListLength+")' data-html='true' style='padding-left: 4px; color:red;'></span></div>"
+
+            + "<div class='col-md-offset-1 col-md-2'><label for='Links_" + ListLength + "__Button_text' class='control-label'>Button text</label></div>"
+
+            + "<div class='col-md-9' style='padding-bottom: 35px;'><input class='text-box single-line' id='Links_" + ListLength + "__text' name='Links[" + ListLength + "].text' type='text' value=''></div></div>";
+
+        $("#" + HorizontalPosition + "").append(html);
+
+        ListLength++;
+
+    }
+
+
+    function Remove(id, horz_el, vert_el, listIndex) {
+
+        var vert_pos = $(vert_el).val();
+
+        var horz_pos = $(horz_el).val();
+
+        var horz_id;
+
+        var drop_child;
+
+        if (vert_pos == 0) {
+
+            for (var i = 0; i < ListLength; i++) {
+
+                horz_id = $("#Links_" + i + "__posHorizontal");
+
+                if (horz_id.val() > horz_pos) {
+                    horz_id.val(horz_id.val() - 1);
+                }
+            }
+            Drop_Pos[horz_pos] == 0;
+            HorizontalLength -= 1;
+
+        } else {
+
+            drop_child = $("#" + horz_pos);                
+
+            for (var j = 0; j < ListLength; j++) {
+
+                if (drop_child.find("#Links_" + j + "__posVertical").length) {
+
+                    var child_verticalEl = drop_child.find("#Links_" + j + "__posVertical");
+
+                    if (child_verticalEl.val() > vert_pos) {                    
+                        child_verticalEl.val(child_verticalEl.val()-1)
+                    }
+                }
+            }
+
+
+            Drop_Pos[horz_pos] -= 1;
+        }
+
+
+
+        var mainDiv = $("#Links_" + listIndex);
+        var idVal = mainDiv.find("#Links_" + listIndex + "__ID").val(); //maybe to specific for function purposes
+
+        var result = confirm("Do you want to delete this entry?");
+        if (result) {
+            //Logic to delete the item
+
+            $.post("/PartnerSite/DeleteLink", { id: idVal}, function (data) {
+                //do whatever with the response
+                //window.location.reload(false);
+                return false;
+            });
+        }
+
+        $(id).remove();
+
+        }
+    </script>
+

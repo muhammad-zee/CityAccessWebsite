@@ -1,0 +1,11 @@
+﻿@model PartnerSiteElements
+@{
+    Layout = "~/Views/Shared/PartnerSiteLayout.cshtml";
+    //Layout = null;
+}
+
+@Html.Action("Index", "Agreements", new { partnerID = Model.PartnerID })
+
+
+
+

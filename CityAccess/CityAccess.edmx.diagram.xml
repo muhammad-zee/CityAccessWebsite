@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="959399e4baae4061aaffa153dbe4729e" Name="Diagram1" ZoomLevel="79">
+        <EntityTypeShape EntityType="CityAccessModel.Agreement" Width="1.5" PointX="10.375" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="CityAccessModel.City" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CityAccessModel.commissionType" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CityAccessModel.Partner" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CityAccessModel.serviceType" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CityAccessModel.User" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector ManuallyRouted="false" Association="CityAccessModel.FK_User_Partner" />
+        <EntityTypeShape EntityType="CityAccessModel.Service" Width="1.5" PointX="8.25" PointY="5.5" />
+        <AssociationConnector Association="CityAccessModel.FK_Agreement_Service" />
+        <AssociationConnector Association="CityAccessModel.FK_Service_City" />
+        <AssociationConnector Association="CityAccessModel.FK_Service_Partner" />
+        <AssociationConnector Association="CityAccessModel.FK_Service_serviceType" />
+        <EntityTypeShape EntityType="CityAccessModel.Request" Width="1.5" PointX="13.5" PointY="3" />
+        <AssociationConnector Association="CityAccessModel.FK_Request_Agreement" />
+        <AssociationConnector Association="CityAccessModel.FK_Request_User" />
+        <EntityTypeShape EntityType="CityAccessModel.State" Width="1.5" PointX="3.375" PointY="0.875" />
+        <AssociationConnector Association="CityAccessModel.FK_Request_State" />
+        <AssociationConnector Association="CityAccessModel.FK_Agreement_Partner" />
+        <EntityTypeShape EntityType="CityAccessModel.ServiceImage" Width="1.5" PointX="13" PointY="0.5" />
+        <AssociationConnector Association="CityAccessModel.FK_Service_ID" />
+        <EntityTypeShape EntityType="CityAccessModel.PartnerLogo" Width="1.5" PointX="2.875" PointY="16.875" />
+        <AssociationConnector Association="CityAccessModel.FK_Partner_ID" />
+        <EntityTypeShape EntityType="CityAccessModel.RequestLog" Width="1.5" PointX="15.75" PointY="7.125" />
+        <AssociationConnector Association="CityAccessModel.FK_RequestLog_Request" />
+        <AssociationConnector Association="CityAccessModel.FK_RequestLog_User" ManuallyRouted="true" >
+          <ConnectorPoint PointX="6.406252" PointY="10.125" />
+          <ConnectorPoint PointX="6.406252" PointY="5.4375" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="5.4374999999999991" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="5.4375" />
+          <ConnectorPoint PointX="9.9479166666666661" PointY="5.4374999999999991" />
+          <ConnectorPoint PointX="10.239583333333334" PointY="5.4375" />
+          <ConnectorPoint PointX="10.3125" PointY="5.4375" />
+          <ConnectorPoint PointX="10.3125" PointY="9.4657194010416656" />
+          <ConnectorPoint PointX="13.041666666666666" PointY="9.4657194010416656" />
+          <ConnectorPoint PointX="13.208333333333334" PointY="9.4657194010416656" />
+          <ConnectorPoint PointX="13.4375" PointY="9.4657194010416656" />
+          <ConnectorPoint PointX="13.4375" PointY="12.953671349927863" />
+          <ConnectorPoint PointX="15.65625" PointY="12.953671349927863" />
+          <ConnectorPoint PointX="15.65625" PointY="46.99968595499179" />
+          <ConnectorPoint PointX="15.75" PointY="9.6821907552083335" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="CityAccessModel.AgreementLog" Width="1.5" PointX="11.75" PointY="10" />
+        <AssociationConnector Association="CityAccessModel.FK_AgreementLog_Request" />
+        <AssociationConnector Association="CityAccessModel.FK_AgreementLog_User" />
+        <EntityTypeShape EntityType="CityAccessModel.DynamicField" Width="1.5" PointX="10.375" PointY="15.375" />
+        <EntityTypeShape EntityType="CityAccessModel.DynamicFieldAlternative" Width="1.5" PointX="12.625" PointY="18.125" />
+        <EntityTypeShape EntityType="CityAccessModel.DynamicFieldAlternativeMl" Width="1.5" PointX="14.875" PointY="18.125" />
+        <EntityTypeShape EntityType="CityAccessModel.DynamicFieldMl" Width="1.5" PointX="12.625" PointY="15.375" />
+        <EntityTypeShape EntityType="CityAccessModel.ErrorLog" Width="1.5" PointX="5" PointY="22.5" />
+        <EntityTypeShape EntityType="CityAccessModel.Language" Width="1.5" PointX="10.375" PointY="22.5" />
+        <AssociationConnector Association="CityAccessModel.FK_Agreement_DynamicField" />
+        <AssociationConnector Association="CityAccessModel.FK_DynamicFieldAlternative_DynamicField" />
+        <AssociationConnector Association="CityAccessModel.FK_DynamicFieldMl_DynamicField" />
+        <AssociationConnector Association="CityAccessModel.FK_Service_DynamicField" />
+        <AssociationConnector Association="CityAccessModel.FK_DynamicFieldAlternativeMl_DynamicFieldAlternative" />
+        <AssociationConnector Association="CityAccessModel.FK_DynamicFieldAlternativeMl_Language" />
+        <AssociationConnector Association="CityAccessModel.FK_DynamicFieldMl_Language" />
+        <AssociationConnector Association="CityAccessModel.FK_ErrorLog_User" />
+        <AssociationConnector Association="CityAccessModel.FK_Agreement_DynamicFieldAlternative" />
+        <AssociationConnector Association="CityAccessModel.FK_Agreement_DynamicFieldAlternative2" />
+        <AssociationConnector Association="CityAccessModel.FK_Agreement_DynamicFieldAlternative3" />
+        <AssociationConnector Association="CityAccessModel.FK_Service_DynamicFieldAlternative" />
+        <AssociationConnector Association="CityAccessModel.FK_Service_DynamicFieldAlternative2" />
+        <AssociationConnector Association="CityAccessModel.FK_Service_DynamicFieldAlternative3" />
+        <AssociationConnector Association="CityAccessModel.FK_Service_DynamicFieldAlternative4" />
+        <AssociationConnector Association="CityAccessModel.FK_serviceType_Language" />
+        <AssociationConnector Association="CityAccessModel.FK_Service_Service" />
+        <AssociationConnector Association="CityAccessModel.FK_Service_Service1" />
+        <EntityTypeShape EntityType="CityAccessModel.Event" Width="1.5" PointX="16.375" PointY="12.75" />
+        <EntityTypeShape EntityType="CityAccessModel.EventState" Width="1.5" PointX="13.25" PointY="22.625" />
+        <AssociationConnector Association="CityAccessModel.FK_Event_EventState" />
+        <AssociationConnector Association="CityAccessModel.FK_Event_Service" />
+        <EntityTypeShape EntityType="CityAccessModel.UserLog" Width="1.5" PointX="7.5" PointY="24.125" />
+        <AssociationConnector Association="CityAccessModel.FK_Request_User2" />
+        <AssociationConnector Association="CityAccessModel.FK_UserLog_Editor" />
+        <AssociationConnector Association="CityAccessModel.FK_UserLog_User" />
+        <EntityTypeShape EntityType="CityAccessModel.Binary" Width="1.5" PointX="21.875" PointY="17.125" />
+        <EntityTypeShape EntityType="CityAccessModel.FontStyle" Width="1.5" PointX="17.375" PointY="18.875" />
+        <EntityTypeShape EntityType="CityAccessModel.Link" Width="1.5" PointX="21.875" PointY="19.75" />
+        <EntityTypeShape EntityType="CityAccessModel.PartnerSite" Width="1.5" PointX="19.625" PointY="18.375" />
+        <AssociationConnector Association="CityAccessModel.FK_Binarys_PartnerSite" />
+        <AssociationConnector Association="CityAccessModel.FK_PartnerSite_FontStyle" />
+        <AssociationConnector Association="CityAccessModel.FK_link_PartnerSite" />
+        <AssociationConnector Association="CityAccessModel.FK_PartnerSite_Partner" ManuallyRouted="true" >
+          <ConnectorPoint PointX="4.5" PointY="13.905810105468749" />
+          <ConnectorPoint PointX="5" PointY="13.905810105468749" />
+          <ConnectorPoint PointX="5" PointY="15.239807942708332" />
+          <ConnectorPoint PointX="5.791666666666667" PointY="15.239807942708332" />
+          <ConnectorPoint PointX="5.958333333333333" PointY="15.239807942708332" />
+          <ConnectorPoint PointX="6.572916666666667" PointY="15.239807942708332" />
+          <ConnectorPoint PointX="6.7708358333333338" PointY="15.239807942708332" />
+          <ConnectorPoint PointX="7.75" PointY="15.239807942708332" />
+          <ConnectorPoint PointX="7.75" PointY="23.749003906250003" />
+          <ConnectorPoint PointX="10.25" PointY="23.749003906250003" />
+          <ConnectorPoint PointX="10.25" PointY="22.25" />
+          <ConnectorPoint PointX="12.041666666666666" PointY="22.25" />
+          <ConnectorPoint PointX="12.208333333333334" PointY="22.25" />
+          <ConnectorPoint PointX="14.385416666666666" PointY="22.25" />
+          <ConnectorPoint PointX="14.552083333333334" PointY="22.25" />
+          <ConnectorPoint PointX="15.182291666666666" PointY="22.25" />
+          <ConnectorPoint PointX="15.348958333333334" PointY="22.25" />
+          <ConnectorPoint PointX="15.572916666666666" PointY="22.25" />
+          <ConnectorPoint PointX="15.801760150021019" PointY="22.25" />
+          <ConnectorPoint PointX="19.375" PointY="22.25" />
+          <ConnectorPoint PointX="19.375" PointY="18" />
+          <ConnectorPoint PointX="20.375" PointY="18" />
+          <ConnectorPoint PointX="20.375" PointY="18.375" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="CityAccessModel.Style" Width="1.5" PointX="21.875" PointY="23.625" />
+        <AssociationConnector Association="CityAccessModel.FK_Style_PartnerSite" />
+        <EntityTypeShape EntityType="CityAccessModel.StateTransition" Width="1.5" PointX="3.25" PointY="4.5" />
+        <EntityTypeShape EntityType="CityAccessModel.sysdiagram" Width="1.5" PointX="6.875" PointY="0.5" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

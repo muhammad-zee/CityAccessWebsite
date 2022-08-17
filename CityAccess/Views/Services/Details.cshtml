@@ -1,0 +1,204 @@
+﻿@model CityAccess.Service
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<div class="Header">
+	<div class="Section-Title col-md-3">
+		<h1>Details</h1>
+	</div>
+</div>
+
+
+<div class="Content">
+	<div>
+		<h4>Service</h4>
+		<hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.description)
+            </dt>
+
+            <dd>
+                <span class="multi"> @Html.MultiBreakLine(model => model.description) </span>
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Duration)
+            </dt>
+
+            <dd>
+                 @Html.DisplayFor(model => model.Duration) 
+            </dd>
+
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.comissionType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.commissionTypeLabel)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.commissionValue)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.commissionValue)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MaxPersonNum)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MaxPersonNum)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MinPersonNum)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MinPersonNum)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Availability1)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AvailabilityLabel)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.priceType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.priceTypeLabel)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.price)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Override1)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Override1)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PaymentAgentType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PaymentAgentTypeLabel)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PaymentAgent)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PaymentAgent)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.agentInstructions)
+            </dt>
+
+            <dd>
+                <span class="multi"> @Html.MultiBreakLine(model => model.agentInstructions) </span>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConfirmationText)
+            </dt>
+
+            <dd>
+                <span class="multi"> @Html.MultiBreakLine(model => model.ConfirmationText) </span>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.cancellationPolicy)
+            </dt>
+
+            <dd>
+                <span class="multi"> @Html.MultiBreakLine(model => model.cancellationPolicy) </span>
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.isPublic)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.isPublic)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.isActive)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.isActive)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.City.name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.City.name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Partner.tradeName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Partner.tradeName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.serviceType.name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.serviceType.name)
+            </dd>
+
+        </dl>
+	</div>
+    <p>
+        @if (Session["admin"] != null)
+         {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+        <span>|</span>
+        @Html.ActionLink("Back to List", "Index")
+        }
+        @if(Session["admin"] == null)
+        {
+        @Html.ActionLink("Back to List", "Index")
+        }
+    </p>
+	</div>
