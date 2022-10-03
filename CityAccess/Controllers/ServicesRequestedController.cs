@@ -847,7 +847,7 @@ namespace CityAccess.Controllers
             requests2 = requests2.Where(a => a.Agreement.Service.operatorID == partnerID);
             requests2 = requests2.OrderBy(a => a.req_ForTransfer.EventDate + " " + a.req_ForTransfer.EventTime);
 
-            requests = requests1.Union(requests2).OrderBy(x => x.req_ForTransfer.EventDate + " " + x.req_ForTransfer.EventTime);
+            requests = requests1.OrderBy(x => x.req_ForTransfer.EventDate + " " + x.req_ForTransfer.EventTime);
 
             List<Req_Partner> reqs = requests.ToList();
             decimal TotalPrice = 0;
